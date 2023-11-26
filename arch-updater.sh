@@ -16,8 +16,8 @@ OPTIONS=(1 "Update Arch Linux with yay"
          2 "Update Arch Linux without yay"
          3 "Update Arch Linux mirrorlist"
          4 "Install or update Debtap"
-         5 "Clean Arch Linux"
-         6 "Install or update all of above"
+         5 "Install or update all of above"
+         6 "Clean Arch Linux"
 		 7 "Install apps and configure a fresh installation"
          8 ">> Conky, GRUB & GTK-Themes")
 
