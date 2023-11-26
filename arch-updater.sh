@@ -3,10 +3,11 @@ pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $pwd
 CYAN='\033[0;36m'
 NOCOLOR='\033[0m'
-ver=1.3
+ver=1.5
 HEIGHT=20
 WIDTH=75
 CHOICE_HEIGHT=4
+CHOICE="foobar"
 BACKTITLE="PWD= $pwd"
 TITLE="ALU - Arch Linux Updater $ver"
 MENU="Choose one of the following options:"
@@ -14,13 +15,11 @@ MENU="Choose one of the following options:"
 OPTIONS=(1 "Update Arch Linux with yay"
          2 "Update Arch Linux without yay"
          3 "Update Arch Linux mirrorlist"
-         4 "Clean Arch Linux"
-         5 "Install or update Debtap"
-         6 "Install or update Conky-Colors"
-		 7 "Install or setup Clock-With-Weather-Conky"
-         8 "Install or update WhiteSur-GTK-Theme"
-         9 "Install apps and configure a fresh installation"
-         10 "Install or update all of above")
+         4 "Install or update Debtap"
+         5 "Clean Arch Linux"
+         6 "Install or update all of above"
+		 7 "Install apps and configure a fresh installation"
+         8 ">> Conky, GRUB & GTK-Themes")
 
 if ! command -v dialog &> /dev/null; then
 	echo "This script needs the dialog package to run properly."
@@ -32,13 +31,7 @@ if ! command -v dialog &> /dev/null; then
 	fi
 fi
 
-CHOICE=$(dialog --clear \
-                --backtitle "$BACKTITLE" \
-                --title "$TITLE" \
-                --menu "$MENU" \
-                $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                "${OPTIONS[@]}" \
-                2>&1 >/dev/tty)
+## methods
 
 update_yay(){
 	echo -e "${CYAN} Update Arch Linux with yay... ${NOCOLOR}\n"
@@ -113,41 +106,30 @@ clean_arch(){
 install_update_debtap(){
 	echo -e "${CYAN} Install or update debtap... ${NOCOLOR}\n"
         sleep 3
-	if command -v debtap &> /dev/null ; then
-		sudo debtap -u
-	else
-	        if ! command -v yay &> /dev/null; then
-	                sudo pacman -S build-essential git
-	                git clone https://aur.archlinux.com/yay.git
-	                cd yay
-	                sudo makepg -si
-        	else
-        	        yay -S debtap
-        	fi
+	if ! command -v debtap &> /dev/null ; then
+	    if ! command -v yay &> /dev/null; then
+	            sudo pacman -S build-essential git
+	            git clone https://aur.archlinux.com/yay.git
+	            cd yay
+	            sudo makepg -si
+        fi
+		yay -S debtap
 	fi
+	sudo debtap -u
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
-        sleep 3
+	sleep 3
 }
 
 install_update_conky_colors(){
 	echo -e "${CYAN} Install or update Conky-Colors... ${NOCOLOR}\n"
-        sleep 3
-	if command -v  conky-colors &> /dev/null ; then
-		conky-colors --lang=de --theme=purple --arch --cpu=12 --cputemp --proc=10 --clock=modern --hd=mix --network --eth=0 --side=right --nvidia
-	else
-		if ! command -v yay &> /dev/null; then
-			sudo pacman -S build-essential git
-			git clone https://aur.archlinux.com/yay.git
-			cd yay
-			sudo makepg -si
-			cd ..
-			rm -rf yay
-		else
-			yay -S conky-colors-git
-		fi
+    sleep 3
+	read -p "Do you want to edit the conky-colors script before starting? [y/n] " input
+	if [[ $input == "y" ]]; then
+		nano ./assets/conky-colors.sh
 	fi
+	bash ./assets/conky-colors.sh
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
-        sleep 3
+    sleep 3
 }
 
 install_setup_clock_weather_conky(){
@@ -168,22 +150,28 @@ install_setup_clock_weather_conky(){
 install_update_whitesur(){
 	echo -e "${CYAN} Install or update WhiteSur-GTK-Theme... ${NOCOLOR}\n"
         sleep 3
-	curBg=$(gsettings get org.gnome.desktop.background picture-uri)
-	first=${curBg/\'file:\/\//}
-	second=${first/\'/}
-	curBg=$second
-	if [ -d "WhiteSur-gtk-theme" ]; then
-		cd WhiteSur-gtk-theme
-		git pull
-	else
-		git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
-		cd WhiteSur-gtk-theme
+	read -p "Do you want to edit the WhiteSur script before starting? [y/n] " input
+	if [[ $input == "y" ]]; then
+		nano ./assets/whitsur.sh
 	fi
-	./install.sh -l -m -o normal -c Dark -a normal -t all -i arch -b $curBg -N mojave
-	sudo ./tweaks.sh -g -r
-	sudo ./tweaks.sh -g -t purple -b $curBg -c Dark -i arch
+	bash ./assets/whitesur.sh
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
-        sleep 3
+    sleep 3
+}
+
+install_set_grub_theme(){
+		echo ">> Copy GRUB theme and customize settings"
+        sudo sed -i '/GRUB_DEFAULT=/c\GRUB_DEFAULT=saved' /etc/default/grub
+        sudo sed -i '/GRUB_SAVEDEFAULT=/c\GRUB_SAVEDEFAULT=true' /etc/default/grub
+        read -p 'Do you want the blue or red Arch Linux GRUB theme? [b/r] ' input
+        if [[ $input == "b" ]]; then
+        	sudo cp -r ./assets/arch-silence_black-blue /boot/grub/themes
+        	sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-blue/theme.txt"' /etc/default/grub
+        elif [[ $input == "r" ]];then
+        	sudo cp -r ./assets/arch-silence_black-red /boot/grub/themes
+        	sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-red/theme.txt"' /etc/default/grub
+        fi
+        sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 fresh_install(){
@@ -234,7 +222,7 @@ fresh_install(){
         sleep 3
 
         echo ">> Copy webapp-icons for webapp-manager to ~/.icons/"
-	cp -r ./assets/webapps ~/.icons
+		cp -r ./assets/webapps ~/.icons
 
         echo ">> Copy boot menu entry file for Batocera"
         sudo cp ./assets/15_batocera /etc/grub.d/
@@ -273,12 +261,12 @@ fresh_install(){
 	sudo systemctl enable fstrim.timer --now
 	sudo systemctl enable reflector.timer --now
 
-        echo "Improving laptop battery life"
-        sudo systemctl enable tlp.service --now
-        sudo powertop --auto-tune
+    echo "Improving laptop battery life"
+    sudo systemctl enable tlp.service --now
+    sudo powertop --auto-tune
 
-        echo "Taming the jounal's size"
-        sudo journalctl --vacuum-size=100M
+    echo "Taming the jounal's size"
+    sudo journalctl --vacuum-size=100M
 	sudo journalctl --vacuum-time=2weeks
 
 	read -p "Laptop or desktop? [l/d] " input
@@ -329,6 +317,12 @@ fresh_install(){
 	if [[ $input == y ]]; then
 		install_setup_clock_weather_conky
 	fi
+
+	read -p "Do you want to install Arch Linux GRUB-Theme? [y/n] " input
+	if [[ $input == y ]]; then
+		install_set_grub_theme
+	fi
+
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
 	echo "It's recommended to reboot the system now!"
 	read -p "Do you want to reboot? [y/n] " input
@@ -336,39 +330,75 @@ fresh_install(){
 		sudo reboot
 	fi
 }
-clear
-case $CHOICE in
-       	1)
-            update_yay
-            ;;
-        2)
-            update_pacman
-            ;;
-        3)
-            update_mirrorlist
-            ;;
-        4)
-            clean_arch
-            ;;
-        5)
-            install_update_debtap
-            ;;
-        6)
-            install_update_conky_colors
-            ;;
-		7)
-	    	install_setup_clock_weather_conky
-	    	;;
-        8)
-            install_update_whitesur
-            ;;
-        9)
-            fresh_install
-            ;;
-        10)
-            update_mirrorlist
-            update_yay
-            install_update_debtap
-            install_update_whitesur
-            ;;
-esac
+
+while [ -n  "$CHOICE"  ] ; 
+do
+	CHOICE=$(dialog --clear \
+    	            --backtitle "$BACKTITLE" \
+        	        --title "$TITLE" \
+            	    --menu "$MENU" \
+            		$HEIGHT $WIDTH $CHOICE_HEIGHT \
+                	"${OPTIONS[@]}" \
+                	2>&1 >/dev/tty)
+	if [ -n "$CHOICE" ]
+    then
+		reset
+		clear
+		case $CHOICE in
+       		1)
+        	    update_yay
+	            ;;
+	        2)
+	            update_pacman
+        	    ;;
+    	    3)
+        	    update_mirrorlist
+        	    ;;
+        	4)
+            	install_update_debtap
+        	   	;;
+        	5)
+            	update_mirrorlist
+            	update_yay
+            	install_update_debtap
+            	install_update_whitesur
+            	;;
+        	6)
+        	    clean_arch
+            	;;
+			7)
+		    	fresh_install
+		    	;;
+			8)
+			# Submenu tryout
+			OPTIONS_gfx=(1 "Install / update Conky-Colors"
+ 					  	 2 "Install / setup Conky Clock & Weather"
+						 3 "Install / set GRUB-Theme"
+         			  	 4 "Install / update WhiteSur-GTK-Theme (preconfigured)")
+			CHOICE_gfx=$(dialog --clear \
+                	--backtitle "$BACKTITLE" \
+            		--title "$TITLE" \
+                	--menu "$MENU" \
+                	$HEIGHT $WIDTH $CHOICE_HEIGHT \
+                	"${OPTIONS_gfx[@]}" \
+                	2>&1 >/dev/tty)
+			clear
+			case $CHOICE_gfx in
+       		1)
+            	install_update_conky_colors
+            	;;
+        	2)
+            	install_setup_clock_weather_conky
+            	;;
+        	3)
+				install_set_grub_theme
+				;;
+			4)
+            	install_update_whitesur
+            	;;
+			esac
+	esac
+	fi
+done
+
+
