@@ -1,0 +1,15 @@
+
+#SMB-Shares
+//100.112.30.113/anime /home/tommy/NAS/anime cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/backups /home/tommy/NAS/backups cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/docker /home/tommy/NAS/docker cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/downloads /home/tommy/NAS/downloads cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/emulation /home/tommy/NAS/emulation cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/isoz /home/tommy/NAS/isoz cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/moviez /home/tommy/NAS/moviez cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/music /home/tommy/NAS/music cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/music_videos /home/tommy/NAS/music_videos cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/photos /home/tommy/NAS/photos cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/seriez /home/tommy/NAS/seriez cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/shared /home/tommy/NAS/shared cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/home/Drive /home/tommy/NAS/drive cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
