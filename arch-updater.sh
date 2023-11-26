@@ -313,6 +313,22 @@ fresh_install(){
 		echo "neofetch" >> /home/tommy/.zshrc
 		sudo echo "neofetch" >> /root/.zshrc
 	fi
+	read -p "Do you want to install debtap? [y/n] " input
+	if [[ $input == y ]]; then
+		install_update_debtap
+	fi
+	read -p "Do you want to install WhiteSur-GTK-Theme? [y/n] " input
+	if [[ $input == y ]]; then
+		install_update_whitesur
+	fi
+	read -p "Do you want to install conky-colors? [y/n] " input
+	if [[ $input == y ]]; then
+		install_update_conky_colors
+	fi
+	read -p "Do you want to install Conky-Clock-Weather? [y/n] " input
+	if [[ $input == y ]]; then
+		install_setup_clock_weather_conky
+	fi
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
 	echo "It's recommended to reboot the system now!"
 	read -p "Do you want to reboot? [y/n] " input
@@ -340,9 +356,9 @@ case $CHOICE in
         6)
             install_update_conky_colors
             ;;
-	7)
-	    install_setup_clock_weather_conky
-	    ;;
+		7)
+	    	install_setup_clock_weather_conky
+	    	;;
         8)
             install_update_whitesur
             ;;
@@ -353,7 +369,6 @@ case $CHOICE in
             update_mirrorlist
             update_yay
             install_update_debtap
-            install_update_conky_colors
             install_update_whitesur
             ;;
 esac
