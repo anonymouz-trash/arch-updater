@@ -268,7 +268,7 @@ fresh_install(){
 		echo "Improving laptop performance"
 		sudo systemctl enable tuned.service --now
 		sudo tuned-adm profile laptop-ac-powersave
-	elif [[ $input == 'd']]
+	elif [[ $input == 'd' ]]; then
 		echo "Improving desktop perfomance"
 		sudo systemctl enable tuned.service --now
 		sudo tuned-adm profile desktop
