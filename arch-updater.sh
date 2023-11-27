@@ -159,6 +159,18 @@ install_update_whitesur(){
     sleep 3
 }
 
+install_update_fluent(){
+	echo -e "${CYAN} Install or update Fluent-GTK-Theme... ${NOCOLOR}\n"
+        sleep 3
+	read -p "Do you want to edit the Fluent script before starting? [y/N] " input
+	if [[ $input == "y" ]]; then
+		nano ./assets/fluent.sh
+	fi
+	bash ./assets/fluent.sh
+	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
+    sleep 3
+}
+
 install_set_grub_theme(){
 	echo ">> Copy GRUB theme and customize settings"
     sudo sed -i '/GRUB_DEFAULT=/c\GRUB_DEFAULT=saved' /etc/default/grub
@@ -372,7 +384,8 @@ do
 			OPTIONS_gfx=(1 "Install / update Conky-Colors"
  					  	 2 "Install / setup Conky Clock & Weather"
 						 3 "Install / set GRUB-Theme"
-         			  	 4 "Install / update WhiteSur-GTK-Theme (preconfigured)")
+         			  	 4 "Install / update WhiteSur-GTK-Theme"
+						 5 "Install / update Fluent-GTK-Theme")
 			CHOICE_gfx=$(dialog --clear \
                 	--backtitle "$BACKTITLE" \
             		--title "$TITLE" \
@@ -394,6 +407,9 @@ do
 			4)
             	install_update_whitesur
             	;;
+			5)
+				install_update_fluent
+				;;
 			esac
 	esac
 	fi
