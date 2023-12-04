@@ -1,7 +1,7 @@
 #!/bin/bash
 pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $pwd
-CYAN='\033[0;36m'
+CYAN='\033[1;36m'
 NOCOLOR='\033[0m'
 ver=1.5
 HEIGHT=20
