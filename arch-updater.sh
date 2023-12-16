@@ -32,19 +32,35 @@ if ! command -v dialog &> /dev/null; then
 fi
 
 ## methods
+check_yay(){
+	if ! command -v yay &> /dev/null; then
+        sudo pacman -S build-essential git
+        git clone https://aur.archlinux.com/yay.git
+        cd yay
+        sudo makepg -si
+		echo -e "${CYAN} Yay installed... ${NOCOLOR}\n"
+	else
+		echo -e "${CYAN} Yay is already installed... ${NOCOLOR}\n"
+    fi
+	$yay=1
+}
 
 update_yay(){
 	echo -e "${CYAN} Update Arch Linux with yay... ${NOCOLOR}\n"
-	yay -Syu
+	if [[ $yay == 1 ]]; then
+		yay -Syu
+	else
+		echo -e "${CYAN} Yay is not installed...${NOCOLOR}\n"
+	fi
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
-        sleep 3
+    sleep 3
 }
 
 update_pacman(){
 	echo -e "${CYAN} Update Arch Linux without yay... ${NOCOLOR}\n"
 	sudo pacman -Syu
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
-        sleep 3
+    sleep 3
 }
 
 update_mirrorlist(){
@@ -52,9 +68,8 @@ update_mirrorlist(){
 	if ! command -v reflector &> /dev/null ; then
 		sudo pacman -S reflector
 		sudo systemctl enable reflector.timer --now
-	else
-		sudo reflector --threads 8 -c Germany -f 10 -p https --save /etc/pacman.d/mirrorlist --verbose
 	fi
+	sudo reflector --threads 8 -c Germany -f 10 -p https --save /etc/pacman.d/mirrorlist --verbose
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
         sleep 3
 }
@@ -62,45 +77,36 @@ update_mirrorlist(){
 clean_arch(){
 	echo -e "${CYAN} Clean Arch Linux... ${NOCOLOR}\n"
 
-	echo -e "${CYAN} Size of current User's cache: ${NOCOLOR}\n"
-	sudo du -sh ~/.cache
+	echo -e "${CYAN} Size of current user's cache: ${NOCOLOR}\n"
+	du -sh ~/.cache
 
-	echo -e "${CYAN} Size of Pacman Cache: ${NOCOLOR}\n"
-	sudo du -sh /var/cache/pacman/pkg
+	echo -e "${CYAN} Size of pacman cache: ${NOCOLOR}\n"
+	du -sh /var/cache/pacman/pkg
 
-	if ! command -v yay &> /dev/null; then
-                sudo pacman -S build-essential git
-                git clone https://aur.archlinux.com/yay.git
-                cd yay
-                sudo makepg -si
-        fi
-
-	read -p 'Do you want to clear all (y) cached packages or just the ones that are not installed (N)? [y/N] ' input
-
-	if [[ $input == "y" ]]; then
-		yay -Scc
-	else
-		yay -Sc
+	if [[ $yay == 1 ]]; then
+		read -p 'Do you want to clear all (y) cached packages or just the ones that are not installed (N)? [y/N] ' input
+		if [[ $input == "y" ]]; then
+			yay -Scc
+		else
+			yay -Sc
+		fi
+		echo -e "\n${CYAN} This is a list of pacman packages not used by anyone... ${NOCOLOR}\n"
+		yay -Qtdq
+		read -p 'Do you want to remove these packages? [y/N] ' input
+		if [[ $input == "y" ]]; then
+			yay -Rns $(yay -Qtdq)
+		fi
 	fi
-
-	echo -e "\n${CYAN} This is a list of pacman packages not used by anyone... ${NOCOLOR}\n"
-	yay -Qtdq
-	read -p 'Do you want to remove these packages? [y/N] ' input
-
-	if [[ $input == "y" ]]; then
-		yay -Rns $(yay -Qtdq)
-	fi
-
 	clear
 
 	echo -e "${CYAN} Size of current User's cache: ${NOCOLOR}\n"
-	sudo du -sh ~/.cache
+	du -sh ~/.cache
 
-	echo -e "${CYAN} Size of Pacman Cache: ${NOCOLOR}\n"
-	sudo du -sh /var/cache/pacman/pkg
+	echo -e "${CYAN} Size of pacman cache: ${NOCOLOR}\n"
+	du -sh /var/cache/pacman/pkg
 
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
-        sleep 3
+    sleep 3
 }
 
 install_update_debtap(){

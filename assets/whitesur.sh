@@ -20,4 +20,12 @@ fi
 ./install.sh -l -m -o normal -c Dark -a normal -t all -i arch -b $curBg -N mojave
 sudo ./tweaks.sh -g -r
 sudo ./tweaks.sh -g -t purple -b $curBg -c Dark -i arch
-	
+
+read -p "Do you want to remove previously downloaded files? [Y/n]" input
+
+if [[ $input == "n" ]]; then
+	break;
+else
+	cd $pwd
+	rm -rf WhiteSur-gtk-theme
+fi
