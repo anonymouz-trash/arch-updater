@@ -377,7 +377,6 @@ do
             	update_mirrorlist
             	update_yay
             	install_update_debtap
-            	install_update_whitesur
             	;;
         	6)
         	    clean_arch
