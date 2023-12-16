@@ -1,4 +1,5 @@
 #!/bin/bash
+yay=0
 pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $pwd
 CYAN='\033[1;36m'
@@ -40,7 +41,7 @@ check_yay(){
         sudo makepg -si
 		echo -e "${CYAN} Yay installed... ${NOCOLOR}\n"
     fi
-	$yay=1
+	yay=1
 }
 
 update_yay(){
