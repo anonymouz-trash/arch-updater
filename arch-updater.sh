@@ -39,14 +39,13 @@ check_yay(){
         cd yay
         sudo makepg -si
 		echo -e "${CYAN} Yay installed... ${NOCOLOR}\n"
-	else
-		echo -e "${CYAN} Yay is already installed... ${NOCOLOR}\n"
     fi
 	$yay=1
 }
 
 update_yay(){
 	echo -e "${CYAN} Update Arch Linux with yay... ${NOCOLOR}\n"
+	check_yay
 	if [[ $yay == 1 ]]; then
 		yay -Syu
 	else
