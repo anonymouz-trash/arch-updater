@@ -1,9 +1,10 @@
 
-#SMB-Shares
-//100.112.30.113/backups /home/tommy/NAS/backups cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
-//100.112.30.113/docker /home/tommy/NAS/docker cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
-//100.112.30.113/emulation /home/tommy/NAS/emulation cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
-//100.112.30.113/isoz /home/tommy/NAS/isoz cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
-//100.112.30.113/media /home/tommy/NAS/media cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
-//100.112.30.113/shared /home/tommy/NAS/shared cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
-//100.112.30.113/home/Drive /home/tommy/NAS/drive cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+# SMB-Shares
+# Replace ${USER} with your username and check the mount path
+//100.112.30.113/backups /home/${USER}/NAS/backups cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/docker /home/${USER}/NAS/docker cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/emulation /home/${USER}/NAS/emulation cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/isoz /home/${USER}/NAS/isoz cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/media /home/${USER}/NAS/media cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/shared /home/${USER}/NAS/shared cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
+//100.112.30.113/home/Drive /home/${USER}/NAS/drive cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/etc/samba/cred,iocharset=utf8,vers=3.0 0 0
