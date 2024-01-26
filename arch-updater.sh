@@ -193,84 +193,84 @@ install_set_grub_theme(){
 }
 
 fresh_install(){
-	echo -e "${CYAN} Install Chaotic-AUR Repo... ${NOCOLOR}\n"
-	sleep 3
-	# Install Chaotic-AUR Repo
-	if pacman -Qs "chaotic-keyring" > /dev/null ; then
-		sudo pacman -Syu
-	else
-		sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
-		sudo pacman-key --lsign-key FBA220DFC880C036
-		sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-		sudo echo "[chaotic-aur]" >> /etc/pacman.conf
-		sudo echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
-		sudo pacman -Syu
-	fi
+    echo -e "${CYAN} Install Chaotic-AUR Repo... ${NOCOLOR}\n"
+    sleep 3
+    # Install Chaotic-AUR Repo
+    if pacman -Qs "chaotic-keyring" > /dev/null ; then
+        sudo pacman -Syu
+    else
+	sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
+	sudo pacman-key --lsign-key FBA220DFC880C036
+	sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+	sudo echo "[chaotic-aur]" >> /etc/pacman.conf
+	sudo echo "Include = /etc/pacman.d/chaotic-mirrorlist" >> /etc/pacman.conf
+	sudo pacman -Syu
+    fi
 
-	echo -e "${CYAN} Install all wanted packages from pkglist-directory... ${NOCOLOR}\n"
-	sleep 3
+    echo -e "${CYAN} Install all wanted packages from pkglist-directory... ${NOCOLOR}\n"
+    sleep 3
 
-	read -p 'Do you want to install AMD or Nvidia GPU drivers? Just press [Enter] to skip. [a/n] ' input
+    read -p 'Do you want to install AMD or Nvidia GPU drivers? Just press [Enter] to skip. [a/n] ' input
 
-	if [[ $input == "n" ]]; then
-		sudo pacman -S --needed nvidia nvidia-settings nvidia-utils lib32-nvidia-utils lib32-opencl-nvidia opencl-nvidia libvdpau libxnvctrl vulkan-icd-loader lib32-vulkan-icd-loader envycontrol nvtop
-	elif [[ $input == "a" ]]; then
-		sudo pacman -S --needed mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau lib32-vulkan-radeon vulkan-radeon glu lib32-glu vulkan-icd-loader lib32-vulkan-icd-loader
-	fi
+    if [[ $input == "n" ]]; then
+	sudo pacman -S --needed nvidia nvidia-settings nvidia-utils lib32-nvidia-utils lib32-opencl-nvidia opencl-nvidia libvdpau libxnvctrl vulkan-icd-loader lib32-vulkan-icd-loader envycontrol nvtop
+    elif [[ $input == "a" ]]; then
+	sudo pacman -S --needed mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau lib32-vulkan-radeon vulkan-radeon glu lib32-glu vulkan-icd-loader lib32-vulkan-icd-loader
+    fi
 
-	read -p 'Do you want to install additional pacman packages? [y/N] ' input
+    read -p 'Do you want to install additional pacman packages? [y/N] ' input
 
-	if [[ $input == "y" ]]; then
-		yay -S --needed - < ./assets/pkglist-pacman.txt
-	fi
+    if [[ $input == "y" ]]; then
+	yay -S --needed - < ./assets/pkglist-pacman.txt
+    fi
 
-	read -p 'Do you want to install additional yay packages? [y/N] ' input
+    read -p 'Do you want to install additional yay packages? [y/N] ' input
 
-	if [[ $input == "y" ]]; then
-		yay -S --needed - < ./assets/pkglist-yay.txt
-	fi
+    if [[ $input == "y" ]]; then
+	yay -S --needed - < ./assets/pkglist-yay.txt
+    fi
 
-	echo -e "${CYAN} Install WINE + dependencies and other gaming tools... ${NOCOLOR}\n"
-	sleep 3	
-	sudo pacman -S --needed wine-staging
-	sudo pacman -S --needed giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader cups samba dosbox
-	yay -S --needed vkbasalt mangohud goverlay
+    echo -e "${CYAN} Install WINE + dependencies and other gaming tools... ${NOCOLOR}\n"
+    sleep 3	
+    sudo pacman -S --needed wine-staging
+    sudo pacman -S --needed giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader cups samba dosbox
+    yay -S --needed vkbasalt mangohud goverlay
 
     echo -e "${CYAN} Configure installed packages... ${NOCOLOR}\n"
     sleep 3
 
     echo ">> Copy webapp-icons for webapp-manager to ~/.icons/"
-	cp -r ./assets/webapps ~/.icons
+    cp -r ./assets/webapps ~/.icons
 
     echo ">> Copy boot menu entry file for Batocera"
     sudo cp ./assets/15_batocera /etc/grub.d/
 
     read -p 'Do you want to apply Arch Linux GRUB-Theme? [y/N] ' input
 
-	if [[ $input == "y" ]]; then
-		install_set_grub_theme
-	fi
-	
+    if [[ $input == "y" ]]; then
+	install_set_grub_theme
+    fi
+
     echo ">> Disabling Wayland in GDM"
     sudo sed -i 's/#WaylandEnable/WaylandEnable/g' /etc/gdm/custom.conf
 
     echo ">> Activate gamemode"
     systemctl --user enable gamemoded.service --now
 
-	echo ">> Install missing fonts"
-	sudo pacman -S --needed noto-fonts noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans
+    echo ">> Install missing fonts"
+    sudo pacman -S --needed noto-fonts noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans
 
-	echo ">> Enabling ClearType rendering"
-	yay -S --needed freetype2
-	sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
-	sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
-	sudo ln -s /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
-	sudo sed -i 's/#export/export/g' /etc/profile.d/freetype2.sh
+    echo ">> Enabling ClearType rendering"
+    yay -S --needed freetype2
+    sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
+    sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
+    sudo ln -s /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
+    sudo sed -i 's/#export/export/g' /etc/profile.d/freetype2.sh
 
-	echo "Improving I/O performance"
-	sudo cp ./assets/60-ioschedulers.rules /etc/udev/rules.d
-	sudo systemctl enable fstrim.timer --now
-	sudo systemctl enable reflector.timer --now
+    echo "Improving I/O performance"
+    sudo cp ./assets/60-ioschedulers.rules /etc/udev/rules.d
+    sudo systemctl enable fstrim.timer --now
+    sudo systemctl enable reflector.timer --now
 
     echo "Improving laptop battery life"
     sudo systemctl enable tlp.service --now
@@ -278,73 +278,77 @@ fresh_install(){
 
     echo "Taming the jounal's size"
     sudo journalctl --vacuum-size=100M
-	sudo journalctl --vacuum-time=2weeks
+    sudo journalctl --vacuum-time=2weeks
 
-	read -p "Laptop or desktop? Just press [Enter] to skip. [l/d]" input
+    read -p "Laptop or desktop? Just press [Enter] to skip. [l/d]" input
 
-	if [[ $input == 'l' ]]; then
-		echo "Improving laptop performance"
-		sudo systemctl enable tuned.service --now
-		sudo tuned-adm profile laptop-ac-powersave
-	elif [[ $input == 'd' ]]; then
-		echo "Improving desktop perfomance"
-		sudo systemctl enable tuned.service --now
-		sudo tuned-adm profile desktop
-	fi
+    if [[ $input == 'l' ]]; then
+	echo "Improving laptop performance"
+	sudo systemctl enable tuned.service --now
+	sudo tuned-adm profile laptop-ac-powersave
+    elif [[ $input == 'd' ]]; then
+	echo "Improving desktop perfomance"
+	sudo systemctl enable tuned.service --now
+	sudo tuned-adm profile desktop
+    fi
 
-	if ! grep -Fxq "#SMB-Shares" /etc/fstab; then
-		read -p "Do you want to add NAS drives to fstab? [y/N] " input
-		if [[ $input == "y" ]]; then
-			sudo cat ./assets/nas-smb-mount.txt >> /etc/fstab
-			sudo cp ./assets/nas-smb-acc.txt /etc/samba/cred
-			sudo chmod 600 /etc/samba/cred
-			sudo systemctl daemon-reload
-		fi
-	fi
-
-	if pacman -Qs zsh > /dev/null; then
-		echo ">> Change standard shell to ZSH for tommy"
-		chsh -s $(which zsh) tommy
-		echo ">> Change standard shell to ZSH for root"
-		sudo chsh -s $(which zsh)
-		echo "Install Oh My ZSH! for tommy"
-		terminator -e sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-		echo "Install Oh My ZSH! for root"
-		sudo terminator -e sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-		echo "neofetch" >> /home/tommy/.zshrc
-		sudo echo "neofetch" >> /root/.zshrc
-	fi
-	
-	read -p "Do you want to install debtap? [y/N] " input
-	if [[ $input == y ]]; then
-		install_update_debtap
-	fi
-	
-	read -p "Do you want to install WhiteSur-GTK-Theme? [y/N] " input
-	if [[ $input == y ]]; then
-		install_update_whitesur
-	fi
-	
-	read -p "Do you want to install conky-colors? [y/N] " input
-	if [[ $input == y ]]; then
-		install_update_conky_colors
-	fi
-	read -p "Do you want to install Conky-Clock-Weather? [y/N] " input
-	if [[ $input == y ]]; then
-		install_setup_clock_weather_conky
-	fi
-
-	read -p "Do you want to install Arch Linux GRUB-Theme? [y/N] " input
-	if [[ $input == y ]]; then
-		install_set_grub_theme
-	fi
-
-	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
-	echo "It's recommended to reboot the system now!"
-	read -p "Do you want to reboot? [y/N] " input
+    if ! grep -Fxq "#SMB-Shares" /etc/fstab; then
+	read -p "Do you want to add NAS drives to fstab? [y/N] " input
 	if [[ $input == "y" ]]; then
-		sudo reboot
+ 		sudo cat ./assets/nas-smb-mount.txt >> /etc/fstab
+		sudo cp ./assets/nas-smb-acc.txt /etc/samba/cred
+		sudo chmod 600 /etc/samba/cred
+  		echo ">> You have to change/check the credentials and mount paths!"
+    		sudo nano /etc/samba/cred
+      		sudo nano /etc/fstab
+		sudo systemctl daemon-reload
 	fi
+    fi
+
+    if pacman -Qs zsh > /dev/null; then
+	echo ">> Change standard shell to ZSH for logged in user"
+	chsh -s $(which zsh) ${USER}
+	echo ">> Change standard shell to ZSH for root"
+	sudo chsh -s $(which zsh)
+	echo "Install Oh My ZSH! for logged in user"
+	terminator -e sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	echo "Install Oh My ZSH! for root"
+	sudo terminator -e sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	echo "neofetch" >> /home/${USER}/.zshrc
+	sudo echo "neofetch" >> /root/.zshrc
+    fi
+	
+    read -p "Do you want to install debtap? [y/N] " input
+    if [[ $input == y ]]; then
+	install_update_debtap
+    fi
+	
+    read -p "Do you want to install WhiteSur-GTK-Theme? [y/N] " input
+    if [[ $input == y ]]; then
+	install_update_whitesur
+    fi
+	
+    read -p "Do you want to install conky-colors? [y/N] " input
+    if [[ $input == y ]]; then
+	install_update_conky_colors
+    fi
+    
+    read -p "Do you want to install Conky-Clock-Weather? [y/N] " input
+    if [[ $input == y ]]; then
+	install_setup_clock_weather_conky
+    fi
+
+    read -p "Do you want to install Arch Linux GRUB-Theme? [y/N] " input
+    if [[ $input == y ]]; then
+	install_set_grub_theme
+    fi
+
+    echo -e "${CYAN} Finished... ${NOCOLOR}\n"
+    echo "It's recommended to reboot the system now!"
+    read -p "Do you want to reboot? [y/N] " input
+    if [[ $input == "y" ]]; then
+	sudo reboot
+    fi
 }
 
 while [ -n  "$CHOICE"  ] ; 
