@@ -163,9 +163,9 @@ fi
 #  Show this help.
 
 # Installation
-./install.sh -l -m -o normal -c Dark -a normal -t all -i arch -b $curBg -N mojave
+./install.sh -l -m -o normal -c Dark -a normal -t all -i arch -b $curBg -N glassy -m
 sudo ./tweaks.sh -g -r
-sudo ./tweaks.sh -g -t purple -b $curBg -c Dark -i arch
+sudo ./tweaks.sh -g -b $curBg -c Dark -i arch
 
 read -p "Do you want to remove previously downloaded files? [Y/n]" input
 

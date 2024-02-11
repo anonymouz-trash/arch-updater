@@ -4,12 +4,12 @@ pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $pwd
 CYAN='\033[1;36m'
 NOCOLOR='\033[0m'
-ver=1.5
+ver=1.6
 HEIGHT=20
 WIDTH=75
 CHOICE_HEIGHT=4
 CHOICE="foobar"
-BACKTITLE="PWD= $pwd"
+BACKTITLE="PWD=$pwd"
 TITLE="ALU - Arch Linux Updater $ver"
 MENU="Choose one of the following options:"
 
@@ -158,7 +158,7 @@ install_update_whitesur(){
         sleep 3
 	read -p "Do you want to edit the WhiteSur script before starting? [y/N] " input
 	if [[ $input == "y" ]]; then
-		nano ./assets/whitsur.sh
+		nano ./assets/whitesur.sh
 	fi
 	bash ./assets/whitesur.sh
 	echo -e "${CYAN} Finished... ${NOCOLOR}\n"
