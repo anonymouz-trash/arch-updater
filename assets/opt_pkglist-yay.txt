@@ -1,0 +1,17 @@
+4kvideodownloader
+4kyoutubetomp3
+bitwarden
+clamav-unofficial-sigs
+cnrdrvcups-lb-bin
+etcher-bin
+gamemode
+heroic-games-launcher-bin
+mkinitcpio-firmware
+pdftk
+proton-ge-custom-bin
+protontricks-git
+ryusak-bin
+sof-firmware
+mp3directcut
+mp3tag
+librewolf-bin

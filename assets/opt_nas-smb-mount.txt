@@ -1,0 +1,19 @@
+
+# SMB-Shares
+# Replace ${USER} with your username and check the mount path
+# Replace ${DEST} with the IP or hostname/domain of your NAS
+
+# Options user and noauto is set, this means you're able to mount as user and
+# all shares will not (!) auto mount at boot, otherwise if the mount is not
+# available it can cause very high loading time at boot or shutdown.
+
+# Given shares are just examples. Don't forget to create the directorys for the
+# mount point before mounting them! Mount point also won't work after kernel
+# updates. Just restart and you're good to go.
+
+//${DEST}/backups /home/${USER}/NAS/backups cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/${USER}/.smb,iocharset=utf8,vers=3.0 0 0
+//${DEST}/docker /home/${USER}/NAS/docker cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/${USER}/.smb,iocharset=utf8,vers=3.0 0 0
+//${DEST}/isoz /home/${USER}/NAS/isoz cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/${USER}/.smb,iocharset=utf8,vers=3.0 0 0
+//${DEST}/media /home/${USER}/NAS/media cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/${USER}/.smb,iocharset=utf8,vers=3.0 0 0
+//${DEST}/shared /home/${USER}/NAS/shared cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/${USER}/.smb,iocharset=utf8,vers=3.0 0 0
+//${DEST}/home/Drive /home/${USER}/NAS/drive cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/${USER}/.smb,iocharset=utf8,vers=3.0 0 0
