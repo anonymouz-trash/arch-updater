@@ -55,7 +55,7 @@ check_4_yay(){
     if ! command -v yay &> /dev/null ; then
         echo -e "\n${white}#> ${blue}Yay is not installed, installing...${nocolor}\n"
         sudo pacman -S build-essential git
-        git clone https://aur.archlinux.com/yay.git
+        git clone https://aur.archlinux.org/yay.git
         cd yay
         sudo makepg -si
         cd ..
@@ -382,8 +382,8 @@ opt_chaotic(){
         fi
         return
     else
-		sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
-		sudo pacman-key --lsign-key FBA220DFC880C036
+		sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+		sudo pacman-key --lsign-key 3056513887B78AEB
 		sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 		echo '[chaotic-aur]' | sudo tee -a /etc/pacman.conf > /dev/null
 		echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf > /dev/null
@@ -763,8 +763,9 @@ do
                     echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Improve I/O performance (for SSDs & NVMEs)            ${magenta}|${noclor}";
                     echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Improve device performance (for Laptops/Desktops)     ${magenta}|${noclor}";
                     echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Make Z shell default and install Oh My ZSH            ${magenta}|${noclor}";
+                    echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
                     echo -e "${magenta}|                                                            |${nocolor}";
-                    echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Apply all options from above                          ${magenta}|${noclor}";
+                    echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Apply all options from above                          ${magenta}|${noclor}";
                     echo -e "${magenta}|                                                            |${nocolor}";
                     echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
                     echo -e "${magenta}|                                                            |${nocolor}";
@@ -807,6 +808,9 @@ do
                                 opt_zsh
                                 ;;
                             12)
+                                opt_smbshares
+                                ;;
+                            13)
                                 echo -e "${blue}Install Chaotic AUR Repository${nocolor}"
                                 read -p "Press any key to resume ..."
                                 opt_chaotic
@@ -840,6 +844,9 @@ do
                                 echo -e "${blue}Make Z shell default and install Oh My ZSH${nocolor}"
                                 read -p "Press any key to resume ..."
                                 opt_zsh
+                                echo -e "${blue}Apply SMB-Shares to /etc/fstab${nocolor}"
+                                read -p "Press any key to resume ..."
+                                opt_smbshares
                                 ;;
                             b)
                                 ;;
