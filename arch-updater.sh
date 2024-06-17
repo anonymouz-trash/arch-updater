@@ -100,7 +100,7 @@ clean_arch(){
 	echo -e "${cyan} Size of pacman cache: ${nocolor}\n"
 	du -sh /var/cache/pacman/pkg
 
-	if [[ $yay == 1 ]]; then
+	if ! command -v yay &> /dev/null ; then
 		read -p 'Do you want to clear all (y) cached packages or just the ones that are not installed (N)? [y/N] ' input
 		if [[ $input == "y" ]]; then
 			yay -Scc
