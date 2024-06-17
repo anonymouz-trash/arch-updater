@@ -34,13 +34,13 @@ version=2.2
 # This is useful if you plan to start the script via global hotkey
 # because of the assets and the the use of relative paths
 pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-cd $pwd
+cd ${pwd}
 
 # reflector settings
-country=$(cfg_read $pwd/assets/arch_updater.conf country)
-fastest=$(cfg_read $pwd/assets/arch_updater.conf fastest)
-protocol=$(cfg_read $pwd/assets/arch_updater.conf protocol)
-score=$(cfg_read $pwd/assets/arch_updater.conf score)
+country=$(cfg_read ${pwd}/assets/arch_updater.conf country)
+fastest=$(cfg_read ${pwd}/assets/arch_updater.conf fastest)
+protocol=$(cfg_read ${pwd}/assets/arch_updater.conf protocol)
+score=$(cfg_read ${pwd}/assets/arch_updater.conf score)
 
 # colors section
 blue='\033[1;34m'
@@ -100,9 +100,10 @@ clean_arch(){
 	echo -e "${cyan} Size of pacman cache: ${nocolor}\n"
 	du -sh /var/cache/pacman/pkg
 
-	if ! command -v yay &> /dev/null ; then
-		read -p 'Do you want to clear all (y) cached packages or just the ones that are not installed (N)? [y/N] ' input
-		if [[ $input == "y" ]]; then
+	if command -v yay &> /dev/null ; then
+		echo
+        read -p 'Do you want to clear all (y) cached packages or just the ones that are not installed (N)? [y/N] ' input
+		if [[ ${input} == "y" ]]; then
 			yay -Scc
 		else
 			yay -Sc
@@ -110,17 +111,17 @@ clean_arch(){
 		echo -e "\n${cyan} This is a list of packages not used by anyone... ${nocolor}\n"
 		yay -Qtdq
 		read -p 'Do you want to remove these packages? [y/N] ' input
-		if [[ $input == "y" ]]; then
+		if [[ ${input} == "y" ]]; then
 			yay -Rns $(yay -Qtdq)
 		fi
 	fi
 
     read -p 'Do you want to delete the contents of ~/.cache directory? [y/N] ' input
-    if [[ $input == "y" ]]; then
+    if [[ ${input} == "y" ]]; then
 		rm -rfv ~/.cache/*
 	else
         read -p 'Do you want to delete the contents of ~/.cache/yay directory? [y/N] ' input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             rm -rfv ~/.cache/yay/*
         fi
 	fi
@@ -151,9 +152,9 @@ cust_conky-colors(){
 	sleep 2
 	check_4_yay
 	read -p "Do you want to (e)dit the conky-colors script before installing or (r)remove it? [e/r/N] " input
-	if [[ $input == "e" ]]; then
+	if [[ ${input} == "e" ]]; then
 		nano ./assets/conky-colors.sh
-    elif [[ $input == "r" ]]; then
+    elif [[ ${input} == "r" ]]; then
         if command -v  conky-colors &> /dev/null ; then
             yay -Rsnc conky-colors-git
             rm -rfv ~/.conky-colors
@@ -169,7 +170,7 @@ cust_conky-clock-weather(){
 	sleep 2
 	if [ -d "/home/$USER/.conky/Clock-With-Weather-Conky" ]; then
         read -p "Do you want to (r)emove Conky clock with weather? [y/N] " input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             killall conky
             rm -rfv ~/.conky
             return
@@ -190,10 +191,10 @@ cust_grub-theme(){
     sudo sed -i '/GRUB_DEFAULT=/c\GRUB_DEFAULT=saved' /etc/default/grub
     sudo sed -i '/GRUB_SAVEDEFAULT=/c\GRUB_SAVEDEFAULT=true' /etc/default/grub
     read -p 'Do you want the blue or red Arch Linux GRUB theme? [b/r] ' input
-    if [[ $input == "b" ]]; then
+    if [[ ${input} == "b" ]]; then
       	sudo cp -rv ./assets/arch-silence_black-blue /boot/grub/themes
       	sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-blue/theme.txt"' /etc/default/grub
-    elif [[ $input == "r" ]];then
+    elif [[ ${input} == "r" ]];then
       	sudo cp -rv ./assets/arch-silence_black-red /boot/grub/themes
        	sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-red/theme.txt"' /etc/default/grub
     fi
@@ -206,7 +207,7 @@ cust_colloid(){
     cd assets
     if [ -d "Colloid-icon-theme" ]; then
         read -p "Do you want to (r)emove or just update it? [r/U] " input
-        if [[ $input == "r" ]]; then
+        if [[ ${input} == "r" ]]; then
             rm -rfv ./Colloid-icon-theme
             sudo rm -rfv /usr/share/icons/Colloid*
             return
@@ -222,7 +223,7 @@ cust_colloid(){
     if [[ -d Colloid-icon-theme ]] ; then
         echo "Do you want to remove previously downloaded files? "
         read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             rm -rfv ./Colloid-icon-theme
         fi
     fi
@@ -236,7 +237,7 @@ cust_obsidian(){
     cd assets
     if [ -d "iconpack-obsidian" ]; then
         read -p "Do you want to (r)emove or just update it? [r/U] " input
-        if [[ $input == "r" ]]; then
+        if [[ ${input} == "r" ]]; then
             rm -rfv ./iconpack-obsidian
             sudo rm -rfv /usr/share/icons/Obsidian*
             return
@@ -252,7 +253,7 @@ cust_obsidian(){
     if [[ -d iconpack-obsidian ]] ; then
         echo "Do you want to remove previously downloaded files? "
         read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             rm -rfv ./iconpack-obsidian
         fi
     fi
@@ -264,7 +265,7 @@ cust_lavanda(){
     echo -e "\n${white}#> ${blue}Installing or updating Lavanda GTK/KDE theme...${nocolor}\n"
 	sleep 2
 	read -p "Do you want to edit the Lavanda script before starting? [y/N] " input
-	if [[ $input == "y" ]]; then
+	if [[ ${input} == "y" ]]; then
 		nano ./assets/cust_lavanda.sh
 	fi
 	bash ./assets/cust_lavanda.sh
@@ -275,7 +276,7 @@ cust_macsonoma(){
     echo -e "\n${white}#> ${blue}Installing or updating MacSonoma KDE theme...${nocolor}\n"
 	sleep 2
 	read -p "Do you want to edit the MacSonoma script before starting? [y/N] " input
-	if [[ $input == "y" ]]; then
+	if [[ ${input} == "y" ]]; then
 		nano ./assets/cust_macsonoma.sh
 	fi
 	bash ./assets/cust_macsonoma.sh
@@ -286,7 +287,7 @@ cust_whitesur(){
     echo -e "\n${white}#> ${blue}Installing or updating WhiteSur GTK/KDE theme...${nocolor}\n"
 	sleep 2
 	read -p "Do you want to edit the WhiteSur script before starting? [y/N] " input
-	if [[ $input == "y" ]]; then
+	if [[ ${input} == "y" ]]; then
 		nano ./assets/cust_whitesur.sh
 	fi
 	bash ./assets/cust_whitesur.sh
@@ -299,7 +300,7 @@ cust_bibata(){
 	check_4_yay
     if [ "$(yay -Qe bibata-cursor-theme | wc -l)" -ge 1 ]; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
-        if [[ $input == "r" ]]; then
+        if [[ ${input} == "r" ]]; then
             yay -Rsnc bibata-cursor-theme
             return
         fi
@@ -319,7 +320,7 @@ cust_fastfetch(){
     else
         if [ "$(pacman -Qe fastfetch | wc -l)" -ge 1 ]; then
             read -p "Already installed! Do you want to (r)emove it? [r/N] " input
-            if [[ $input == "r" ]]; then
+            if [[ ${input} == "r" ]]; then
                 sudo pacman -Rsnc fastfetch
                 rm -rf ~/.config/fastfetch
                 if [[ ${SHELL,,} =~ "zsh" ]]; then
@@ -372,7 +373,7 @@ opt_chaotic(){
 	sleep 2
     if [ "$(pacman -Qe chaotic-keyring | wc -l)" -ge 1 ] ; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
-        if [[ $input == "r" ]]; then
+        if [[ ${input} == "r" ]]; then
             sudo pacman -Rsnc chaotic-keyring chaotic-mirrorlist
             sudo sed -i '/\[chaotic-aur\]/c\' /etc/pacman.conf
             sudo sed -i '/Include = \/etc\/pacman.d\/chaotic-mirrorlist\/c\' /etc/pacman.conf
@@ -396,9 +397,9 @@ opt_graphic_drivers(){
     echo -e "\n${white}#> ${blue}Installing AMD/Nvidia GPU drivers...${nocolor}\n"
 	sleep 2
     read -p 'AMD or Nvidia? Just press [Enter] to skip. [a/n] ' input
-    if [[ $input == "n" ]]; then
+    if [[ ${input} == "n" ]]; then
 		sudo pacman -S --needed nvidia-dkms nvidia-settings nvidia-utils lib32-nvidia-utils lib32-opencl-nvidia opencl-nvidia libvdpau libxnvctrl vulkan-icd-loader lib32-vulkan-icd-loader envycontrol nvtop
-    elif [[ $input == "a" ]]; then
+    elif [[ ${input} == "a" ]]; then
 		sudo pacman -S --needed mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau lib32-vulkan-radeon vulkan-radeon glu lib32-glu vulkan-icd-loader lib32-vulkan-icd-loader
     fi
 }
@@ -408,16 +409,16 @@ opt_packages(){
     echo -e "\n${white}#> ${blue}Installing additional packages...${nocolor}\n"
 	sleep 2
     read -p 'Do you want to edit pacman package list before installing? [y/N] ' input
-    if [[ $input == "y" ]]; then
+    if [[ ${input} == "y" ]]; then
 		nano ./assets/opt_pkglist-pacman.txt
     fi
     sudo pacman -S --needed - < ./assets/opt_pkglist-pacman.txt
 
     read -p 'Do you want to install additional yay packages? [y/N] ' input
-    if [[ $input == "y" ]]; then
+    if [[ ${input} == "y" ]]; then
         check_4_yay
         read -p 'Do you want to edit yay package list before installing? [y/N] ' input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             nano ./assets/opt_pkglist-yay.txt
         fi
 		yay -S --needed - < ./assets/opt_pkglist-yay.txt
@@ -431,7 +432,7 @@ opt_wine(){
     sudo pacman -S --needed wine-staging
     sudo pacman -S --needed giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader cups samba dosbox
     read -p 'Do you want to install also vkBasalt, MangoHUD & gOverlay? [y/N] ' input
-    if [[ $input == "y" ]]; then
+    if [[ ${input} == "y" ]]; then
         check_4_yay
         yay -S --needed vkbasalt mangohud goverlay
     fi
@@ -443,7 +444,7 @@ opt_batocera(){
 	sleep 2
     if [ -f /etc/grub.d/15_batocera ]; then
         read -p 'Boot entry already exists! Do you want to remove it? [y/N] ' input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             sudo rm -v /etc/grub.d/15_batocera
         fi
     else
@@ -461,7 +462,7 @@ opt_gamemode(){
     check_4_yay
     if [ "$(yay -Qe gamemode | wc -l)" -ge 1 ]; then
         read -p 'Gamemode already installed! Do you want to remove it? [y/N] ' input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             yay -Rsnc gamemode gamescope
         fi
         return
@@ -486,7 +487,7 @@ opt_cleartype(){
     check_4_yay
     if [ "$(yay -Qe freetype2 | wc -l)" -ge 1 ]; then
         read -p 'ClearType Rendering already enabled! Do you want to remove it? [y/N] ' input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             sudo rm /etc/fonts/conf.d/70-no-bitmaps.conf
             sudo rm /etc/fonts/conf.d/10-sub-pixel-rgb.conf
             sudo rm /etc/fonts/conf.d/11-lcdfilter-default.conf
@@ -509,7 +510,7 @@ opt_io-performance(){
 	sleep 2
     if [ -f /etc/udev/rules.d/60-ioschedulers.rules ]; then
         read -p 'I/O performance rule already exists! Do you want to remove it? [y/N] ' input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             sudo rm -v /etc/udev/rules.d/60-ioschedulers.rules
             sudo systemctl disable fstrim.timer --now
         fi
@@ -525,7 +526,7 @@ opt_dev-performance(){
 	sleep 2
     if [ "$(pacman -Qe tuned | wc -l)" -ge 1 ]; then
         read -p 'Device performance settings are applied! Do you want to remove it? [y/N] ' input
-        if [[ $input == "y" ]]; then
+        if [[ ${input} == "y" ]]; then
             sudo systemctl disable tuned.service --now
             sudo systemctl disable tlp.service --now
             sudo pacman -Rsnc tlp tlp-rdw powertop tuned
@@ -538,9 +539,9 @@ opt_dev-performance(){
         sudo systemctl enable tuned.service --now
         sudo systemctl enable tlp.service --now
         sudo powertop --auto-tune
-        if [[ $input == 'l' ]]; then
+        if [[ ${input} == 'l' ]]; then
             sudo tuned-adm profile laptop-ac-powersave
-        elif [[ $input == 'd' ]]; then
+        elif [[ ${input} == 'd' ]]; then
             sudo tuned-adm profile desktop
         fi
     fi
@@ -552,7 +553,7 @@ opt_smbshares(){
 	sleep 2
     if grep -Fxq "#SMB-Shares" /etc/fstab; then
         read -p "#SMB-Shares comment found! Do you want to edit fstab? [y/N] " input
-		if [[ $input == "y" ]]; then
+		if [[ ${input} == "y" ]]; then
             sudo nano /etc/fstab
         fi
     else
@@ -597,33 +598,33 @@ set_reflector(){
 	echo "     Score = $score"
 	echo ""
 	read -p "Do you want to change settings? [y/N] " input
-	if [[ $input == 'y' ]]; then
+	if [[ ${input} == 'y' ]]; then
         echo -e "\n${white}#> ${blue}Enter a valid country or country code or nothing for all available mirrors.${nocolor}"
         echo -e "${white} ${blue}A list of countries separated by commas is possible, e.g. like France,sweden,de,CZ .${nocolor}"
         echo -e "${white}   ${blue}Press [l] for a list of available countries...${nocolor}\n"
         read -p "Country: " input
-        until [ ! "$input" = "l" ] ;
+        until [ ! "${input}" = "l" ] ;
         do
             reflector --list-countries
             read -p "Country: " input
         done
-        country=$input
-        cfg_write ./assets/arch_updater.conf country $input
+        country=${input}
+        cfg_write ./assets/arch_updater.conf country ${input}
         echo -e "\n${white}#> ${blue}Enter a number of how much of the fastest mirrors to save.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "n amount of fastest mirrors: " input
-        fastest=$input
-        cfg_write ./assets/arch_updater.conf fastest $input
+        fastest=${input}
+        cfg_write ./assets/arch_updater.conf fastest ${input}
         echo -e "\n${white}#> ${blue}Enter the allowed protocol(s), like http,https,ftp${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "Protocol: " input
-        protocol=$input
-        cfg_write ./assets/arch_updater.conf protocol $input
+        protocol=${input}
+        cfg_write ./assets/arch_updater.conf protocol ${input}
         echo -e "\n${white}#> ${blue}Limit the list to the n servers with the highest score.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "n amount of highest score mirrors: " input
-        score=$input
-        cfg_write ./assets/arch_updater.conf score $input
+        score=${input}
+        cfg_write ./assets/arch_updater.conf score ${input}
     fi
 }
 ### Menu section

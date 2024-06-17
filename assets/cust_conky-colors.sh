@@ -1,6 +1,6 @@
 #!/bin/bash
 pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-cd $pwd
+cd ${pwd}
 
 # Check for needed dependencies
 if ! command -v  conky-colors &> /dev/null ; then
