@@ -143,11 +143,11 @@ do
                     echo -e "${magenta}|                                                            |${nocolor}";
                     echo -e "${magenta}| ${white}Optimizations & Tweaks:                                    ${magenta}|${nocolor}";
                     echo -e "${magenta}|                                                            |${nocolor}";
-                    echo -e "${magenta}| ${cyan}[ ${blue}1${cyan}] ${white}Install Chaotic AUR Repository                        ${magenta}|${noclor}";
+                    echo -e "${magenta}| ${cyan}[ ${blue}1${cyan}] ${white}Install/Remove Chaotic AUR Repository                 ${magenta}|${noclor}";
                     echo -e "${magenta}| ${cyan}[ ${blue}2${cyan}] ${white}Install AMD / Nvidia drivers                          ${magenta}|${noclor}";
                     echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Install additional pacman / yay packages              ${magenta}|${noclor}";
                     echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}Get out of Wine dependency hell                       ${magenta}|${noclor}";
-                    echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}Add Batocera Dual-Boot to system                      ${magenta}|${noclor}";
+                    echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}Add Batocera Dual-Boot entry to GRUB                  ${magenta}|${noclor}";
                     echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}Install Gamemode- / Gamescope-Service (FSR)           ${magenta}|${noclor}";
                     echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}Install additional fonts, e.g. Windows fonts          ${magenta}|${noclor}";
                     echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}Enable ClearType rendering                            ${magenta}|${noclor}";

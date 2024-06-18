@@ -4,24 +4,27 @@ opt_chaotic(){
     clear
     echo -e "\n${white}#> ${blue}Installing or updating Chaotic AUR repository...${nocolor}\n"
 	sleep 2
-    if [ "$(pacman -Qe chaotic-keyring | wc -l)" -ge 1 ] ; then
+
+    if [ "$(pacman -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
         if [[ ${input} == "r" ]]; then
             sudo pacman -Rsnc chaotic-keyring chaotic-mirrorlist
-            sudo sed -i '/\[chaotic-aur\]/c\' /etc/pacman.conf
-            sudo sed -i '/Include = \/etc\/pacman.d\/chaotic-mirrorlist\/c\' /etc/pacman.conf
-
             sudo sed -i 's/\[chaotic-aur\]//g' /etc/pacman.conf
             sudo sed -i 's/Include = \/etc\/pacman\.d\/chaotic-mirrorlist//g' /etc/pacman.conf
         fi
+        sudo pacman -Sy
         return
     else
-		sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-		sudo pacman-key --lsign-key 3056513887B78AEB
+        echo -e "${blue}Please copy the key after\n\n${magenta}pacman-key --recv-key${blue} or ${magenta}pacman-key --lsign-key\n\n${blue}on the next webpage and paste it in here.${nocolor}\n"
+        read -p "Press any key to resume ..."
+        xdg-open https://aur.chaotic.cx/docs
+        read -p "Enter key: " key_keyserver
+        sudo pacman-key --recv-key ${key_keyserver} --keyserver keyserver.ubuntu.com
+		sudo pacman-key --lsign-key ${key_keyserver}
 		sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 		echo '[chaotic-aur]' | sudo tee -a /etc/pacman.conf > /dev/null
 		echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf > /dev/null
-		sudo pacman -Syu
+		sudo pacman -Sy
     fi
 }
 
@@ -169,9 +172,9 @@ opt_dev-performance(){
         sudo journalctl --vacuum-time=2weeks
         read -p "Laptop or desktop? Just press [Enter] to skip. [l/d]" input
         sudo pacman -S tlp tlp-rdw powertop tuned
+        sudo powertop --auto-tune
         sudo systemctl enable tuned.service --now
         sudo systemctl enable tlp.service --now
-        sudo powertop --auto-tune
         if [[ ${input} == 'l' ]]; then
             sudo tuned-adm profile laptop-ac-powersave
         elif [[ ${input} == 'd' ]]; then
