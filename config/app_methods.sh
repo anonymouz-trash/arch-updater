@@ -50,22 +50,22 @@ set_reflector(){
             read -p "Country: " input
         done
         country=${input}
-        cfg_write ./assets/arch_updater.conf country ${input}
+        cfg_write ./config/arch_updater.conf country ${input}
         echo -e "\n${white}#> ${blue}Enter a number of how much of the fastest mirrors to save.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "n amount of fastest mirrors: " input
         fastest=${input}
-        cfg_write ./assets/arch_updater.conf fastest ${input}
+        cfg_write ./config/arch_updater.conf fastest ${input}
         echo -e "\n${white}#> ${blue}Enter the allowed protocol(s), like http,https,ftp${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "Protocol: " input
         protocol=${input}
-        cfg_write ./assets/arch_updater.conf protocol ${input}
+        cfg_write ./config/arch_updater.conf protocol ${input}
         echo -e "\n${white}#> ${blue}Limit the list to the n servers with the highest score.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "n amount of highest score mirrors: " input
         score=${input}
-        cfg_write ./assets/arch_updater.conf score ${input}
+        cfg_write ./config/arch_updater.conf score ${input}
     fi
 }
 
