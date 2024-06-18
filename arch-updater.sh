@@ -7,8 +7,10 @@ pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd ${pwd}
 
 ### Include required functions
-
+source ./config/colors.sh
 source ./config/app_methods.sh
+source ./config/cust_methods.sh
+source ./config/opt_methods.sh
 
 ### Declare environment variables
 
