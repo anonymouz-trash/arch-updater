@@ -1,6 +1,7 @@
 #!/bin/bash
 pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd ${pwd}
+
 de=$XDG_CURRENT_DESKTOP
 
 # Check if WhiteSur got pulled and is up to date
@@ -33,17 +34,19 @@ fi
 
 # Installation
 
-
-
 if [[ ${de,,} =~ "gnome" ]]; then
 	# Get actual set background of GNOME
-	curBg=$(gsettings get org.gnome.desktop.background picture-uri)
-	first=${curBg/\'file:\/\//}
-	second=${first/\'/}
-	curBg=${second}
-	./WhiteSur-gtk-theme/install.sh -l -m -o normal -c Dark -t all -i arch -b $curBg -N glassy
+	curBg="$(gsettings get org.gnome.desktop.background picture-uri | cut -d\' -f2 | cut -c 8-)"
+	./WhiteSur-gtk-theme/install.sh -l -m -o normal -c Dark -t all -i arch -b "$curBg" -N glassy
+	# su root -c "./WhiteSur-gtk-theme/install.sh -d /usr/share/themes -l -m -o normal -c Dark -t all -i arch -b "$curBg" -N glassy"
 	sudo ./WhiteSur-gtk-theme/tweaks.sh -g -r
-	sudo ./WhiteSur-gtk-theme/tweaks.sh -g -b $curBg -c Dark -i arch
+	sudo ./WhiteSur-gtk-theme/tweaks.sh -g -b "$curBg" -c Dark -i arch
+	until [ $(pgrep -c firefox) -eq 0 ] ;
+	do
+		echo -e "\nFirefox is running, please close it to proceed...\n"
+		read -p "Press [Enter] to check again..."
+	done 
+	sudo ./WhiteSur-gtk-theme/tweaks.sh -f monterey
 elif [[ ${de,,} =~ "kde" ]]; then
 	sudo ./WhiteSur-kde/install.sh -c dark --opaque
 	sudo ./WhiteSur-kde/sddm/install.sh

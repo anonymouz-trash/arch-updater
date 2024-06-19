@@ -138,7 +138,8 @@ cust_macsonoma(){
 
 cust_whitesur(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating WhiteSur GTK/KDE theme...${nocolor}\n"
+    echo -e "\n${white}#> ${blue}Installing or updating WhiteSur GTK/KDE theme...${nocolor}"
+    echo -e "\n${blue}!!!${nocolor} Please use background pictures without spaces in the filename ${blue}!!!${nocolor}\n"
 	sleep 2
 	read -p "Do you want to edit the WhiteSur script before starting? [y/N] " input
 	if [[ ${input} == "y" ]]; then
