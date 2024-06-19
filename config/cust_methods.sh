@@ -166,7 +166,7 @@ cust_bibata(){
 
 cust_fastfetch(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or fastfetch...${nocolor}\n"
+    echo -e "\n${white}#> ${blue}Installing / Removing fastfetch...${nocolor}\n"
 	sleep 2
 	if [ "$(pacman -Qe bash | wc -l)" -ge 1 ] | [ "$(pacman -Qe bash | wc -l)" -ge 1 ] ; then
         echo -e "\n${white}#> ${cyan}Neither BASH or ZSH are installed, aborting...${nocolor}\n"
@@ -218,5 +218,21 @@ cust_fastfetch(){
                 echo "fastfetch -c /home/${USER}/.config/fastfetch/cust_myarch.jsonc" | sudo tee -a /root/.bashrc > /dev/null
             fi
         fi
+    fi
+}
+
+cust_tmux(){
+    clear
+    echo -e "\n${white}#> ${blue}Installing / Removing tmux...${nocolor}\n"
+	sleep 2
+	if [ "$(pacman -Qe tmux | wc -l)" -ge 1 ] && [ -f ~/.tmux.conf ] ; then
+        read -p "Already installed! Do you want to (r)emove it? [r/N] " input
+        if [[ ${input} == "r" ]]; then
+            sudo pacman -Rsnc tmux
+            rm -rf ~/.tmux.conf
+        fi
+    else
+        sudo pacman -S tmux
+        cp ./assets/cust_tmux.conf ~/.tmux.conf
     fi
 }

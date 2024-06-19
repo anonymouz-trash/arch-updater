@@ -87,6 +87,7 @@ do
                     echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Bibata cursor theme                                   ${magenta}|${noclor}";
                     echo -e "${magenta}|                                                            |${nocolor}";
                     echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Install fastfetch and copy minimal config             ${magenta}|${noclor}";
+                    echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Install tmux and copy minimal config                  ${magenta}|${noclor}";
                     echo -e "${magenta}|                                                            |${nocolor}";
                     echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
                     echo -e "${magenta}|                                                            |${nocolor}";
@@ -124,6 +125,9 @@ do
                                 ;;
                             10)
                                 cust_fastfetch
+                                ;;
+                            11)
+                                cust_tmux
                                 ;;
                             b)
                                 ;;
