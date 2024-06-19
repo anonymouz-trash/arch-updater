@@ -38,7 +38,7 @@ if [[ ${de,,} =~ "gnome" ]]; then
 	# Get actual set background of GNOME
 	curBg="$(gsettings get org.gnome.desktop.background picture-uri | cut -d\' -f2 | cut -c 8-)"
 	./WhiteSur-gtk-theme/install.sh -l -m -o normal -c Dark -t all -i arch -b "$curBg" -N glassy
-	# su root -c "./WhiteSur-gtk-theme/install.sh -d /usr/share/themes -l -m -o normal -c Dark -t all -i arch -b "$curBg" -N glassy"
+	su root -c "./WhiteSur-gtk-theme/install.sh -l -m -o normal -c Dark -t all -i arch -b "$curBg" -N glassy"
 	sudo ./WhiteSur-gtk-theme/tweaks.sh -g -r
 	sudo ./WhiteSur-gtk-theme/tweaks.sh -g -b "$curBg" -c Dark -i arch
 	until [ $(pgrep -c firefox) -eq 0 ] ;
