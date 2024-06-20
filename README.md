@@ -11,6 +11,7 @@ As you know: No backup, no mercy. ;)
 - yay           (AUR-Helper)
 - debtap        (for installing *.deb-packages)
 - reflector     (Updating Arch mirrorlist)
+
 All programs will be installed automatically if not available.
 
 # Changelog
