@@ -135,6 +135,8 @@ do
                         read -p "Press any key to resume ..."
                         ;;
                 esac
+                echo
+                read -p "Press any key to resume ..."
             done
             ;;
         8)
@@ -248,6 +250,8 @@ do
                         read -p "Press any key to resume ..."
                         ;;
                 esac
+                echo
+                read -p "Press any key to resume ..."
             done
             ;;
         9)
@@ -282,6 +286,7 @@ do
         q)
             echo
             echo -e "${magenta}Script ${blue}terminated, Good bye..."
+            exit
             ;;
         *)
             echo
@@ -289,4 +294,6 @@ do
             read -p "Press any key to resume ..."
             ;;
     esac
+    echo
+    read -p "Press any key to resume ..."
 done
