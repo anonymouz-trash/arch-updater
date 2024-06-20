@@ -7,7 +7,15 @@ Feel free to use any of the code in this repo for your own.
 I highly encourage you to read through the script before you using it!
 As you know: No backup, no mercy. ;)
 
+# Prerequisite
+- yay           (AUR-Helper)
+- debtap        (for installing *.deb-packages)
+- reflector     (Updating Arch mirrorlist)
+All programs will be installed automatically if not available.
+
 # Changelog
+v2.5:
+- code design, erased useless stuff
 
 v2.0 released :D :
 - ditched dialog as TUI
