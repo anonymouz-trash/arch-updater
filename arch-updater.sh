@@ -73,7 +73,6 @@ do
             echo -e "\n${blue}#>${white} Clean Arch Linux${nocolor}\n"
             clean_arch
             echo
-            read -p "Press any key to resume ..."
                         ;;
         7)
             until [ "$CHOICE" = "b" ] ;
@@ -220,36 +219,47 @@ do
                         echo -e "${blue}Install Chaotic AUR Repository${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_chaotic
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Install AMD / Nvidia drivers${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_graphic_drivers
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Install additional pacman / yay packages${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_packages
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Get out of Wine dependency hell${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_wine
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Add Batocera Dual-Boot to system${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_batocera
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Install Gamemode- / Gamescope-Service (FSR)${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_gamemode
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Install additional fonts, e.g. Windows fonts${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_fonts
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Enable ClearType rendering${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_cleartype
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Improve I/O performance (for SSDs & NVMEs)${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_io-performance
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Improve device performance (for Laptops/Desktops)${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_dev-performance
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Make Z shell default and install Oh My ZSH${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_zsh
+                        read -p "Press any key to resume ..."
                         echo -e "${blue}Apply SMB-Shares to /etc/fstab${nocolor}"
                         read -p "Press any key to resume ..."
                         opt_smbshares
