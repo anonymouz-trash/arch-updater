@@ -105,7 +105,7 @@ update_mirrorlist(){
 		sudo pacman -S reflector
 		sudo systemctl enable reflector.timer --now
 	fi
-	sudo reflector -c $country -f $fastest -p $protocol --score $score --save /etc/pacman.d/mirrorlist --verbose
+	sudo reflector -c ${country} -f ${fastest} -p ${protocol} --score ${score} --save /etc/pacman.d/mirrorlist --verbose
 }
 
 clean_arch(){
