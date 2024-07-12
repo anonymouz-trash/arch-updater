@@ -101,7 +101,7 @@ opt_gamemode(){
     echo -e "\n${white}#> ${blue}Installing gamemode/gamescope service...${nocolor}\n"
 	sleep 2
     check_4_yay
-    if [ "$(yay -Qe gamemode | wc -l)" -ge 1 && "$(yay -Qe gamescope | wc -l)" -ge 1]; then
+    if [ "$(yay -Qe gamemode | wc -l)" -ge 1 ] && [ "$(yay -Qe gamescope | wc -l)" -ge 1 ]; then
         read -p 'Gamemode already installed! Do you want to remove it? [y/N] ' input
         if [[ ${input} == "y" ]]; then
             yay -Rsnc gamemode gamescope
