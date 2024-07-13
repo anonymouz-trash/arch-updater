@@ -154,6 +154,7 @@ do
             until [ "$CHOICE" = "b" ] ;
             do
                 clear
+                cd ${pwd}
                 echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Upater Script ${white}$version ${magenta}]>-------------+${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}Optimizations & Tweaks:                                    ${magenta}|${nocolor}";
