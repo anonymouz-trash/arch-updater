@@ -215,7 +215,7 @@ opt_zsh(){
     clear
     echo -e "\n${white}#>  ${blue}Make Z shell standard for ${white}${USER}${blue} and root...${nocolor}\n"
 	sleep 2
-    if ! [ "$(pacman -Qe zsh | wc -l)" -ge 1 ]; then
+    if [ "$(pacman -Qe zsh | wc -l)" -ge 1 ]; then
 		echo ">> Change standard shell to ZSH for logged in user"
 		chsh -s $(which zsh) ${USER}
 		echo ">> Change standard shell to ZSH for root"
