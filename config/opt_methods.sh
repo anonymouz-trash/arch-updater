@@ -200,7 +200,8 @@ opt_smbshares(){
     else
 			echo "You have to change/check the credentials and mount paths!"
 			echo "Just search the given variables with [Ctrl-\] in nano and replace them."
-			read -p
+            echo
+			read -p "Press any key to resume..."
             sudo nano ./assets/opt_nas-smb-acc.txt
 			sudo nano ./assets/opt_nas-smb-mount.txt
 			cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
