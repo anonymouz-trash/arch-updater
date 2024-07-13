@@ -76,7 +76,7 @@ check_4_yay(){
         sudo pacman -S build-essential git
         git clone https://aur.archlinux.org/yay.git
         cd yay
-        sudo makepg -si
+        sudo makepkg -si
         cd ..
         rm -rf yay
     fi
