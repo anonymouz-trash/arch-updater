@@ -85,6 +85,10 @@ opt_batocera(){
         fi
     else
         sudo cp -v ./assets/opt_15_batocera /etc/grub.d/15_batocera
+        if ! [ "$(pacman -Qe os-prober | wc -l)" -ge 1 ]; then
+            sudo pacman -S os-prober
+            sudo sed -i 's/#GRUB_DISABLE_OS_PROBER/GRUB_DISABLE_OS_PROBER/g' /etc/default/grub
+        fi
         echo -e "${magenta}Copied! ${blue}Now running grub-mkconfig.${nocolor}"
         echo -e "${blue}If Batocera EFI boot partition is installed anywhere it will find it.${nocolor}"
         sudo grub-mkconfig -o /boot/grub/grub.cfg
@@ -209,7 +213,7 @@ opt_zsh(){
     clear
     echo -e "\n${white}#>  ${blue}Make Z shell standard for ${white}${USER}${blue} and root...${nocolor}\n"
 	sleep 2
-    if [ "$(pacman -Qe zsh | wc -l)" -ge 1 ]; then
+    if ! [ "$(pacman -Qe zsh | wc -l)" -ge 1 ]; then
 		echo ">> Change standard shell to ZSH for logged in user"
 		chsh -s $(which zsh) ${USER}
 		echo ">> Change standard shell to ZSH for root"
@@ -222,5 +226,7 @@ opt_zsh(){
 		sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 		sed -i 's/robbyrussell/refined/g' ~/.zshrc
 		sudo sed -i 's/robbyrussell/fox/g' /root/.zshrc
+    else
+        echo ">> no Z Shell installed, exiting..."
     fi
 }
