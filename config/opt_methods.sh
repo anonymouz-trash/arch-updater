@@ -85,6 +85,7 @@ opt_batocera(){
         fi
     else
         sudo cp -v ./assets/opt_15_batocera /etc/grub.d/15_batocera
+        sudo chmod 0755 /etc/grub.d/15_batocera
         if ! [ "$(pacman -Qe os-prober | wc -l)" -ge 1 ]; then
             sudo pacman -S os-prober
             sudo sed -i 's/#GRUB_DISABLE_OS_PROBER/GRUB_DISABLE_OS_PROBER/g' /etc/default/grub
