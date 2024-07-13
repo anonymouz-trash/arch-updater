@@ -21,6 +21,7 @@ version=2.5
 until [ "$CHOICE" = "q" ] ;
 do
     clear
+    cd ${pwd}
     echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Upater Script ${white}$version ${magenta}]>-------------+${nocolor}";
     echo -e "${magenta}|                                                            |${nocolor}";
     echo -e "${magenta}| ${cyan}[ ${blue}1${cyan}] ${white}Update Arch Linux with yay                            ${magenta}|${noclor}";
@@ -77,6 +78,7 @@ do
             until [ "$CHOICE" = "b" ] ;
             do
                 clear
+                cd ${pwd}
                 echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Upater Script ${white}$version ${magenta}]>-------------+${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}Customization:                                             ${magenta}|${nocolor}";
@@ -272,8 +274,6 @@ do
                         read -p "Press any key to resume ..."
                         ;;
                 esac
-                echo
-                read -p "Press any key to resume ..."
             done
             ;;
         9)
@@ -316,6 +316,4 @@ do
             read -p "Press any key to resume ..."
             ;;
     esac
-    echo
-    read -p "Press any key to resume ..."
 done
