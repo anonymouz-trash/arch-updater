@@ -4,6 +4,7 @@
 # This is useful if you plan to start the script via global hotkey
 # because of the assets and the the use of relative paths
 pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+cd ${pwd}
 
 ### Include required functions
 source ./config/colors.sh
