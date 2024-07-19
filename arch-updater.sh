@@ -319,4 +319,6 @@ do
             read -p "Press any key to resume ..."
             ;;
     esac
+    echo
+    read -p "Press any key to resume ..."
 done
