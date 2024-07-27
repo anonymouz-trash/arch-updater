@@ -26,6 +26,8 @@ opt_chaotic(){
 		echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf > /dev/null
 		sudo pacman -Sy
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_graphic_drivers(){
@@ -38,6 +40,8 @@ opt_graphic_drivers(){
     elif [[ ${input} == "a" ]]; then
 		sudo pacman -S --needed mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau lib32-vulkan-radeon vulkan-radeon glu lib32-glu vulkan-icd-loader lib32-vulkan-icd-loader
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_packages(){
@@ -59,6 +63,8 @@ opt_packages(){
         fi
 		yay -S --needed - < ./assets/opt_pkglist-yay.txt
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_wine(){
@@ -72,6 +78,8 @@ opt_wine(){
         check_4_yay
         yay -S --needed vkbasalt mangohud goverlay
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_batocera(){
@@ -94,6 +102,8 @@ opt_batocera(){
         echo -e "${blue}If Batocera EFI boot partition is installed anywhere it will find it.${nocolor}"
         sudo grub-mkconfig -o /boot/grub/grub.cfg
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_gamemode(){
@@ -111,6 +121,8 @@ opt_gamemode(){
         yay -S gamemode gamescope
         systemctl --user enable gamemoded.service --now
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_fonts(){
@@ -118,7 +130,11 @@ opt_fonts(){
     echo -e "\n${white}#> ${blue}Installing additional fonts...${nocolor}\n"
 	sleep 2
     check_4_yay
-    yay -S --needed noto-fonts-git ttf-dejavu ttf-liberation ttf-opensans terminus-font ttf-ubuntu-font-family ttf-ms-win11 ttf-ms-win10
+    sudo pacman -S --needed noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-liberation ttf-dejavu ttf-roboto
+    sudo pacman -S --needed ttf-jetbrains-mono ttf-fira-code ttf-hack adobe-source-code-pro-fonts
+    yay -S --needed ttf-symbola ttf-ms-fonts ttf-tahoma ttf-vista-fonts
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_cleartype(){
@@ -143,6 +159,8 @@ opt_cleartype(){
         sudo ln -s /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
         sudo sed -i 's/#export/export/g' /etc/profile.d/freetype2.sh
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_io-performance(){
@@ -159,6 +177,8 @@ opt_io-performance(){
         sudo cp ./assets/opt_60-ioschedulers.rules /etc/udev/rules.d/60-ioschedulers.rules
         sudo systemctl enable fstrim.timer --now
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_dev-performance(){
@@ -186,6 +206,8 @@ opt_dev-performance(){
             sudo tuned-adm profile desktop
         fi
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_smbshares(){
@@ -209,6 +231,8 @@ opt_smbshares(){
 			chmod 600 ~/.smb
 			sudo systemctl daemon-reload
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 opt_zsh(){
@@ -231,4 +255,6 @@ opt_zsh(){
     else
         echo ">> no Z Shell installed, exiting..."
     fi
+    echo
+    read -p "Press any key to resume ..."
 }

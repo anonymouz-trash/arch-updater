@@ -6,10 +6,12 @@
         "color":
         {
             "1": "blue"
-        },
+        }
     },
     "display": {
-        "binaryPrefix": "si"
+        "size": {
+            "binaryPrefix": "si"
+	}
     },
     "modules": [
         {        

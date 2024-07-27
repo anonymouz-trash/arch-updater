@@ -16,6 +16,8 @@ cust_conky-colors(){
         fi
 	fi
 	bash ./assets/conky-colors.sh
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_conky-clock-weather(){
@@ -36,6 +38,8 @@ cust_conky-clock-weather(){
         fi
 		bash -c "$(wget --no-check-certificate --no-cache --no-cookies -O- https://raw.githubusercontent.com/takattila/Clock-With-Weather-Conky/v1.0.0/scripts/install.sh)"
 	fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_grub-theme(){
@@ -53,6 +57,8 @@ cust_grub-theme(){
        	sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-red/theme.txt"' /etc/default/grub
     fi
     sudo grub-mkconfig -o /boot/grub/grub.cfg
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_colloid(){
@@ -82,6 +88,8 @@ cust_colloid(){
         fi
     fi
     cd ..
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_obsidian(){
@@ -112,6 +120,8 @@ cust_obsidian(){
         fi
     fi
     cd ..
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_lavanda(){
@@ -123,6 +133,8 @@ cust_lavanda(){
 		nano ./assets/cust_lavanda.sh
 	fi
 	bash ./assets/cust_lavanda.sh
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_macsonoma(){
@@ -134,6 +146,8 @@ cust_macsonoma(){
 		nano ./assets/cust_macsonoma.sh
 	fi
 	bash ./assets/cust_macsonoma.sh
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_whitesur(){
@@ -146,6 +160,8 @@ cust_whitesur(){
 		nano ./assets/cust_whitesur.sh
 	fi
 	bash ./assets/cust_whitesur.sh
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_bibata(){
@@ -162,7 +178,8 @@ cust_bibata(){
     else
         yay -S bibata-cursor-theme
     fi
-
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_fastfetch(){
@@ -220,6 +237,8 @@ cust_fastfetch(){
             fi
         fi
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 cust_tmux(){
@@ -236,4 +255,6 @@ cust_tmux(){
         sudo pacman -S tmux
         cp ./assets/cust_tmux.conf ~/.tmux.conf
     fi
+    echo
+    read -p "Press any key to resume ..."
 }

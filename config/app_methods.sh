@@ -67,6 +67,8 @@ set_reflector(){
         score=${input}
         cfg_write ./config/arch_updater.conf score ${input}
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 ### Check if yay AUR helper is installed, if not it will be installed
@@ -80,6 +82,8 @@ check_4_yay(){
         cd ..
         rm -rf yay
     fi
+    echo
+    read -p "Press any key to resume ..."
 }
 
 update_yay(){
@@ -88,6 +92,8 @@ update_yay(){
     sleep 2
 	check_4_yay
     yay -Syyu
+    echo
+    read -p "Press any key to resume ..."
 }
 
 update_pacman(){
@@ -95,6 +101,8 @@ update_pacman(){
 	echo -e "\n${white}#> ${blue}Updating Arch Linux with pacman... ${nocolor}\n"
 	sleep 2
 	sudo pacman -Syyu
+	echo
+    read -p "Press any key to resume ..."
 }
 
 update_mirrorlist(){
@@ -102,10 +110,12 @@ update_mirrorlist(){
 	echo -e "\n${white}#> ${blue}Updating Arch Linux mirrorlist with reflector... ${nocolor}\n"
 	sleep 2
 	if ! command -v reflector &> /dev/null ; then
-		sudo pacman -S reflector
-		sudo systemctl enable reflector.timer --now
-	fi
-	sudo reflector -c ${country} -f ${fastest} -p ${protocol} --score ${score} --save /etc/pacman.d/mirrorlist --verbose
+        sudo pacman -S reflector
+        sudo systemctl enable reflector.timer --now
+    fi
+    sudo reflector -c ${country} -f ${fastest} -p ${protocol} --score ${score} --save /etc/pacman.d/mirrorlist --verbose
+    echo
+    read -p "Press any key to resume ..."
 }
 
 clean_arch(){
@@ -118,6 +128,7 @@ clean_arch(){
 
 	echo -e "${cyan} Size of pacman cache: ${nocolor}\n"
 	du -sh /var/cache/pacman/pkg
+    echo
 
 	if command -v yay &> /dev/null ; then
 		echo
@@ -149,9 +160,12 @@ clean_arch(){
 
 	echo -e "${cyan} Size of current User's cache: ${nocolor}\n"
 	du -sh ~/.cache
-
+    echo
 	echo -e "${cyan} Size of pacman cache: ${nocolor}\n"
 	du -sh /var/cache/pacman/pkg
+    echo
+    echo
+    read -p "Press any key to resume ..."
 }
 
 update_debtap(){
@@ -163,4 +177,6 @@ update_debtap(){
 		yay -S debtap
 	fi
 	sudo debtap -u
+    echo
+    read -p "Press any key to resume ..."
 }
