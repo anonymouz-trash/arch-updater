@@ -15,7 +15,7 @@ source ./config/opt_methods.sh
 ### Declare environment variables
 
 # script version in title
-version=2.5
+version=2.7
 
 ### Menu section
 
