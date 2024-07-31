@@ -61,16 +61,10 @@ do
         6)
             echo -e "\n${blue}#>${white} Update Mirrorlist with reflector${nocolor}\n"
             update_mirrorlist
-            echo
-            read -p "Press any key to resume ..."
             echo -e "\n${blue}#>${white} Update Arch Linux with yay${nocolor}\n"
             update_yay
-            echo
-            read -p "Press any key to resume ..."
             echo -e "\n${blue}#>${white} Update de debtap database${nocolor}\n"
             update_debtap
-            echo
-            read -p "Press any key to resume ..."
             echo -e "\n${blue}#>${white} Clean Arch Linux${nocolor}\n"
             clean_arch
             echo

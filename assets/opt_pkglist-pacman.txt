@@ -4,6 +4,7 @@ clamav
 clamtk
 gimp
 gimp-help-de
+google-chrome
 guestfs-tools
 htop
 hypnotix
@@ -26,6 +27,3 @@ ufw-extras
 unrar-free
 virt-manager
 zram-generator
-zsh
-zsh-completions
-zsh-syntax-highlighting
