@@ -15,7 +15,7 @@ source ./config/opt_methods.sh
 ### Declare environment variables
 
 # script version in title
-version=2.7
+version=2.9
 
 ### Menu section
 
@@ -36,6 +36,7 @@ do
     echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}>> Optimizations & Tweaks submenu                     ${magenta}|${noclor}";
     echo -e "${magenta}|                                                            |${nocolor}";
     echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Settings                                              ${magenta}|${noclor}";
+    echo -e "${magenta}|                                                            |${nocolor}";
     echo -e "${magenta}|                                                            |${nocolor}";
     echo -e "${magenta}| ${cyan}[ ${blue}q${cyan}] ${white}Quit the script                                       ${magenta}|${noclor}";
     echo -e "${magenta}|                                                            |${nocolor}";
@@ -76,24 +77,31 @@ do
                 cd ${pwd}
                 echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Upater Script ${white}$version ${magenta}]>-------------+${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${white}Customization:                                             ${magenta}|${nocolor}";
+                echo -e "${magenta}| ${white}>> GRUB:                                                   ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}1${cyan}] ${white}Conky-Colors                                          ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}2${cyan}] ${white}Conky Clock with Weather                              ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}1${cyan}] ${white}Simple Arch Linux Theme                               ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Arch Linux GRUB theme                                 ${magenta}|${noclor}";
+                echo -e "${magenta}| ${white}>> Icons:                                                  ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}Colloid icon theme                                    ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}Obsidian icon theme                                   ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}2${cyan}] ${white}Colloid icon theme                                    ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Obsidian icon theme                                   ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}Lavanda KDE/GTK theme                                 ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}MacSonoma KDE/GTK theme                               ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}WhiteSur KDE/GTK theme                                ${magenta}|${noclor}";
+                echo -e "${magenta}| ${white}>> GTK/KDE Designs:                                        ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Bibata cursor theme                                   ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}Lavanda KDE/GTK theme                                 ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}MacSonoma KDE/GTK theme                               ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}WhiteSur KDE/GTK theme                                ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Install fastfetch and copy minimal config             ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Install tmux and copy minimal config                  ${magenta}|${noclor}";
+                echo -e "${magenta}| ${white}>> Cursors:                                                ${magenta}|${nocolor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}Bibata cursor theme                                   ${magenta}|${noclor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${white}>> Terminal customization:                                 ${magenta}|${nocolor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}Install OhMyZsh!                 ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Install fastfetch and copy minimal config             ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Install tmux and copy minimal config                  ${magenta}|${noclor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
@@ -102,36 +110,33 @@ do
                 read -p "#> " CHOICE
                 case $CHOICE in
                     1)
-                        cust_conky-colors
-                        ;;
-                    2)
-                        cust_conky-clock-weather
-                        ;;
-                    3)
                         cust_grub-theme
                         ;;
-                    4)
+                    2)
                         cust_colloid
                         ;;
-                    5)
+                    3)
                         cust_obsidian
                         ;;
-                    6)
+                    4)
                         cust_lavanda
                         ;;
-                    7)
+                    5)
                         cust_macsonoma
                         ;;
-                    8)
+                    6)
                         cust_whitesur
                         ;;
-                    9)
+                    7)
                         cust_bibata
                         ;;
-                    10)
+                    8)
+                        cust_ohmyzsh
+                        ;;
+                    9)
                         cust_fastfetch
                         ;;
-                    11)
+                    10)
                         cust_tmux
                         ;;
                     b)
@@ -151,22 +156,31 @@ do
                 cd ${pwd}
                 echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Upater Script ${white}$version ${magenta}]>-------------+${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${white}Optimizations & Tweaks:                                    ${magenta}|${nocolor}";
+                echo -e "${magenta}| ${white}>> Repositorys                                             ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}1${cyan}] ${white}Install/Remove Chaotic AUR Repository                 ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}2${cyan}] ${white}Install AMD / Nvidia drivers                          ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Install additional pacman / yay packages              ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}Get out of Wine dependency hell                       ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}Add Batocera Dual-Boot entry to GRUB                  ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}Install Gamemode- / Gamescope-Service (FSR)           ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}Install additional fonts, e.g. Windows fonts          ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}Enable ClearType rendering                            ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Improve I/O performance (for SSDs & NVMEs)            ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Improve device performance (for Laptops/Desktops)     ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Make Z shell default and install Oh My ZSH            ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Apply all options from above                          ${magenta}|${noclor}";
+                echo -e "${magenta}| ${white}>> Additional packages                                     ${magenta}|${nocolor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}2${cyan}] ${white}Install additional pacman / yay packages              ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Install additional fonts, e.g. Windows fonts          ${magenta}|${noclor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${white}>> Gaming                                                  ${magenta}|${nocolor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}WINE dependencies & MangoHUD / gOverlay / vkBasalt    ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}Install Gamemode- / Gamescope-Service (FSR)           ${magenta}|${noclor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${white}>> Performance & Tweaks                                    ${magenta}|${nocolor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}Add Batocera Dual-Boot entry to GRUB                  ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}Enable ClearType rendering                            ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}Improve I/O performance (for SSDs & NVMEs)            ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Improve device performance (for Laptops/Desktops)     ${magenta}|${noclor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${white}>> Network-Sahres                                          ${magenta}|${nocolor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
@@ -178,85 +192,30 @@ do
                         opt_chaotic
                         ;;
                     2)
-                        opt_graphic_drivers
+                        opt_packages
                         ;;
                     3)
-                        opt_packages
+                        opt_fonts
                         ;;
                     4)
                         opt_wine
                         ;;
                     5)
-                        opt_batocera
+                        opt_gamemode
                         ;;
                     6)
-                        opt_gamemode
+                        opt_batocera
                         ;;
                     7)
-                        opt_fonts
+                        opt_cleartype
                         ;;
                     8)
-                        opt_cleartype
+                        opt_io-performance
                         ;;
                     9)
-                        opt_io-performance
+                        opt_dev-performance
                         ;;
                     10)
-                        opt_dev-performance
-                        ;;
-                    11)
-                        opt_zsh
-                        ;;
-                    12)
-                        opt_smbshares
-                        ;;
-                    13)
-                        echo -e "${blue}Install Chaotic AUR Repository${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_chaotic
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Install AMD / Nvidia drivers${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_graphic_drivers
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Install additional pacman / yay packages${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_packages
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Get out of Wine dependency hell${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_wine
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Add Batocera Dual-Boot to system${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_batocera
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Install Gamemode- / Gamescope-Service (FSR)${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_gamemode
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Install additional fonts, e.g. Windows fonts${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_fonts
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Enable ClearType rendering${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_cleartype
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Improve I/O performance (for SSDs & NVMEs)${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_io-performance
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Improve device performance (for Laptops/Desktops)${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_dev-performance
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Make Z shell default and install Oh My ZSH${nocolor}"
-                        read -p "Press any key to resume ..."
-                        opt_zsh
-                        read -p "Press any key to resume ..."
-                        echo -e "${blue}Apply SMB-Shares to /etc/fstab${nocolor}"
-                        read -p "Press any key to resume ..."
                         opt_smbshares
                         ;;
                     b)

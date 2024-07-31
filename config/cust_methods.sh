@@ -258,3 +258,21 @@ cust_tmux(){
     echo
     read -p "Press any key to resume ..."
 }
+
+cust_ohmyzsh(){
+    clear
+    if [ "$(pacman -Qe zsh | wc -l)" -ge 1 ]; then
+		echo "Install Oh My ZSH! for logged in user"
+		sleep 1
+		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+		echo "Install Oh My ZSH! for root"
+		sleep 1
+		sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+		sed -i 's/robbyrussell/refined/g' ~/.zshrc
+		sudo sed -i 's/robbyrussell/fox/g' /root/.zshrc
+    else
+        echo ">> no Z Shell installed, exiting..."
+    fi
+    echo
+    read -p "Press any key to resume ..."
+}

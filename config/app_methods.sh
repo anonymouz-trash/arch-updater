@@ -81,8 +81,6 @@ check_4_yay(){
         makepkg -si
         cd ..
         rm -rf yay
-        echo
-        read -p "Press any key to resume ..."
     fi
 }
 

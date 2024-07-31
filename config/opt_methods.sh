@@ -30,20 +30,6 @@ opt_chaotic(){
     read -p "Press any key to resume ..."
 }
 
-opt_graphic_drivers(){
-    clear
-    echo -e "\n${white}#> ${blue}Installing AMD/Nvidia GPU drivers...${nocolor}\n"
-	sleep 2
-    read -p 'AMD or Nvidia? Just press [Enter] to skip. [a/n] ' input
-    if [[ ${input} == "n" ]]; then
-		sudo pacman -S --needed nvidia-dkms nvidia-settings nvidia-utils lib32-nvidia-utils lib32-opencl-nvidia opencl-nvidia libvdpau libxnvctrl vulkan-icd-loader lib32-vulkan-icd-loader envycontrol nvtop
-    elif [[ ${input} == "a" ]]; then
-		sudo pacman -S --needed mesa lib32-mesa mesa-vdpau lib32-mesa-vdpau lib32-vulkan-radeon vulkan-radeon glu lib32-glu vulkan-icd-loader lib32-vulkan-icd-loader
-    fi
-    echo
-    read -p "Press any key to resume ..."
-}
-
 opt_packages(){
     clear
     echo -e "\n${white}#> ${blue}Installing additional packages...${nocolor}\n"
@@ -229,31 +215,8 @@ opt_smbshares(){
 			cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
 			cp ./assets/opt_nas-smb-acc.txt ~/.smb
 			chmod 600 ~/.smb
+			mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
 			sudo systemctl daemon-reload
-    fi
-    echo
-    read -p "Press any key to resume ..."
-}
-
-opt_zsh(){
-    clear
-    echo -e "\n${white}#>  ${blue}Make Z shell standard for ${white}${USER}${blue} and root...${nocolor}\n"
-	sleep 2
-    if [ "$(pacman -Qe zsh | wc -l)" -ge 1 ]; then
-		echo ">> Change standard shell to ZSH for logged in user"
-		chsh -s $(which zsh) ${USER}
-		echo ">> Change standard shell to ZSH for root"
-		sudo chsh -s $(which zsh)
-		echo "Install Oh My ZSH! for logged in user"
-		sleep 1
-		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-		echo "Install Oh My ZSH! for root"
-		sleep 1
-		sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-		sed -i 's/robbyrussell/refined/g' ~/.zshrc
-		sudo sed -i 's/robbyrussell/fox/g' /root/.zshrc
-    else
-        echo ">> no Z Shell installed, exiting..."
     fi
     echo
     read -p "Press any key to resume ..."
