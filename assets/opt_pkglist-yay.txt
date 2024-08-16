@@ -1,4 +1,3 @@
-bitwarden
 clamav-unofficial-sigs
 cnrdrvcups-lb-bin
 etcher-bin

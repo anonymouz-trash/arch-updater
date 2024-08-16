@@ -213,8 +213,8 @@ opt_smbshares(){
             		read -p "What's your SMB-Share username: " smb_user
 			read -p "What's the password: " smb_pass
 			sudo nano ./assets/opt_nas-smb-mount.txt
-			cat ${smb_user} > ~/.smb
-			cat ${smb_pass} > ~/.smb
+			echo ${smb_user} > ~/.smb
+			echo ${smb_pass} > ~/.smb
 			cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
 			chmod 600 ~/.smb
 			mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
