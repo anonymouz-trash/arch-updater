@@ -1,2 +1,2 @@
-username=tommy
-password=h7QdPXd8ZZ%qE34$zSU!V9%wS56!HJ!WgW96!iarEnJ%MTMKMLPc*n#%D&b93Z2r
+username=
+password=

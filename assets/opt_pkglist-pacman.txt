@@ -1,4 +1,5 @@
 bashtop
+bottles
 bridge-utils
 clamav
 clamtk
@@ -12,7 +13,6 @@ iptables-nft
 libguestfs
 libreoffice-fresh
 libreoffice-fresh-de
-lutris
 mc
 mixxx
 ncdu
