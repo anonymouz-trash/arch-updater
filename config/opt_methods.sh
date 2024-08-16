@@ -209,11 +209,13 @@ opt_smbshares(){
 			echo "You have to change/check the credentials and mount paths!"
 			echo "Just search the given variables with [Ctrl-\] in nano and replace them."
             echo
-			read -p "Press any key to resume..."
-            sudo nano ./assets/opt_nas-smb-acc.txt
+			echo
+            		read -p "What's your SMB-Share username: " smb_user
+			read -p "What's the password: " smb_pass
 			sudo nano ./assets/opt_nas-smb-mount.txt
+			cat ${smb_user} > ~/.smb
+			cat ${smb_pass} > ~/.smb
 			cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
-			cp ./assets/opt_nas-smb-acc.txt ~/.smb
 			chmod 600 ~/.smb
 			mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
 			sudo systemctl daemon-reload
