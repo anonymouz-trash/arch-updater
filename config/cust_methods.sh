@@ -1,53 +1,9 @@
 #!/usr/bin/bash
 
-cust_conky-colors(){
-	clear
-	echo -e "\n${white}#> ${blue}Installing or updating Conky Colors...${nocolor}\n"
-	sleep 2
-	check_4_yay
-	read -p "Do you want to (e)dit the conky-colors script before installing or (r)remove it? [e/r/N] " input
-	if [[ ${input} == "e" ]]; then
-		nano ./assets/conky-colors.sh
-    elif [[ ${input} == "r" ]]; then
-        if command -v  conky-colors &> /dev/null ; then
-            yay -Rsnc conky-colors-git
-            rm -rfv ~/.conky-colors
-            return
-        fi
-	fi
-	bash ./assets/conky-colors.sh
-    echo
-    read -p "Press any key to resume ..."
-}
-
-cust_conky-clock-weather(){
+cust_simple-arch-grub-theme(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating Conky Clock with weather...${nocolor}\n"
-	sleep 2
-	if [ -d "/home/$USER/.conky/Clock-With-Weather-Conky" ]; then
-        read -p "Do you want to (r)emove Conky clock with weather? [y/N] " input
-        if [[ ${input} == "y" ]]; then
-            killall conky
-            rm -rfv ~/.conky
-            return
-        fi
-		bash ~/.conky/Clock-With-Weather-Conky/scripts/setup.sh
-	else
-		if ! command -v wget &> /dev/null; then
-            sudo pacman -S wget
-        fi
-		bash -c "$(wget --no-check-certificate --no-cache --no-cookies -O- https://raw.githubusercontent.com/takattila/Clock-With-Weather-Conky/v1.0.0/scripts/install.sh)"
-	fi
-    echo
-    read -p "Press any key to resume ..."
-}
-
-cust_grub-theme(){
-    clear
-    echo -e "\n${white}#> ${blue}Installing or updating GRUB theme...${nocolor}\n"
-	sleep 2
-    sudo sed -i '/GRUB_DEFAULT=/c\GRUB_DEFAULT=saved' /etc/default/grub
-    sudo sed -i '/GRUB_SAVEDEFAULT=/c\GRUB_SAVEDEFAULT=true' /etc/default/grub
+    echo -e "\n${white}#> ${blue}Installing or updating Simple Arch Linux GRUB theme...${nocolor}\n"
+    sleep 2
     read -p 'Do you want the blue or red Arch Linux GRUB theme? [b/r] ' input
     if [[ ${input} == "b" ]]; then
       	sudo cp -rv ./assets/arch-silence_black-blue /boot/grub/themes
@@ -56,6 +12,28 @@ cust_grub-theme(){
       	sudo cp -rv ./assets/arch-silence_black-red /boot/grub/themes
        	sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-red/theme.txt"' /etc/default/grub
     fi
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+    echo
+    read -p "Press any key to resume ..."
+}
+
+cust_xenlism-arch-grub-theme(){
+    clear
+    echo -e "\n${white}#> ${blue}Installing Xenlism Arch Linux GRUB theme...${nocolor}\n"
+    sleep 2
+    sudo cp -rv ./assets/xenlism-grub-arch /boot/grub/themes
+    sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/xenlism-grub-arch/theme.txt"' /etc/default/grub
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+    echo
+    read -p "Press any key to resume ..."
+}
+
+cust_rog-grub-theme(){
+    clear
+    echo -e "\n${white}#> ${blue}Installing Republic of Gamers GRUB theme...${nocolor}\n"
+    sleep 2
+    sudo cp -rv ./assets/rog-grub-theme /boot/grub/themes
+    sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/rog-grub-theme/theme.txt"' /etc/default/grub
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     echo
     read -p "Press any key to resume ..."

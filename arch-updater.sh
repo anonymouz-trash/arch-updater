@@ -15,7 +15,7 @@ source ./config/opt_methods.sh
 ### Declare environment variables
 
 # script version in title
-version=2.9
+version=3.0
 
 ### Menu section
 
@@ -80,27 +80,29 @@ do
                 echo -e "${magenta}| ${white}>> GRUB:                                                   ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}1${cyan}] ${white}Simple Arch Linux Theme                               ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}2${cyan}] ${white}Xenlism Arch Linux Theme                              ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Republic of Gamers Theme                              ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Icons:                                                  ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}2${cyan}] ${white}Colloid icon theme                                    ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Obsidian icon theme                                   ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}Colloid icon theme                                    ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}Obsidian icon theme                                   ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> GTK/KDE Designs:                                        ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}Lavanda KDE/GTK theme                                 ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}MacSonoma KDE/GTK theme                               ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}WhiteSur KDE/GTK theme                                ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}Lavanda KDE/GTK theme                                 ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}MacSonoma KDE/GTK theme                               ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}WhiteSur KDE/GTK theme                                ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Cursors:                                                ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}Bibata cursor theme                                   ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Bibata cursor theme                                   ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Terminal customization:                                 ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}Install OhMyZsh!                 ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Install fastfetch and copy minimal config             ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Install tmux and copy minimal config                  ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Install OhMyZsh!                 ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Install fastfetch and copy minimal config             ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Install tmux and copy minimal config                  ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
@@ -110,33 +112,39 @@ do
                 read -p "#> " CHOICE
                 case $CHOICE in
                     1)
-                        cust_grub-theme
+                        cust_simple-arch-grub-theme
                         ;;
-                    2)
+		    2)
+			cust_xenlism-arch-grub-theme
+			;;
+		    3)
+			cust_rog-grub-theme
+			;;
+                    4)
                         cust_colloid
                         ;;
-                    3)
+                    5)
                         cust_obsidian
                         ;;
-                    4)
+                    6)
                         cust_lavanda
                         ;;
-                    5)
+                    7)
                         cust_macsonoma
                         ;;
-                    6)
+                    8)
                         cust_whitesur
                         ;;
-                    7)
+                    9)
                         cust_bibata
                         ;;
-                    8)
+                    10)
                         cust_ohmyzsh
                         ;;
-                    9)
+                    11)
                         cust_fastfetch
                         ;;
-                    10)
+                    12)
                         cust_tmux
                         ;;
                     b)
