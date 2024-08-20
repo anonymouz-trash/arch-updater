@@ -82,12 +82,13 @@ opt_wine(){
         check_4_yay
         yay -S --needed vkbasalt mangohud goverlay
     fi
+    
     echo
     echo "What's your local domain? E.g. for Fritz!Box users 'fritz.box' is common. "
     LOCALDOMAIN=localdomain
     read -p "If you just press Enter 'localdomain' would be set: " LOCALDOMAIN
-    if grep -q "127.0.0.1   localhost $HOST.$LOCALDOMAIN    $HOST" "/etc/hosts"; then
-        
+    if ! grep -q "127.0.0.1   localhost $HOST.$LOCALDOMAIN    $HOST" "/etc/hosts"; then
+        echo "127.0.0.1   localhost $HOST.$LOCALDOMAIN    $HOST" | sudo tee -a /etc/hosts > /dev/null
     fi
 
     echo
