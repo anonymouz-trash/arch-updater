@@ -167,19 +167,20 @@ do
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Gaming                                                  ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}WINE dependencies & MangoHUD / gOverlay / vkBasalt    ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}Install Gamemode- / Gamescope-Service (FSR)           ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}Install AMD / NVIDIA / INTEL drivers with Vulkan      ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}WINE dependencies & MangoHUD / gOverlay / vkBasalt    ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}Install Gamemode- / Gamescope-Service (FSR)           ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Performance & Tweaks                                    ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}Add Batocera Dual-Boot entry to GRUB                  ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}Enable ClearType rendering                            ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}Improve I/O performance (for SSDs & NVMEs)            ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Improve device performance (for Laptops/Desktops)     ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}Add Batocera Dual-Boot entry to GRUB                  ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}Enable ClearType rendering                            ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Improve I/O performance (for SSDs & NVMEs)            ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Improve device performance (for Laptops/Desktops)     ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Network-Sahres                                          ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
@@ -198,24 +199,27 @@ do
                         opt_fonts
                         ;;
                     4)
-                        opt_wine
+                        opt_gpu_drivers
                         ;;
                     5)
-                        opt_gamemode
+                        opt_wine
                         ;;
                     6)
-                        opt_batocera
+                        opt_gamemode
                         ;;
                     7)
-                        opt_cleartype
+                        opt_batocera
                         ;;
                     8)
-                        opt_io-performance
+                        opt_cleartype
                         ;;
                     9)
-                        opt_dev-performance
+                        opt_io-performance
                         ;;
                     10)
+                        opt_dev-performance
+                        ;;
+                    11)
                         opt_smbshares
                         ;;
                     b)
