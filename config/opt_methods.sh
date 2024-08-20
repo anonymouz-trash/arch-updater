@@ -82,6 +82,20 @@ opt_wine(){
         check_4_yay
         yay -S --needed vkbasalt mangohud goverlay
     fi
+    echo
+    echo "For some services like Battle.net it's important to have a correct /etc/hosts-file, so ..."
+    echo "What's your local domain? E.g. for Fritz!Box users 'fritz.box' is common. "
+    read -p "If you just press Enter 'localdomain' would be set: " input
+    if [[ ${input} == "" ]]; then
+        LOCALDOMAIN=localdomain
+    else
+        LOCALDOMAIN=${input}
+    fi
+    if grep -q "127.0.0.1" "/etc/hosts"; then
+        sudo sed -i "s/.*127.0.0.1.*/127.0.0.1  localhost       $(hostnamectl hostname).$LOCALDOMAIN $(hostnamectl hostname)/g" /etc/hosts
+    else
+        echo "127.0.0.1 localhost       $(hostnamectl hostname).${LOCALDOMAIN}  $(hostnamectl hostname)" | sudo tee -a /etc/hosts > /dev/null
+    fi
 
     echo
     read -p "Press any key to resume ..."
