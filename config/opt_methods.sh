@@ -53,12 +53,30 @@ opt_packages(){
     read -p "Press any key to resume ..."
 }
 
+opt_gpu_drivers(){
+    clear
+    echo -e "\n${white}#> ${blue}Install GPU drivers with Vulkan support!${nocolor}\n"
+	sleep 2
+    read -p 'Do you want to install AMD or NVIDIA or INTEL drivers? [a/n/i] ' input
+    if [[ ${input} == "a" ]]; then
+        sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader
+    elif [[ ${input} == "n" ]]; then
+        sudo pacman -S --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader
+    elif [[ ${input} == "i" ]]; then
+        sudo pacman -S --needed lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader
+    fi
+}
+
 opt_wine(){
     clear
     echo -e "\n${white}#> ${blue}Get out of WINE dependency hell...${nocolor}\n"
 	sleep 2
-    sudo pacman -S --needed wine-staging
-    sudo pacman -S --needed giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader cups samba dosbox
+    sudo pacman -S wine-staging
+    sudo pacman -S --needed --asdeps giflib lib32-giflib gnutls lib32-gnutls v4l-utils lib32-v4l-utils libpulse \
+    lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib sqlite lib32-sqlite libxcomposite \
+    lib32-libxcomposite ocl-icd lib32-ocl-icd libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs \
+    lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader sdl2 lib32-sdl2
+    echo
     read -p 'Do you want to install also vkBasalt, MangoHUD & gOverlay? [y/N] ' input
     if [[ ${input} == "y" ]]; then
         check_4_yay
@@ -118,7 +136,7 @@ opt_fonts(){
     check_4_yay
     sudo pacman -S --needed noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-liberation ttf-dejavu ttf-roboto
     sudo pacman -S --needed ttf-jetbrains-mono ttf-fira-code ttf-hack adobe-source-code-pro-fonts
-    yay -S --needed ttf-symbola ttf-ms-fonts ttf-tahoma ttf-vista-fonts
+    yay -S --needed ttf-ms-fonts
     echo
     read -p "Press any key to resume ..."
 }
