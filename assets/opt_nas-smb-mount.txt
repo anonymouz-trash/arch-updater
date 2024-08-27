@@ -1,6 +1,6 @@
 # SMB-Shares
-//192.168.178.5/backups /home/tommy/NAS/backups cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
-//192.168.178.5/isoz /home/tommy/NAS/isoz cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
-//192.168.178.5/media /home/tommy/NAS/media cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
-//192.168.178.5/shared /home/tommy/NAS/shared cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
-//192.168.178.5/home/Drive /home/tommy/NAS/drive cifs user,noauto,_netdev,uid=1000,gid=1000,dir_mode=0770,file_mode=0770,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
+//192.168.178.5/backups /home/tommy/NAS/backups cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
+//192.168.178.5/isoz /home/tommy/NAS/isoz cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
+//192.168.178.5/media /home/tommy/NAS/media cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
+//192.168.178.5/shared /home/tommy/NAS/shared cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
+//192.168.178.5/home/Drive /home/tommy/NAS/drive cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
