@@ -7,23 +7,49 @@ Feel free to use any of the code in this repo for your own.
 I highly encourage you to read through the script before you using it!
 As you know: No backup, no mercy. ;)
 
-# Prerequisite
-- yay           (AUR-Helper)
-- debtap        (for installing *.deb-packages)
-- reflector     (Updating Arch mirrorlist)
+# Prerequisites
+* yay       (AUR-Helper)
+* debtap    (for installing *.deb-packages)
+* reflector (Updating Arch mirrorlist)
+* bash
+* zsh       (Please have a look at option 10 in main menu, if you just installed it, you to reboot!)
 
 All programs will be installed automatically if not available.
 
-# Changelog
-v2.5:
-- code design, erased useless stuff
+# Usage
+Just clone the repo and run it like below at any preferred location you want.
+```
+./arch-updater.sh
+```
 
-v2.0 released :D :
-- ditched dialog as TUI
-- created an even simplier menu just with echo and case in a do-while-loop
-- full rewrite
-- re-organize categories & assets
-- make it more KISS
+> Hint: Configure a global hotkey in your system to use it.
+
+# Changelog
+
+#### v3.5:
+After minor changes & fixes = massive overhaul! :-)
+* You are now able to leave the script at any menu or sub-menu by pressing "q"
+
+###### Customization
+* Fix:     The script for now on downloads all ressources to $HOME/.cache/arch-updater
+* Removed: `conky scripts`
+* Removed: `WhiteSur Sequoia KDE theme`, because KDE only, I want to include GTKs too
+* Added:   `WhiteSur Firefox theme`
+* Added:   `Environment variables`, hit "10" in main menu
+* Added:   `Credits section`, for the hard working developers
+
+###### Optimizations
+* Fixes:   Many, just many, try it out :)
+
+#### v2.5:
+* code design, erased useless stuff
+
+#### v2.0 released :D :
+* ditched dialog as TUI
+* created an even simplier menu just with echo and case in a do-while-loop
+* full rewrite
+* re-organize categories & assets
+* make it more KISS
 
 # Disclaimer
 
