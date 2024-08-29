@@ -25,10 +25,10 @@ cfg_haskey() { # path, key
 }
 
 # reflector settings
-country=$(cfg_read ${pwd}/config/arch_updater.conf country)
-fastest=$(cfg_read ${pwd}/config/arch_updater.conf fastest)
-protocol=$(cfg_read ${pwd}/config/arch_updater.conf protocol)
-score=$(cfg_read ${pwd}/config/arch_updater.conf score)
+country=$(cfg_read ${app_pwd}/config/arch_updater.conf country)
+fastest=$(cfg_read ${app_pwd}/config/arch_updater.conf fastest)
+protocol=$(cfg_read ${app_pwd}/config/arch_updater.conf protocol)
+score=$(cfg_read ${app_pwd}/config/arch_updater.conf score)
 
 set_reflector(){
     clear
