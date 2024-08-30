@@ -31,7 +31,8 @@ After minor changes & fixes = massive overhaul! :-)
 * You are now able to leave the script at any menu or sub-menu by pressing "q"
 
 ###### Customization
-* Fix:     The script for now on downloads all ressources to $HOME/.cache/arch-updater
+* Improvement:  The script for now on downloads all ressources to $HOME/.cache/arch-updater
+* Improvement:  The script checks for config at startup and writes it to $HOME/.config/arch_updater.conf
 * Removed: `conky scripts`
 * Removed: `WhiteSur Sequoia KDE theme`, because KDE only, I want to include GTKs too
 * Added:   `WhiteSur Firefox theme`
