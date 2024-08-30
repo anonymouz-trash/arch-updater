@@ -20,8 +20,12 @@ source ./config/app_methods.sh
 source ./config/cust_methods.sh
 source ./config/opt_methods.sh
 
-### Menu section
+### Check if a config is available
+if ! [ -f ~/.config/arch_updater.conf ]; then
+    set_reflector
+fi
 
+### Menu section
 until [ "$CHOICE" = "q" ] ;
 do
     clear
