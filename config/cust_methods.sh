@@ -204,10 +204,10 @@ cust_lavanda(){
             git clone https://github.com/vinceliuice/Lavanda-kde.git
         fi
     fi
-    sudo {app_home}/.cache/arch-updater/Lavanda-gtk-theme/install.sh -d /usr/share/themes -l -i arch
+    sudo ${app_home}/.cache/arch-updater/Lavanda-gtk-theme/install.sh -d /usr/share/themes -l -i arch
     if [[ ${de,,} =~ "kde" ]]; then
-        sudo {app_home}/.cache/arch-updater/Lavanda-kde/install.sh
-        sudo {app_home}/.cache/arch-updater/Lavanda-kde/sddm/install.sh
+        sudo ${app_home}/.cache/arch-updater/Lavanda-kde/install.sh
+        sudo ${app_home}/.cache/arch-updater/Lavanda-kde/sddm/install.sh
     fi
     if [ -d "Lavanda-gtk-theme"]; then
         echo
@@ -266,7 +266,7 @@ cust_whitesur(){
         sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/tweaks.sh -g -r
         sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/tweaks.sh -g -b "$curBg" -c Dark -i arch
     elif [[ ${de,,} =~ "kde" ]]; then
-        sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -m -o normal -t all -i arch
+        sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -m -o normal -t all
         sudo $app_home/.cache/arch-updater/WhiteSur-kde/install.sh --opaque
         sudo $app_home/.cache/arch-updater/WhiteSur-kde/sddm/install.sh
     fi
