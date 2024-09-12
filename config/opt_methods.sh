@@ -256,3 +256,37 @@ opt_smbshares(){
     echo
     read -p "Press any key to resume ..."
 }
+
+opt_wireguard-sh(){
+    clear
+    echo -e "\n${white}#> Add wireguard activate/deactivate script in /usr/local/bin...${nocolor}\n"
+    echo -e "\n${white}   Don't forget to put your wireguard profile in /etc/wireguard/wg0.conf${nocolor}\n"
+	sleep 2
+    if [ -f /usr/local/bin/wg-up ] && [ -f /usr/local/bin/wg-down ]; then
+        read -p 'Wireguard scripts already exists! Do you want to remove it? [y/N] ' input
+        if [[ ${input} == "y" ]]; then
+            sudo rm -v /usr/local/bin/wg-*
+        fi
+    else
+        sudo cp ./assets/opt_wg-up.sh /usr/local/bin/wg-up
+        sudo cp ./assets/opt_wg-down.sh /usr/local/bin/wg-down
+    fi
+    echo
+    read -p "Press any key to resume ..."
+}
+
+opt_fan-profile-sh(){
+    clear
+    echo -e "\n${white}#> Add show-fan-profile script in /usr/local/bin...${nocolor}\n"
+	sleep 2
+    if [ -f /usr/local/bin/show-fan-profile ]; then
+        read -p 'Show-fan-profile script already exists! Do you want to remove it? [y/N] ' input
+        if [[ ${input} == "y" ]]; then
+            sudo rm -v /usr/local/bin/show-fan-profile
+        fi
+    else
+        sudo cp ./assets/opt_show-fan-profile.sh /usr/local/bin/show-fan-profile
+    fi
+    echo
+    read -p "Press any key to resume ..."
+}
