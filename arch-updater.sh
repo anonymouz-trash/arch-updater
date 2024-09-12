@@ -212,6 +212,11 @@ do
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${white}>> Useful scripts                                          ${magenta}|${nocolor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Copy wireguard scripts to /usr/local/bin              ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Copy fan-profile script to /usr/local/bin             ${magenta}|${noclor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}q${cyan}] ${white}Quit                                                  ${magenta}|${noclor}";
@@ -252,6 +257,12 @@ do
                         ;;
                     11)
                         opt_smbshares
+                        ;;
+                    12)
+                        opt_wireguard-sh
+                        ;;
+                    13)
+                        opt_fan-profile-sh
                         ;;
                     b)
                         ;;
