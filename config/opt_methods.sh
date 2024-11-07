@@ -262,14 +262,14 @@ opt_wireguard-sh(){
     echo -e "\n${white}#> Add wireguard activate/deactivate script in /usr/local/bin...${nocolor}\n"
     echo -e "\n${white}   Don't forget to put your wireguard profile in /etc/wireguard/wg0.conf${nocolor}\n"
 	sleep 2
-    if [ -f /usr/local/bin/wg-up ] && [ -f /usr/local/bin/wg-down ]; then
+    if [ -f /usr/local/bin/wg0-up ] && [ -f /usr/local/bin/wg0-down ]; then
         read -p 'Wireguard scripts already exists! Do you want to remove it? [y/N] ' input
         if [[ ${input} == "y" ]]; then
-            sudo rm -v /usr/local/bin/wg-*
+            sudo rm -v /usr/local/bin/wg0-*
         fi
     else
-        sudo cp ./assets/opt_wg-up.sh /usr/local/bin/wg-up
-        sudo cp ./assets/opt_wg-down.sh /usr/local/bin/wg-down
+        sudo cp ./assets/opt_wg-up.sh /usr/local/bin/wg0-up
+        sudo cp ./assets/opt_wg-down.sh /usr/local/bin/wg0-down
     fi
     echo
     read -p "Press any key to resume ..."

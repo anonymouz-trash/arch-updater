@@ -207,7 +207,7 @@ cust_lavanda(){
     sudo ${app_home}/.cache/arch-updater/Lavanda-gtk-theme/install.sh -d /usr/share/themes -l -i arch
     if [[ ${de,,} =~ "kde" ]]; then
         sudo ${app_home}/.cache/arch-updater/Lavanda-kde/install.sh
-        sudo ${app_home}/.cache/arch-updater/Lavanda-kde/sddm/install.sh
+        sudo ${app_home}/.cache/arch-updater/Lavanda-kde/sddm/6.0/install.sh
     fi
     if [ -d "Lavanda-gtk-theme"]; then
         echo
@@ -268,7 +268,7 @@ cust_whitesur(){
     elif [[ ${de,,} =~ "kde" ]]; then
         sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -m -o normal -t all
         sudo $app_home/.cache/arch-updater/WhiteSur-kde/install.sh --opaque
-        sudo $app_home/.cache/arch-updater/WhiteSur-kde/sddm/install.sh
+        sudo $app_home/.cache/arch-updater/WhiteSur-kde/sddm/6.0/install.sh
     fi
     if [ -d "WhiteSur-gtk-theme" ]; then
         echo
