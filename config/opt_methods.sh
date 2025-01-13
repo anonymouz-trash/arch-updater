@@ -262,7 +262,7 @@ opt_wireguard-sh(){
     echo -e "\n${white}#> Add wireguard activate/deactivate script in /usr/local/bin...${nocolor}\n"
     echo -e "\n${white}   Don't forget to put your wireguard profile in /etc/wireguard/wg0.conf${nocolor}\n"
 	sleep 2
-    if [ -f /usr/local/bin/wireguard-vpn ] ]; then
+    if [ -f /usr/local/bin/wireguard-vpn ]; then
         read -p 'Wireguard scripts already exists! Do you want to remove it? [y/N] ' input
         if [[ ${input} == "y" ]]; then
             sudo rm -v /usr/local/bin/wireguard-vpn
