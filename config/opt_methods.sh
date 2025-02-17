@@ -235,23 +235,23 @@ opt_smbshares(){
 	sleep 2
     if grep -Fxq "#SMB-Shares" /etc/fstab; then
         read -p "#SMB-Shares comment found! Do you want to edit fstab? [y/N] " input
-		if [[ ${input} == "y" ]]; then
+	if [[ ${input} == "y" ]]; then
             sudo nano /etc/fstab
         fi
     else
-			echo "You have to change/check the credentials and mount paths!"
-			echo "Just search the given variables with [Ctrl-\] in nano and replace them."
-            echo
-			echo
-            		read -p "What's your SMB-Share username: " smb_user
-			read -p "What's the password: " smb_pass
-			sudo nano ./assets/opt_nas-smb-mount.txt
-			echo ${smb_user} > ~/.smb
-			echo ${smb_pass} > ~/.smb
-			cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
-			chmod 600 ~/.smb
-			mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
-			sudo systemctl daemon-reload
+	echo "You have to change/check the credentials and mount paths!"
+	echo "Just search the given variables with [Ctrl-\] in nano and replace them."
+        echo
+	echo
+        read -p "What's your SMB-Share username: " smb_user
+	read -p "What's the password: " smb_pass
+	sudo nano ./assets/opt_nas-smb-mount.txt
+	echo "username=${smb_user}" >> ~/.smb
+	echo "password=${smb_pass}" >> ~/.smb
+	cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
+	chmod 600 ~/.smb
+	mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
+	sudo systemctl daemon-reload
     fi
     echo
     read -p "Press any key to resume ..."
