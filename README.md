@@ -26,31 +26,9 @@ Just clone the repo and run it like below at any preferred location you want.
 
 # Changelog
 
-#### v3.5:
-After minor changes & fixes = massive overhaul! :-)
-* You are now able to leave the script at any menu or sub-menu by pressing "q"
+> Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
 
-###### Customization
-* Improvement:  The script for now on downloads all ressources to $HOME/.cache/arch-updater
-* Improvement:  The script checks for config at startup and writes it to $HOME/.config/arch_updater.conf
-* Removed: `conky scripts`
-* Removed: `WhiteSur Sequoia KDE theme`, because KDE only, I want to include GTKs too
-* Added:   `WhiteSur Firefox theme`
-* Added:   `Environment variables`, hit "10" in main menu
-* Added:   `Credits section`, for the hard working developers
-
-###### Optimizations
-* Fixes:   Many, just many, try it out :)
-
-#### v2.5:
-* code design, erased useless stuff
-
-#### v2.0 released :D :
-* ditched dialog as TUI
-* created an even simplier menu just with echo and case in a do-while-loop
-* full rewrite
-* re-organize categories & assets
-* make it more KISS
+* Fixed: User/Pass input for SMB-Shares
 
 # Disclaimer
 

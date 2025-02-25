@@ -71,6 +71,7 @@ cust_rog-grub-theme(){
 }
 
 cust_colloid(){
+    clear
     echo -e "\n${white}#> ${blue}Installing or updating Colloid icon theme...${nocolor}\n"
 	sleep 2
     cd ~/.cache/arch-updater
