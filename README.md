@@ -29,6 +29,7 @@ Just clone the repo and run it like below at any preferred location you want.
 > Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
 
 * Fixed: User/Pass input for SMB-Shares
+* Update: Improved check procedure for Iconpack installation in Customization section
 
 # Disclaimer
 

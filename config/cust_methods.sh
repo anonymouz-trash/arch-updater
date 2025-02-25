@@ -73,24 +73,26 @@ cust_rog-grub-theme(){
 cust_colloid(){
     clear
     echo -e "\n${white}#> ${blue}Installing or updating Colloid icon theme...${nocolor}\n"
-	sleep 2
+    sleep 2
     cd ~/.cache/arch-updater
-    if [ -d "Colloid-icon-theme" ]; then
+    if [[ -d "/usr/share/icons/Colloid" ]]; then 
         read -p "Do you want to (r)emove or just update it? [r/U] " input
         if [[ ${input} == "r" ]]; then
             rm -rfv ./Colloid-icon-theme
             sudo rm -rfv /usr/share/icons/Colloid*
             return
         else
-            cd Colloid-icon-theme
-            git pull
-            cd ..
+            if [[ -d "Colloid-icon-theme" ]]; then
+                cd Colloid-icon-theme
+                git pull
+                cd ..
+            else
+                git clone https://github.com/vinceliuice/Colloid-icon-theme.git
+            fi
         fi
-    else
-        git clone https://github.com/vinceliuice/Colloid-icon-theme.git
     fi
-    sudo ./Colloid-icon-theme/install.sh -d /usr/share/icons -s all -t all
     if [[ -d "Colloid-icon-theme" ]] ; then
+        sudo ./Colloid-icon-theme/install.sh -d /usr/share/icons -s all -t all
         echo
         echo
         echo "Do you want to remove previously downloaded files? "
@@ -109,22 +111,24 @@ cust_obsidian(){
     echo -e "\n${white}#> ${blue}Installing or updating Obsidian icon theme...${nocolor}\n"
 	sleep 2
     cd ~/.cache/arch-updater
-    if [ -d "iconpack-obsidian" ]; then
+    if [ -d "/usr/share/icons/Obsidian" ]; then
         read -p "Do you want to (r)emove or just update it? [r/U] " input
         if [[ ${input} == "r" ]]; then
             rm -rfv ./iconpack-obsidian
             sudo rm -rfv /usr/share/icons/Obsidian*
             return
         else
-            cd iconpack-obsidian
-            git pull
-            cd ..
+            if [[ -d "iconpack-obsidian" ]] ; then
+                cd iconpack-obsidian
+                git pull
+                cd ..
+            else
+                git clone https://github.com/madmaxms/iconpack-obsidian.git
+            fi
         fi
-    else
-        git clone https://github.com/madmaxms/iconpack-obsidian.git
     fi
-    sudo cp -rv ./iconpack-obsidian/Obsidian* /usr/share/icons
     if [[ -d "iconpack-obsidian" ]] ; then
+        sudo cp -rv ./iconpack-obsidian/Obsidian* /usr/share/icons
         echo
         echo
         echo "Do you want to remove previously downloaded files? "
@@ -143,22 +147,24 @@ cust_whitesur_icon(){
     echo -e "\n${white}#> ${blue}Installing or updating WhiteSur icon theme...${nocolor}\n"
     sleep 2
     cd ~/.cache/arch-updater
-    if [ -d "WhiteSur-icon-theme" ]; then
+    if [ -d "/usr/share/icons/WhiteSur" ]; then
         read -p "Do you want to (r)emove or just update it? [r/U] " input
         if [[ ${input} == "r" ]]; then
             rm -rfv ./WhiteSur-icon-theme
             sudo rm -rfv /usr/share/icons/WhiteSur*
             return
         else
-            cd WhiteSur-icon-theme
-            git pull
-            cd ..
+            if [[ -d "WhiteSur-icon-theme" ]] ; then
+                cd WhiteSur-icon-theme
+                git pull
+                cd ..
+            else
+                git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
+            fi
         fi
-    else
-        git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
     fi
-    sudo ./WhiteSur-icon-theme/install.sh -d /usr/share/icons -a -t all
     if [[ -d "WhiteSur-icon-theme" ]] ; then
+        sudo ./WhiteSur-icon-theme/install.sh -d /usr/share/icons -a -t all
         echo
         echo
         echo "Do you want to remove previously downloaded files? "
