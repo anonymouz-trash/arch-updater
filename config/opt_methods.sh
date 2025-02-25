@@ -268,6 +268,9 @@ opt_wireguard-sh(){
             sudo rm -v /usr/local/bin/wireguard-vpn
         fi
     else
+        if [ "$(pacman -Qe openresolv | wc -l > /dev/null)" -eq 0 ] || [ "$(pacman -Qe wireguard-tools | wc -l > /dev/null)" -eq 0 ]; then
+            sudo pacman -S openresolv wireguard-tools
+        fi
         sudo cp ./assets/opt_wireguard-vpn.sh /usr/local/bin/wireguard-vpn
     fi
     echo

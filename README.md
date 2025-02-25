@@ -30,6 +30,7 @@ Just clone the repo and run it like below at any preferred location you want.
 
 * Fixed: User/Pass input for SMB-Shares
 * Update: Improved check procedure for Iconpack installation in Customization section
+* Update: Improved wireguard vpn script file (proper notifications)
 
 # Disclaimer
 
