@@ -81,7 +81,7 @@ do
             do
                 clear
                 cd ${app_pwd}
-                echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Updater Script ${white}$version ${magenta}]>------------+${nocolor}";
+                echo -e "${magenta}+---<[ ${cyan}Arch Linux Updater Script ${magenta}]>--------------------------+${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> GRUB:                                                   ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
@@ -181,7 +181,7 @@ do
             do
                 clear
                 cd ${app_pwd}
-                echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Updater Script ${white}$version ${magenta}]>------------+${nocolor}";
+                echo -e "${magenta}+---<[ ${cyan}Arch Linux Updater Script ${magenta}]>--------------------------+${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Repositorys                                             ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
@@ -280,7 +280,7 @@ do
             until [ "$CHOICE" = "b" ];
             do
                 clear
-                echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Updater Script ${white}$version ${magenta}]>------------+${nocolor}";
+                echo -e "${magenta}+---<[ ${cyan}Arch Linux Updater Script ${magenta}]>--------------------------+${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}Settings:                                                  ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
@@ -322,7 +322,7 @@ do
             until [ "$CHOICE" = "b" ];
             do
                 clear
-                echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Updater Script ${white}$version ${magenta}]>------------+${nocolor}";
+                echo -e "${magenta}+---<[ ${cyan}Arch Linux Updater Script ${magenta}]>--------------------------+${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}Credits and big thanks to:                                 ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
