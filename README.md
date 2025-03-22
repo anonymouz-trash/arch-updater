@@ -24,13 +24,17 @@ Just clone the repo and run it like below at any preferred location you want.
 
 > Hint: Configure a global hotkey in your system to use it.
 
+> Info: This script and its core functions, like updating, cleaning and installing packages, can used on nearly all Arch-based distros. If you are using Hyprland please read `Clean Arch`-Section, because during the process you get asked for cleaning `.cache`-directory and there maybe cached things that would be deleted like wallpapers. 
+
 # Changelog
 
 > Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
 
-* Fixed: User/Pass input for SMB-Shares
+* Fixed:  User/Pass input for SMB-Shares
 * Update: Improved check procedure for Iconpack installation in Customization section
 * Update: Improved wireguard vpn script file (proper notifications)
+* Update: Removed version info, because rolling release
+* Fixed:  When cleaning don't show removable packages info when there are nothing
 
 # Disclaimer
 

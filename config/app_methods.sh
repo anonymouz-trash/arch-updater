@@ -143,12 +143,15 @@ clean_arch(){
 		else
 			yay -Sc
 		fi
-		echo -e "\n${cyan} This is a list of packages not used by anyone... ${nocolor}\n"
-		yay -Qtdq
-		read -p 'Do you want to remove these packages? [y/N] ' input
-		if [[ ${input} == "y" ]]; then
-			yay -Rns $(yay -Qtdq)
-		fi
+		unused=$(yay -Qtdq)
+		if [ "$(echo ${unused} | wc -l)" -gt 1 ]; then
+            echo -e "\n${cyan} This is a list of packages not used by anyone... ${nocolor}\n"
+            echo -e "${red}${unused}${nocolor}\n"
+            read -p 'Do you want to remove these packages? [y/N] ' input
+            if [[ ${input} == "y" ]]; then
+                yay -Rns $(yay -Qtdq)
+            fi
+        fi
 	fi
 
     read -p 'Do you want to delete the contents of ~/.cache directory? [y/N] ' input

@@ -2,9 +2,6 @@
 
 ### Declare environment variables
 
-# script version in title
-version=3.5
-
 # User home directory
 app_home=$HOME
 
@@ -30,7 +27,7 @@ until [ "$CHOICE" = "q" ] ;
 do
     clear
     cd ${app_pwd}
-    echo -e "${magenta}+-------------<[ ${cyan}Arch Linux Updater Script ${white}$version ${magenta}]>------------+${nocolor}";
+    echo -e "${magenta}+---<[ ${cyan}Arch Linux Updater Script ${magenta}]>--------------------------+${nocolor}";
     echo -e "${magenta}|                                                            |${nocolor}";
     echo -e "${magenta}| ${cyan}[${blue} 1${cyan}] ${white}Update Arch Linux with yay                            ${magenta}|${noclor}";
     echo -e "${magenta}| ${cyan}[${blue} 2${cyan}] ${white}Update Arch Linux with pacman                         ${magenta}|${noclor}";
