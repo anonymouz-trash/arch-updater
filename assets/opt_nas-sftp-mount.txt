@@ -1,0 +1,14 @@
+# Variable description
+#
+# <domain>	= user@domain
+# <path>	= Mounting Path
+# <port>	= Access port of sftp
+#
+# Usage:	Just search and replace the given variables
+# 
+# SFTP-Shares
+<domain>:/backups <path>/NAS/backups fuse.sshfs noauto,users,defaults,_netdev,reconnect,identityfile=<path>/.ssh/id_sshfs,allow_other,uid=1000,gid=1000,default_permissions,ConnectTimeout=5,port=<port>,cache=yes,kernel_cache,Compression=no 0 0
+<domain>:/home/Drive <path>/NAS/drive fuse.sshfs noauto,users,defaults,_netdev,reconnect,identityfile=<path>/.ssh/id_sshfs,allow_other,uid=1000,gid=1000,default_permissions,ConnectTimeout=5,port=<port>,cache=yes,kernel_cache,Compression=no 0 0
+<domain>:/isoz <path>/NAS/isoz fuse.sshfs noauto,users,defaults,_netdev,reconnect,identityfile=<path>/.ssh/id_sshfs,allow_other,uid=1000,gid=1000,default_permissions,ConnectTimeout=5,port=<port>,cache=yes,kernel_cache,Compression=no 0 0
+<domain>:/media <path>/NAS/media fuse.sshfs noauto,users,defaults,_netdev,reconnect,identityfile=<path>/.ssh/id_sshfs,allow_other,uid=1000,gid=1000,default_permissions,ConnectTimeout=5,port=<port>,cache=yes,kernel_cache,Compression=no 0 0
+<domain>:/shared <path>/NAS/shared fuse.sshfs noauto,users,defaults,_netdev,reconnect,identityfile=<path>/.ssh/id_sshfs,allow_other,uid=1000,gid=1000,default_permissions,ConnectTimeout=5,port=<port>,cache=yes,kernel_cache,Compression=no 0 0

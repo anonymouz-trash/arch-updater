@@ -1,6 +1,14 @@
+# Variable description
+#
+# <domain>	= user@domain
+# <path>	= Mounting Path, e.g. /home/user or /mnt
+# <secret>	= Path to .smb secrets file
+# 
+# Usage:	Just search and replace the given variables
+# 
 # SMB-Shares
-//192.168.178.5/backups /home/tommy/NAS/backups cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
-//192.168.178.5/isoz /home/tommy/NAS/isoz cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
-//192.168.178.5/media /home/tommy/NAS/media cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
-//192.168.178.5/shared /home/tommy/NAS/shared cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
-//192.168.178.5/home/Drive /home/tommy/NAS/drive cifs user,noauto,_netdev,credentials=/home/tommy/.smb,iocharset=utf8,vers=3.0 0 0
+//<domain>/backups <path>/NAS/backups cifs user,noauto,_netdev,credentials=<secret>/.smb,iocharset=utf8,vers=3.0 0 0
+//<domain>/isoz <path>/NAS/isoz cifs user,noauto,_netdev,credentials=<secret>/.smb,iocharset=utf8,vers=3.0 0 0
+//<domain>/media <path>/NAS/media cifs user,noauto,_netdev,credentials=<secret>/.smb,iocharset=utf8,vers=3.0 0 0
+//<domain>/shared <path>/NAS/shared cifs user,noauto,_netdev,credentials=<secret>/.smb,iocharset=utf8,vers=3.0 0 0
+//<domain>/home/Drive <path>/NAS/drive cifs user,noauto,_netdev,credentials=<secret>/.smb,iocharset=utf8,vers=3.0 0 0

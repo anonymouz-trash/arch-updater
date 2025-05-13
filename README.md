@@ -26,18 +26,18 @@ Just clone the repo and run it like below at any preferred location you want.
 
 > Info: This script and its core functions, like updating, cleaning and installing packages, can used on nearly all Arch-based distros. If you are using Hyprland please read `Clean Arch`-Section, because during the process you get asked for cleaning `.cache`-directory and there maybe cached things that would be deleted like wallpapers. 
 
-# Changelog
+> Info: Please check `./config/opt_methods.sh` under `opt_smbshares` and `opt_sftpshares` functions because this creates preconfigured mount directories.
 
+# Changelog
 > Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
 
-* Fixed:  User/Pass input for SMB-Shares
-* Update: Improved check procedure for Iconpack installation in Customization section
-* Update: Improved wireguard vpn script file (proper notifications)
-* Update: Removed version info, because rolling release
-* Fixed:  When cleaning don't show removable packages info when there are nothing
+* Add:    Option to add SFTP-Shares to fstab.
+* Update: I inserted vars to preconfigured fstab-files in `./assets`.
+* Update: Reflectlor settings, it's recommended to delete old `~/.config/arch-updater.conf`.
+* Update: Replaced additional installed Fonts with `ttf-ms-win10-auto` and `ttf-ms-win11-auto`.
+* Update: Added `amdvlk`, `lib32-amdvlk` and `mesa` packages in AMD driver installation.
 
 # Disclaimer
-
 THIS IS WORK IN PROGRESS!!
 
 I'm not responsible for any damage and I highly recommend to see through the entire project/code before using it!
