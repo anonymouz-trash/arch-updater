@@ -59,7 +59,7 @@ opt_gpu_drivers(){
 	sleep 2
     read -p 'Do you want to install AMD or NVIDIA or INTEL drivers? [a/n/i] ' input
     if [[ ${input} == "a" ]]; then
-        sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader
+        sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader amdvlk lib32-amdvlk mesa
     elif [[ ${input} == "n" ]]; then
         sudo pacman -S --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader
     elif [[ ${input} == "i" ]]; then
@@ -146,12 +146,11 @@ opt_gamemode(){
 
 opt_fonts(){
     clear
-    echo -e "\n${white}#> ${blue}Installing additional fonts...${nocolor}\n"
+    echo -e "\n${white}#> ${blue}Installing additional Windows fonts...${nocolor}\n"
 	sleep 2
     check_4_yay
-    sudo pacman -S --needed noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-liberation ttf-dejavu ttf-roboto
-    sudo pacman -S --needed ttf-jetbrains-mono ttf-fira-code ttf-hack adobe-source-code-pro-fonts
-    yay -S --needed ttf-ms-fonts
+    yay -S --needed ttf-ms-win10-auto
+    yay -S --needed ttf-ms-win11-auto
     echo
     read -p "Press any key to resume ..."
 }
@@ -235,23 +234,45 @@ opt_smbshares(){
 	sleep 2
     if grep -Fxq "#SMB-Shares" /etc/fstab; then
         read -p "#SMB-Shares comment found! Do you want to edit fstab? [y/N] " input
-	if [[ ${input} == "y" ]]; then
+	    if [[ ${input} == "y" ]]; then
             sudo nano /etc/fstab
         fi
     else
-	echo "You have to change/check the credentials and mount paths!"
-	echo "Just search the given variables with [Ctrl-\] in nano and replace them."
+	    echo "You have to change/check the credentials and mount paths!"
+	    echo "Just search the given variables with [Ctrl-\] in nano and replace them."
         echo
-	echo
         read -p "What's your SMB-Share username: " smb_user
-	read -p "What's the password: " smb_pass
-	sudo nano ./assets/opt_nas-smb-mount.txt
-	echo "username=${smb_user}" >> ~/.smb
-	echo "password=${smb_pass}" >> ~/.smb
-	cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
-	chmod 600 ~/.smb
-	mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
-	sudo systemctl daemon-reload
+	    read -p "What's the password: " smb_pass
+	    sudo nano ./assets/opt_nas-smb-mount.txt
+	    echo "username=${smb_user}" >> ~/.smb
+	    echo "password=${smb_pass}" >> ~/.smb
+	    cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
+	    chmod 600 ~/.smb
+	    mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
+	    sudo systemctl daemon-reload
+    fi
+    echo
+    read -p "Press any key to resume ..."
+}
+
+opt_sftpshares(){
+    clear
+    echo -e "\n${white}#> ${blue}Add SFTP-Shares...${nocolor}\n"
+	sleep 2
+    if grep -Fxq "#SFTP-Shares" /etc/fstab; then
+        read -p "#SFTP-Shares comment found! Do you want to edit fstab? [y/N] " input
+	    if [[ ${input} == "y" ]]; then
+            sudo nano /etc/fstab
+        fi
+    else
+	    echo "You have to change/check the credentials, keys path and mount paths!"
+	    echo "Just search the given variables and replace them."
+        sleep 3
+        nano ./assets/opt_nas-sftp-mount.txt
+	    echo
+        cat ./assets/opt_nas-sftp-mount.txt | sudo tee -a /etc/fstab > /dev/null
+	    mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
+	    sudo systemctl daemon-reload
     fi
     echo
     read -p "Press any key to resume ..."

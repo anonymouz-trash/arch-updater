@@ -190,7 +190,7 @@ do
                 echo -e "${magenta}| ${white}>> Additional packages                                     ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}2${cyan}] ${white}Install additional pacman / yay packages              ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Install additional fonts, e.g. Windows fonts          ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Install additional Windows fonts                      ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Gaming                                                  ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
@@ -208,11 +208,12 @@ do
                 echo -e "${magenta}| ${white}>> Network-Sahres                                          ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Apply SFTP-Shares to /etc/fstab (not working)         ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Useful scripts                                          ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Copy wireguard scripts to /usr/local/bin              ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Copy fan-profile script to /usr/local/bin             ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Copy wireguard scripts to /usr/local/bin              ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}14${cyan}] ${white}Copy fan-profile script to /usr/local/bin             ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
@@ -256,9 +257,12 @@ do
                         opt_smbshares
                         ;;
                     12)
-                        opt_wireguard-sh
+                        opt_sftpshares
                         ;;
                     13)
+                        opt_wireguard-sh
+                        ;;
+                    14)
                         opt_fan-profile-sh
                         ;;
                     b)
