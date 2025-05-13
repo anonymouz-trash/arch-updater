@@ -32,18 +32,18 @@ cfg_haskey() { # path, key
 # reflector settings
 if [ -f ~/.config/arch_updater.conf ]; then
     country=$(cfg_read ~/.config/arch_updater.conf country)
-    fastest=$(cfg_read ~/.config/arch_updater.conf fastest)
+    age=$(cfg_read ~/.config/arch_updater.conf age)
     protocol=$(cfg_read ~/.config/arch_updater.conf protocol)
-    score=$(cfg_read ~/.config/arch_updater.conf score)
+    latest=$(cfg_read ~/.config/arch_updater.conf latest)
 fi
 
 set_reflector(){
     clear
     echo -e "\n${white}#> ${blue}reflector settings...${nocolor}\n"
 	echo "     Country = $country"
-	echo "     Fastest = $fastest (Mirrors)"
+	echo "     Age = $age"
 	echo "     Protocol = $protocol"
-	echo "     Score = $score"
+	echo "     Latest = $latest"
 	echo ""
 	read -p "Do you want to change settings? [y/N] " input
 	if [[ ${input} == 'y' ]]; then
@@ -58,21 +58,21 @@ set_reflector(){
         done
         country=${input}
         cfg_write ~/.config/arch_updater.conf country ${input}
-        echo -e "\n${white}#> ${blue}Enter a number of how much of the fastest mirrors to save.${nocolor}"
+        echo -e "\n${white}#> ${blue}Enter the max age in hours the mirrors should have.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
-        read -p "n amount of fastest mirrors: " input
+        read -p "n hours of last mirror update: " input
         fastest=${input}
-        cfg_write ~/.config/arch_updater.conf fastest ${input}
+        cfg_write ~/.config/arch_updater.conf age ${input}
         echo -e "\n${white}#> ${blue}Enter the allowed protocol(s), like http,https,ftp${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "Protocol: " input
         protocol=${input}
         cfg_write ~/.config/arch_updater.conf protocol ${input}
-        echo -e "\n${white}#> ${blue}Limit the list to the n servers with the highest score.${nocolor}"
+        echo -e "\n${white}#> ${blue}Limit the list to the latest n servers.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
-        read -p "n amount of highest score mirrors: " input
+        read -p "n amount of latest mirrors: " input
         score=${input}
-        cfg_write ~/.config/arch_updater.conf score ${input}
+        cfg_write ~/.config/arch_updater.conf latest ${input}
     fi
     echo
     read -p "Press any key to resume ..."
@@ -118,7 +118,7 @@ update_mirrorlist(){
         sudo pacman -S reflector
         sudo systemctl enable reflector.timer --now
     fi
-    sudo reflector -c ${country} -f ${fastest} -p ${protocol} --score ${score} --save /etc/pacman.d/mirrorlist --verbose
+    sudo reflector -c ${country} -a ${age} -p ${protocol} -l ${latest} --ipv4 --save /etc/pacman.d/mirrorlist --verbose
     echo
     read -p "Press any key to resume ..."
 }
