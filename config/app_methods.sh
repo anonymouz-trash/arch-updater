@@ -61,7 +61,7 @@ set_reflector(){
         echo -e "\n${white}#> ${blue}Enter the max age in hours the mirrors should have.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "n hours of last mirror update: " input
-        fastest=${input}
+        age=${input}
         cfg_write ~/.config/arch_updater.conf age ${input}
         echo -e "\n${white}#> ${blue}Enter the allowed protocol(s), like http,https,ftp${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
