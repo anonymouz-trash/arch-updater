@@ -71,7 +71,7 @@ set_reflector(){
         echo -e "\n${white}#> ${blue}Limit the list to the latest n servers.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "n amount of latest mirrors: " input
-        score=${input}
+        latest=${input}
         cfg_write ~/.config/arch_updater.conf latest ${input}
     fi
     echo
