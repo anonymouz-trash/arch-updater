@@ -6,7 +6,6 @@ gimp
 gimp-help-de
 guestfs-tools
 htop
-hypnotix
 libguestfs
 libreoffice-fresh
 libreoffice-fresh-de
@@ -18,7 +17,6 @@ ncdu
 nmap
 spotify
 steam
-steam-native-runtime
 terminus-font
 ufw
 ufw-extras

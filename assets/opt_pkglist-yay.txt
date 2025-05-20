@@ -1,9 +1,6 @@
 clamav-unofficial-sigs
 cnrdrvcups-lb-bin
-etcher-bin
-heroic-games-launcher-bin
 mkinitcpio-firmware
-pdftk
 proton-ge-custom-bin
 protontricks-git
 sof-firmware
