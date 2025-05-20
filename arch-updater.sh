@@ -93,26 +93,27 @@ do
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[${blue} 4${cyan}] ${white}Colloid icon theme                                    ${magenta}|${noclor}";
                 echo -e "${magenta}| ${cyan}[${blue} 5${cyan}] ${white}Obsidian icon theme                                   ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue} 6${cyan}] ${white}WhiteSur icon theme                                   ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 6${cyan}] ${white}Reversal icon theme                                   ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 7${cyan}] ${white}WhiteSur icon theme                                   ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> GTK/KDE Designs:                                        ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue} 7${cyan}] ${white}Lavanda KDE/GTK theme                                 ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue} 8${cyan}] ${white}WhiteSur KDE/GTK theme                                ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 8${cyan}] ${white}Lavanda KDE/GTK theme                                 ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 9${cyan}] ${white}WhiteSur KDE/GTK theme                                ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Cursors:                                                ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue} 9${cyan}] ${white}Bibata cursor theme                                   ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Bibata cursor theme                                   ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Firefox:                                                ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}WhiteSur theme                                        ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}WhiteSur theme                                        ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Terminal customization:                                 ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Install OhMyZsh!                                      ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Install fastfetch and copy minimal config             ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Install tmux and copy minimal config                  ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Install OhMyZsh!                                      ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Install fastfetch and copy minimal config             ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}14${cyan}] ${white}Install tmux and copy minimal config                  ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
@@ -138,27 +139,30 @@ do
                         cust_obsidian
                         ;;
                     6)
-                        cust_whitesur_icon
+                        cust_reversal
                         ;;
                     7)
-                        cust_lavanda
+                        cust_whitesur_icon
                         ;;
                     8)
-                        cust_whitesur
+                        cust_lavanda
                         ;;
                     9)
-                        cust_bibata
+                        cust_whitesur
                         ;;
                     10)
-                        cust_firefox
+                        cust_bibata
                         ;;
                     11)
-                        cust_ohmyzsh
+                        cust_firefox
                         ;;
                     12)
-                        cust_fastfetch
+                        cust_ohmyzsh
                         ;;
                     13)
+                        cust_fastfetch
+                        ;;
+                    14)
                         cust_tmux
                         ;;
                     b)
@@ -339,8 +343,10 @@ do
                 echo -e "${magenta}| ${blue}Colloid Icon Theme                                         ${magenta}|${noclor}";
                 echo -e "${magenta}|    ${white}https://github.com/vinceliuice/Colloid-icon-theme       ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}Obsidian Icon Theme                                        ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/madmaxms/iconpack-obsidian/          ${magenta}|${noclor}";
-                echo -e "${magenta}| ${blue}GTK/KDE Themes                                             ${magenta}|${noclor}";
+                echo -e "${magenta}|    ${white}https://github.com/madmaxms/iconpack-obsidian           ${magenta}|${noclor}";
+                echo -e "${magenta}| ${blue}Reversal Icon Theme                                        ${magenta}|${noclor}";
+                echo -e "${magenta}|    ${white}https://github.com/yeyushengfan258/Reversal-icon-theme  ${magenta}|${noclor}";
+                echo -e "${magenta}| ${blue}GTK/KDE/Icon Themes                                        ${magenta}|${noclor}";
                 echo -e "${magenta}|    ${white}https://github.com/vinceliuice                          ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}Bibata Cursor Theme                                        ${magenta}|${noclor}";
                 echo -e "${magenta}|    ${white}https://github.com/ful1e5/Bibata_Cursor                 ${magenta}|${noclor}";

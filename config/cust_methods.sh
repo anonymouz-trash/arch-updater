@@ -86,10 +86,11 @@ cust_colloid(){
                 cd Colloid-icon-theme
                 git pull
                 cd ..
-            else
                 git clone https://github.com/vinceliuice/Colloid-icon-theme.git
             fi
         fi
+    else
+        git clone https://github.com/vinceliuice/Colloid-icon-theme.git
     fi
     if [[ -d "Colloid-icon-theme" ]] ; then
         sudo ./Colloid-icon-theme/install.sh -d /usr/share/icons -s all -t all
@@ -122,10 +123,11 @@ cust_obsidian(){
                 cd iconpack-obsidian
                 git pull
                 cd ..
-            else
                 git clone https://github.com/madmaxms/iconpack-obsidian.git
             fi
         fi
+    else
+        git clone https://github.com/madmaxms/iconpack-obsidian.git
     fi
     if [[ -d "iconpack-obsidian" ]] ; then
         sudo cp -rv ./iconpack-obsidian/Obsidian* /usr/share/icons
@@ -135,6 +137,43 @@ cust_obsidian(){
         read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
         if [[ ${input} == "y" ]]; then
             rm -rfv ./iconpack-obsidian
+        fi
+    fi
+    cd ${pwd}
+    echo
+    read -p "Press any key to resume ..."
+}
+
+cust_reversal(){
+    clear
+    echo -e "\n${white}#> ${blue}Installing or updating Reversal icon theme...${nocolor}\n"
+	sleep 2
+    cd ~/.cache/arch-updater
+    if [ -d "/usr/share/icons/Reversal-icon-theme" ]; then
+        read -p "Do you want to (r)emove or just update it? [r/U] " input
+        if [[ ${input} == "r" ]]; then
+            rm -rfv ./iconpack-obsidian
+            sudo rm -rfv /usr/share/icons/Obsidian*
+            return
+        else
+            if [[ -d "Reversal-icon-theme" ]] ; then
+                cd Reversal-icon-theme
+                git pull
+                cd ..
+                git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git
+            fi
+        fi
+    else
+        git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git
+    fi
+    if [[ -d "Reversal-icon-theme" ]] ; then
+        sudo ./Reversal-icon-theme/install.sh -a -d /usr/share/icons
+        echo
+        echo
+        echo "Do you want to remove previously downloaded files? "
+        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
+        if [[ ${input} == "y" ]]; then
+            rm -rfv ./Reversal-icon-theme
         fi
     fi
     cd ${pwd}
@@ -158,6 +197,7 @@ cust_whitesur_icon(){
                 cd WhiteSur-icon-theme
                 git pull
                 cd ..
+                git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
             fi
         fi
     else

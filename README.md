@@ -7,6 +7,12 @@ Feel free to use any of the code in this repo for your own.
 I highly encourage you to read through the script before you using it!
 As you know: No backup, no mercy. ;)
 
+# Disclaimer
+THIS IS WORK IN PROGRESS!!
+
+I'm not responsible for any damage and I highly recommend to see through the entire project/code before using it!
+The whole project is adjusted to my needs.
+
 # Prerequisites
 * yay       (AUR-Helper)
 * debtap    (for installing *.deb-packages)
@@ -32,16 +38,11 @@ Just clone the repo and run it like below at any preferred location you want.
 > Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
 
 * Add:    Option to add SFTP-Shares to fstab.
+* Add:    Reversal icon theme by [yeyushengfan258](https://github.com/yeyushengfan258/Reversal-icon-theme)
 * Update: I inserted vars to preconfigured fstab-files in `./assets`.
 * Update: Reflectlor settings, it's recommended to delete old `~/.config/arch-updater.conf`.
 * Update: Replaced additional installed Fonts with `ttf-ms-win10-auto` and `ttf-ms-win11-auto`.
 * Update: Added `amdvlk`, `lib32-amdvlk` and `mesa` packages in AMD driver installation.
-
-# Disclaimer
-THIS IS WORK IN PROGRESS!!
-
-I'm not responsible for any damage and I highly recommend to see through the entire project/code before using it!
-The whole project is adjusted to my needs.
 
 # Screenshots
 ![Arch Linux Updater - Main Menu](https://github.com/anonymouz-trash/arch-updater/blob/main/screenshots/arch-updater_mainmenu.png?raw=true)
