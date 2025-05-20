@@ -158,10 +158,10 @@ cust_whitesur_icon(){
                 cd WhiteSur-icon-theme
                 git pull
                 cd ..
-            else
-                git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
             fi
         fi
+    else
+        git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
     fi
     if [[ -d "WhiteSur-icon-theme" ]] ; then
         sudo ./WhiteSur-icon-theme/install.sh -d /usr/share/icons -a -t all
