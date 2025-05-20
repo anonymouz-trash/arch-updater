@@ -92,9 +92,9 @@ do
                 echo -e "${magenta}| ${white}>> Icons:                                                  ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[${blue} 4${cyan}] ${white}Colloid icon theme                                    ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue} 5${cyan}] ${white}Obsidian icon theme                                   ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue} 6${cyan}] ${white}Reversal icon theme                                   ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue} 7${cyan}] ${white}WhiteSur icon theme                                   ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 5${cyan}] ${white}Obsidian icon theme  (Updated Faenza icon theme)      ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 6${cyan}] ${white}Reversal icon theme  (Xiaomis MIUI lookalike)         ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 7${cyan}] ${white}WhiteSur icon theme  (macOS lookalike)                ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> GTK/KDE Designs:                                        ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
