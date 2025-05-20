@@ -17,8 +17,8 @@ The whole project is adjusted to my needs.
 * yay       (AUR-Helper)
 * debtap    (for installing *.deb-packages)
 * reflector (Updating Arch mirrorlist)
-* bash
-* zsh       (Please have a look at option 10 in main menu, if you just installed it, you to reboot!)
+* bash      (Default shell on most systems)
+* zsh       (Please have a look at option 9 in main menu, if you just installed it, you have to reboot!)
 
 All programs will be installed automatically if not available.
 
