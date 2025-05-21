@@ -1,4 +1,3 @@
-clamav-unofficial-sigs
 cnrdrvcups-lb-bin
 mkinitcpio-firmware
 proton-ge-custom-bin
