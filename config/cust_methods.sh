@@ -6,7 +6,7 @@ cust_simple-arch-grub-theme(){
     sleep 2
     if [ -d "/boot/grub/themes/arch-silence_black-blue" ] || [ -d "/boot/grub/themes/arch-silence_black-red" ]; then
         read -p "Do you want to (r)emove it? [y/N] " input
-        if [ ${input} == "y" ]; then
+        if [[ ${input} == "y" ]]; then
             if [[ -d "/boot/grub/themes/arch-silence_black-blue" ]]; then
                 sudo rm -rfv /boot/grub/themes/arch-silence_black-blue
             else
