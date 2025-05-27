@@ -63,7 +63,7 @@ set_reflector(){
         read -p "n hours of last mirror update: " input
         age=${input}
         cfg_write ~/.config/arch_updater.conf age ${input}
-        echo -e "\n${white}#> ${blue}Enter the allowed protocol(s), like http,https,rsync${nocolor}"
+        echo -e "\n${white}#> ${blue}Enter the allowed protocol(s), like http or https${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "Protocol: " input
         protocol=${input}
@@ -73,9 +73,12 @@ set_reflector(){
         read -p "n amount of latest mirrors: " input
         latest=${input}
         cfg_write ~/.config/arch_updater.conf latest ${input}
+        echo
+        read -p "Would you like to update the mirrorlist right now? [y/N]: " input
+        if [[ ${input} = "y" ]]; then
+            update_mirrorlist
+        fi
     fi
-    echo
-    read -p "Press any key to resume ..."
 }
 
 ### Check if yay AUR helper is installed, if not it will be installed
