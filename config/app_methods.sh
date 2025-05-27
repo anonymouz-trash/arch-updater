@@ -63,7 +63,7 @@ set_reflector(){
         read -p "n hours of last mirror update: " input
         age=${input}
         cfg_write ~/.config/arch_updater.conf age ${input}
-        echo -e "\n${white}#> ${blue}Enter the allowed protocol(s), like http,https,ftp${nocolor}"
+        echo -e "\n${white}#> ${blue}Enter the allowed protocol(s), like http,https,rsync${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "Protocol: " input
         protocol=${input}
@@ -118,7 +118,7 @@ update_mirrorlist(){
         sudo pacman -S reflector
         sudo systemctl enable reflector.timer --now
     fi
-    sudo reflector -c ${country} -a ${age} -p ${protocol} -l ${latest} --ipv4 --save /etc/pacman.d/mirrorlist --verbose
+    sudo reflector -c ${country} -a ${age} -p ${protocol} -l ${latest} --sort rate --ipv4 --verbose --save /etc/pacman.d/mirrorlist
     echo
     read -p "Press any key to resume ..."
 }
