@@ -1,0 +1,13 @@
+linux-cachyos
+linux-cachyos-lts
+
+# For nvidia use this and delete the lines above including this one. If not than remove all commented lines
+# linux-cachyos-nvidia
+# linux-cachyos-lts-nvidia
+
+linux-cachyos-headers
+linux-cachyos-lts-headers
+cachyos-gaming-applications
+cachyos-gaming-meta
+cachyos-kernel-manager
+cachyos-sysctl-manager

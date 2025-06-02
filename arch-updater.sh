@@ -189,35 +189,37 @@ do
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Repositorys                                             ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}1${cyan}] ${white}Install/Remove Chaotic AUR Repository                 ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 1${cyan}] ${white}Install/Remove Chaotic (precompiled AUR packages)     ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 2${cyan}] ${white}Install/Remove CachyOS (gaming optimized packages)    ${magenta}|${noclor}";
+                echo -e "${magenta}| ${white}     Configuration: ${red}https://wiki.cachyos.org/${nocolor}              ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Additional packages                                     ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}2${cyan}] ${white}Install additional pacman / yay packages              ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}3${cyan}] ${white}Install additional Windows fonts                      ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 3${cyan}] ${white}Install additional pacman / yay / cachyos packages    ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 4${cyan}] ${white}Install additional Windows fonts                      ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Gaming                                                  ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}4${cyan}] ${white}Install AMD / NVIDIA / INTEL drivers with Vulkan      ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}5${cyan}] ${white}WINE dependencies & MangoHUD / gOverlay / vkBasalt    ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}6${cyan}] ${white}Install Gamemode- / Gamescope-Service (FSR)           ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 5${cyan}] ${white}Install AMD / NVIDIA / INTEL drivers with Vulkan      ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 6${cyan}] ${white}WINE dependencies & MangoHUD / gOverlay / vkBasalt    ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 7${cyan}] ${white}Install Gamemode- / Gamescope-Service (FSR)           ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Performance & Tweaks                                    ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}7${cyan}] ${white}Add Batocera Dual-Boot entry to GRUB                  ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}8${cyan}] ${white}Enable ClearType rendering                            ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[ ${blue}9${cyan}] ${white}Improve I/O performance (for SSDs & NVMEs)            ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Improve device performance (for Laptops/Desktops)     ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 8${cyan}] ${white}Add Batocera Dual-Boot entry to GRUB                  ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 9${cyan}] ${white}Enable ClearType rendering                            ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Improve I/O performance (for SSDs & NVMEs)            ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Improve device performance (for Laptops/Desktops)     ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Network-Sahres                                          ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Apply SFTP-Shares to /etc/fstab (not working)         ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Apply SFTP-Shares to /etc/fstab (not working)         ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Useful scripts                                          ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Copy wireguard scripts to /usr/local/bin              ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue}14${cyan}] ${white}Copy fan-profile script to /usr/local/bin             ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}14${cyan}] ${white}Copy wireguard scripts to /usr/local/bin              ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}15${cyan}] ${white}Copy fan-profile script to /usr/local/bin             ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";
@@ -231,42 +233,45 @@ do
                         opt_chaotic
                         ;;
                     2)
-                        opt_packages
+                        opt_cachyos
                         ;;
                     3)
-                        opt_fonts
+                        opt_packages
                         ;;
                     4)
-                        opt_gpu_drivers
+                        opt_fonts
                         ;;
                     5)
-                        opt_wine
+                        opt_gpu_drivers
                         ;;
                     6)
-                        opt_gamemode
+                        opt_wine
                         ;;
                     7)
-                        opt_batocera
+                        opt_gamemode
                         ;;
                     8)
-                        opt_cleartype
+                        opt_batocera
                         ;;
                     9)
-                        opt_io-performance
+                        opt_cleartype
                         ;;
                     10)
-                        opt_dev-performance
+                        opt_io-performance
                         ;;
                     11)
-                        opt_smbshares
+                        opt_dev-performance
                         ;;
                     12)
-                        opt_sftpshares
+                        opt_smbshares
                         ;;
                     13)
-                        opt_wireguard-sh
+                        opt_sftpshares
                         ;;
                     14)
+                        opt_wireguard-sh
+                        ;;
+                    15)
                         opt_fan-profile-sh
                         ;;
                     b)

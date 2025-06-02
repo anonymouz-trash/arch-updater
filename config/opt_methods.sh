@@ -30,13 +30,34 @@ opt_chaotic(){
     read -p "Press any key to resume ..."
 }
 
+opt_cachyos(){
+    clear
+    echo -e "\n${white}#> ${blue}Installing or updating CachyOS repository...${nocolor}\n"
+    sleep 2
+    cd ~/.cache/arch-updater
+    if [ "$(pacman -Qe cachyos-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
+        read -p "Already installed! Do you want to (r)emove it? [r/N] " input
+        if [[ ${input} == "r" ]]; then
+            sudo ./cachyos-repo/cachyos-repo.sh --remove
+        fi
+    else
+        curl https://mirror.cachyos.org/cachyos-repo.tar.xz -o cachyos-repo.tar.xz
+        tar xvf cachyos-repo.tar.xz
+        sudo ./cachyos-repo/cachyos-repo.sh --install
+    fi
+    cd ${pwd}
+    echo
+    read -p "Press any key to resume ..."
+}
+
 opt_packages(){
     clear
     echo -e "\n${white}#> ${blue}Installing additional packages...${nocolor}\n"
-	sleep 2
+    sleep 2
+
     read -p 'Do you want to edit pacman package list before installing? [y/N] ' input
     if [[ ${input} == "y" ]]; then
-		nano ./assets/opt_pkglist-pacman.txt
+        nano ./assets/opt_pkglist-pacman.txt
     fi
     sudo pacman -S --needed - < ./assets/opt_pkglist-pacman.txt
 
@@ -47,7 +68,16 @@ opt_packages(){
         if [[ ${input} == "y" ]]; then
             nano ./assets/opt_pkglist-yay.txt
         fi
-		yay -S --needed - < ./assets/opt_pkglist-yay.txt
+        yay -S --needed - < ./assets/opt_pkglist-yay.txt
+    fi
+
+    read -p 'Do you want to install additional CachyOS packages? [y/N] ' input
+    if [[ ${input} == "y" ]]; then
+        read -p 'Do you want to edit CachyOS package list before installing? [y/N] ' input
+        if [[ ${input} == "y" ]]; then
+            nano ./assets/opt_pkglist-cachyos.txt
+        fi
+        sudo pacman -S --needed - < ./assets/opt_pkglist-cachyos.txt
     fi
     echo
     read -p "Press any key to resume ..."
@@ -56,7 +86,7 @@ opt_packages(){
 opt_gpu_drivers(){
     clear
     echo -e "\n${white}#> ${blue}Install GPU drivers with Vulkan support!${nocolor}\n"
-	sleep 2
+    sleep 2
     read -p 'Do you want to install AMD or NVIDIA or INTEL drivers? [a/n/i] ' input
     if [[ ${input} == "a" ]]; then
         sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader amdvlk lib32-amdvlk mesa
