@@ -1,4 +1,3 @@
-bashtop
 bridge-utils
 clamav
 clamtk
@@ -20,6 +19,7 @@ steam
 terminus-font
 ufw
 ufw-extras
+unrar
 unrar-free
 virt-manager
 zram-generator

@@ -159,25 +159,6 @@ opt_batocera(){
     read -p "Press any key to resume ..."
 }
 
-opt_gamemode(){
-    clear
-    echo -e "\n${white}#> ${blue}Installing gamemode/gamescope service...${nocolor}\n"
-	sleep 2
-    check_4_yay
-    if [ "$(yay -Qe gamemode | wc -l)" -ge 1 ] && [ "$(yay -Qe gamescope | wc -l)" -ge 1 ]; then
-        read -p 'Gamemode already installed! Do you want to remove it? [y/N] ' input
-        if [[ ${input} == "y" ]]; then
-            yay -Rsnc gamemode gamescope
-        fi
-        return
-    else
-        yay -S gamemode gamescope
-        systemctl --user enable gamemoded.service --now
-    fi
-    echo
-    read -p "Press any key to resume ..."
-}
-
 opt_fonts(){
     clear
     echo -e "\n${white}#> ${blue}Installing additional Windows fonts...${nocolor}\n"
