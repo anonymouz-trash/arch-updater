@@ -340,7 +340,7 @@ cust_bibata(){
     echo -e "\n${white}#> ${blue}Installing or updating Bibata cursor theme...${nocolor}\n"
 	sleep 2
 	check_4_yay
-    if [ "$(yay -Qe bibata-cursor-theme | wc -l)" -ge 1 ]; then
+    if [ "$(yay -Qe bibata-cursor-theme-bin | wc -l)" -ge 1 ]; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
         if [[ ${input} == "r" ]]; then
             yay -Rsnc bibata-cursor-theme-bin
