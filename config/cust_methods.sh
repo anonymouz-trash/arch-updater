@@ -197,6 +197,7 @@ cust_whitesur_icon(){
                 cd WhiteSur-icon-theme
                 git pull
                 cd ..
+            else
                 git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
             fi
         fi

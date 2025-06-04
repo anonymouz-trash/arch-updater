@@ -83,34 +83,19 @@ opt_packages(){
     read -p "Press any key to resume ..."
 }
 
-opt_gpu_drivers(){
+opt_archgaming(){
     clear
-    echo -e "\n${white}#> ${blue}Install GPU drivers with Vulkan support!${nocolor}\n"
+    echo -e "\n${white}#> ${blue}Launching archgaming script...${nocolor}\n"
     sleep 2
-    read -p 'Do you want to install AMD or NVIDIA or INTEL drivers? [a/n/i] ' input
-    if [[ ${input} == "a" ]]; then
-        sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader amdvlk lib32-amdvlk mesa
-    elif [[ ${input} == "n" ]]; then
-        sudo pacman -S --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader
-    elif [[ ${input} == "i" ]]; then
-        sudo pacman -S --needed lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader
-    fi
-}
-
-opt_wine(){
-    clear
-    echo -e "\n${white}#> ${blue}Get out of WINE dependency hell...${nocolor}\n"
-	sleep 2
-    sudo pacman -S wine-staging
-    sudo pacman -S --needed --asdeps giflib lib32-giflib gnutls lib32-gnutls v4l-utils lib32-v4l-utils libpulse \
-    lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib sqlite lib32-sqlite libxcomposite \
-    lib32-libxcomposite ocl-icd lib32-ocl-icd libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs \
-    lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader sdl2 lib32-sdl2
-    echo
-    read -p 'Do you want to install also vkBasalt, MangoHUD & gOverlay? [y/N] ' input
-    if [[ ${input} == "y" ]]; then
-        check_4_yay
-        yay -S --needed vkbasalt mangohud goverlay
+    cd ~/.cache/arch-updater
+    if [ -d archgaming ]; then
+        cd archgaming
+        git pull
+        sudo ./gaming.sh
+    else
+        git clone https://github.com/anonymouz-trash/archgaming.git
+        cd archgaming
+        sudo ./gaming.sh
     fi
     echo
     echo "For some services like Battle.net it's important to have a correct /etc/hosts-file, so ..."
@@ -126,7 +111,26 @@ opt_wine(){
     else
         echo "127.0.0.1 localhost       $(hostnamectl hostname).${LOCALDOMAIN}  $(hostnamectl hostname)" | sudo tee -a /etc/hosts > /dev/null
     fi
+    cd ${pwd}
+    echo
+    read -p "Press any key to resume ..."
+}
 
+opt_nsl(){
+    clear
+    echo -e "\n${white}#> ${blue}Get out of WINE dependency hell...${nocolor}\n"
+    sleep 2
+    cd ~/.cache/arch-updater
+    if [ -d NonSteamLaunchers-On-Steam-Deck ]; then
+        cd NonSteamLaunchers-On-Steam-Deck
+        git pull
+        ./NonSteamLaunchers.sh
+    else
+        git clone https://github.com/anonymouz-trash/NonSteamLaunchers-On-Steam-Deck.git
+        cd NonSteamLaunchers-On-Steam-Deck
+        ./NonSteamLaunchers.sh
+    fi
+    cd ${pwd}
     echo
     read -p "Press any key to resume ..."
 }

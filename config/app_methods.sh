@@ -118,7 +118,7 @@ update_mirrorlist(){
 	echo -e "\n${white}#> ${blue}Updating Arch Linux mirrorlist with reflector... ${nocolor}\n"
 	sleep 2
 	if ! command -v reflector &> /dev/null ; then
-        sudo pacman -S reflector
+        sudo pacman -S reflector rsync
         sudo systemctl enable reflector.timer --now
     fi
     sudo reflector -c ${country} -a ${age} -p ${protocol} -l ${latest} --sort rate --ipv4 --verbose --save /etc/pacman.d/mirrorlist
