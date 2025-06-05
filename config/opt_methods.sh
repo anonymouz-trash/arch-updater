@@ -341,7 +341,7 @@ opt_wireguard-sh(){
         if ! pacman -Q openresolv wireguard-tools &> /dev/null ; then
             sudo pacman -S openresolv wireguard-tools
         fi
-        sudo cp ./assets/opt_wireguard-vpn.sh /usr/local/bin/wireguard-vpn
+        sudo cp ./assets/opt_wireguard-vpn.sh /usr/local/sbin/wireguard-vpn
     fi
     echo
     read -p "Press any key to resume ..."

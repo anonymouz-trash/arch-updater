@@ -217,7 +217,7 @@ do
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Useful scripts                                          ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Copy wireguard scripts to /usr/local/bin              ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue}13${cyan}] ${white}Copy wireguard scripts to /usr/local/sbin             ${magenta}|${noclor}";
                 echo -e "${magenta}| ${cyan}[${blue}14${cyan}] ${white}Copy fan-profile script to /usr/local/bin             ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
