@@ -256,51 +256,74 @@ opt_dev-performance(){
 opt_smbshares(){
     clear
     echo -e "\n${white}[+] ${blue}Add SMB-Shares...${nocolor}\n"
-	sleep 2
+    sleep 2
     if grep -Fxq "#SMB-Shares" /etc/fstab; then
         read -p "#SMB-Shares comment found! Do you want to edit fstab? [y/N] " input
 	    if [[ ${input} == "y" ]]; then
             sudo nano /etc/fstab
         fi
     else
-	    echo "You have to change/check the credentials and mount paths!"
-	    echo "Just search the given variables with [Ctrl-\] in nano and replace them."
+	if ! pacman -Q cifs-utils &> /dev/null ; then
+	    echo "[+] cifs  module not found, installing..."
+	    sudo pacman -S cifs-utils
+	fi
+	echo "You have to change/check the credentials and mount paths!"
+	echo "Just search the given variables with [Ctrl-\] in nano and replace them."
+	sleep 5
+	nano ./assets/opt_nas-smb-mount.txt
+	cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
         echo
         read -p "What's your SMB-Share username: " smb_user
-	    read -p "What's the password: " smb_pass
-	    sudo nano ./assets/opt_nas-smb-mount.txt
-	    echo "username=${smb_user}" >> ~/.smb
-	    echo "password=${smb_pass}" >> ~/.smb
-	    cat ./assets/opt_nas-smb-mount.txt | sudo tee -a /etc/fstab > /dev/null
-	    chmod 600 ~/.smb
-	    mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
-	    sudo systemctl daemon-reload
+	read -p "What's the password: " smb_pass
+	echo "username=${smb_user}" > ~/.smb
+	echo "password=${smb_pass}" >> ~/.smb
+	chmod 600 ~/.smb
+   	echo
+	echo "Enter your desired mount path(s). Wrong syntax will result in errors."
+	echo "You can also create multiple folders in bracket like {folder1,folder2}."
+	echo "Example: ~/NAS/{folder1,folder2} or /mnt/NAS"
+	echo
+	read -p "sudo mkdir -p " naspath
+	sudo mkdir -p ${naspath}
+	sudo systemctl daemon-reload
     fi
     echo
     read -p "Press any key to resume ..."
+    unset naspath input
 }
 
 opt_sftpshares(){
     clear
     echo -e "\n${white}[+] ${blue}Add SFTP-Shares...${nocolor}\n"
-	sleep 2
+    sleep 2
     if grep -Fxq "#SFTP-Shares" /etc/fstab; then
         read -p "#SFTP-Shares comment found! Do you want to edit fstab? [y/N] " input
 	    if [[ ${input} == "y" ]]; then
             sudo nano /etc/fstab
         fi
     else
-	    echo "You have to change/check the credentials, keys path and mount paths!"
-	    echo "Just search the given variables and replace them."
-        sleep 3
+	if ! pacman -Q sshfs &> /dev/null ; then
+	    echo "[+] sshfs module not found, installing..."
+	    sudo pacman -S sshfs
+	fi
+	echo "You have to change/check the credentials, keys path and mount paths!"
+	echo "Just search the given variables and replace them."
+        sleep 5
         nano ./assets/opt_nas-sftp-mount.txt
-	    echo
+	echo
         cat ./assets/opt_nas-sftp-mount.txt | sudo tee -a /etc/fstab > /dev/null
-	    mkdir -p ~/NAS/{backups,media,isoz,drive,shared}
-	    sudo systemctl daemon-reload
+	echo
+	echo "Enter your desired mount path(s). Wrong syntax will result in errors."
+	echo "You can also create multiple folders in bracket like {folder1,folder2}."
+	echo "Example: ~/NAS/{folder1,folder2} or /mnt/NAS"
+	echo
+	read -p "sudo mkdir -p " naspath
+	sudo mkdir -p ${naspath}
+	sudo systemctl daemon-reload
     fi
     echo
     read -p "Press any key to resume ..."
+    unset naspath input
 }
 
 opt_wireguard-sh(){
@@ -312,9 +335,10 @@ opt_wireguard-sh(){
         read -p 'Wireguard scripts already exists! Do you want to remove it? [y/N] ' input
         if [[ ${input} == "y" ]]; then
             sudo rm -v /usr/local/bin/wireguard-vpn
+	    sudo pacman -Rsnc openresolv wireguard-tools
         fi
     else
-        if [ "$(pacman -Qe openresolv | wc -l > /dev/null)" -eq 0 ] || [ "$(pacman -Qe wireguard-tools | wc -l > /dev/null)" -eq 0 ]; then
+        if ! pacman -Q openresolv wireguard-tools &> /dev/null ; then
             sudo pacman -S openresolv wireguard-tools
         fi
         sudo cp ./assets/opt_wireguard-vpn.sh /usr/local/bin/wireguard-vpn

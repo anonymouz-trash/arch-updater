@@ -6,6 +6,8 @@
 # 
 # Usage:	Just search and replace the given variables
 # 
+# You can remove comment section till here when you're finished-------------------------------------------------------
+
 # SMB-Shares
 //<domain>/backups <path>/NAS/backups cifs user,noauto,_netdev,credentials=<secret>/.smb,iocharset=utf8,vers=3.0 0 0
 //<domain>/isoz <path>/NAS/isoz cifs user,noauto,_netdev,credentials=<secret>/.smb,iocharset=utf8,vers=3.0 0 0

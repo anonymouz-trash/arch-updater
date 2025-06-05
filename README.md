@@ -37,6 +37,8 @@ Just clone the repo and run it like below at any preferred location you want.
 # Changelog
 > Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
 
+* Add:    archgaming script by [xi-Rick](https://github.com/xi-Rick/archgaming) (a bit modified by me to be more user-friendly and added gamescope and automatic /etc/hosts-entry for battle.net).
+* Add:    NonSteamLauncher on Steam Deck by [moraroy](https://github.com/moraroy/NonSteamLaunchers-On-Steam-Deck).
 * Add:    Option to add SFTP-Shares to fstab.
 * Add:    Reversal icon theme by [yeyushengfan258](https://github.com/yeyushengfan258/Reversal-icon-theme)
 * Update: I inserted vars to preconfigured fstab-files in `./assets`.
