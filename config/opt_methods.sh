@@ -257,8 +257,8 @@ opt_smbshares(){
     clear
     echo -e "\n${white}[+] ${blue}Add SMB-Shares...${nocolor}\n"
     sleep 2
-    if grep -Fxq "#SMB-Shares" /etc/fstab; then
-        read -p "#SMB-Shares comment found! Do you want to edit fstab? [y/N] " input
+    if grep -Fxq "# SMB-Shares" /etc/fstab; then
+        read -p "# SMB-Shares comment found! Do you want to edit fstab? [y/N] " input
 	    if [[ ${input} == "y" ]]; then
             sudo nano /etc/fstab
         fi
@@ -296,8 +296,8 @@ opt_sftpshares(){
     clear
     echo -e "\n${white}[+] ${blue}Add SFTP-Shares...${nocolor}\n"
     sleep 2
-    if grep -Fxq "#SFTP-Shares" /etc/fstab; then
-        read -p "#SFTP-Shares comment found! Do you want to edit fstab? [y/N] " input
+    if grep -Fxq "# SFTP-Shares" /etc/fstab; then
+        read -p "# SFTP-Shares comment found! Do you want to edit fstab? [y/N] " input
 	    if [[ ${input} == "y" ]]; then
             sudo nano /etc/fstab
         fi
