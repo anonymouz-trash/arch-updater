@@ -210,7 +210,7 @@ do
                 echo -e "${magenta}| ${cyan}[${blue} 9${cyan}] ${white}Improve I/O performance (for SSDs & NVMEs)            ${magenta}|${noclor}";
                 echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Improve device performance (for Laptops/Desktops)     ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${white}>> Network-Sahres                                          ${magenta}|${nocolor}";
+                echo -e "${magenta}| ${white}>> Network-Shares                                          ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Apply SMB-Shares to /etc/fstab                        ${magenta}|${noclor}";
                 echo -e "${magenta}| ${cyan}[${blue}12${cyan}] ${white}Apply SFTP-Shares to /etc/fstab (not working)         ${magenta}|${noclor}";
