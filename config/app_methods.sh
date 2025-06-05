@@ -39,7 +39,7 @@ fi
 
 set_reflector(){
     clear
-    echo -e "\n${white}#> ${blue}reflector settings...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}reflector settings...${nocolor}\n"
 	echo "     Country = $country"
 	echo "     Age = $age"
 	echo "     Protocol = $protocol"
@@ -47,7 +47,7 @@ set_reflector(){
 	echo ""
 	read -p "Do you want to change settings? [y/N] " input
 	if [[ ${input} == 'y' ]]; then
-        echo -e "\n${white}#> ${blue}Enter a valid country or country code or nothing for all available mirrors.${nocolor}"
+        echo -e "\n${white}[+] ${blue}Enter a valid country or country code or nothing for all available mirrors.${nocolor}"
         echo -e "${white} ${blue}A list of countries separated by commas is possible, e.g. like France,sweden,de,CZ .${nocolor}"
         echo -e "${white}   ${blue}Press [l] for a list of available countries...${nocolor}\n"
         read -p "Country: " input
@@ -58,17 +58,17 @@ set_reflector(){
         done
         country=${input}
         cfg_write ~/.config/arch_updater.conf country ${input}
-        echo -e "\n${white}#> ${blue}Enter the max age in hours the mirrors should have.${nocolor}"
+        echo -e "\n${white}[+] ${blue}Enter the max age in hours the mirrors should have.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "n hours of last mirror update: " input
         age=${input}
         cfg_write ~/.config/arch_updater.conf age ${input}
-        echo -e "\n${white}#> ${blue}Enter the allowed protocol(s), like http or https${nocolor}"
+        echo -e "\n${white}[+] ${blue}Enter the allowed protocol(s), like http or https${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "Protocol: " input
         protocol=${input}
         cfg_write ~/.config/arch_updater.conf protocol ${input}
-        echo -e "\n${white}#> ${blue}Limit the list to the latest n servers.${nocolor}"
+        echo -e "\n${white}[+] ${blue}Limit the list to the latest n servers.${nocolor}"
         echo -e "${white}   ${blue}Or enter nothing to choose all alvailable.${nocolor}\n"
         read -p "n amount of latest mirrors: " input
         latest=${input}
@@ -84,7 +84,7 @@ set_reflector(){
 ### Check if yay AUR helper is installed, if not it will be installed
 check_4_yay(){
     if ! command -v yay &> /dev/null ; then
-        echo -e "\n${white}#> ${blue}Yay is not installed, installing...${nocolor}\n"
+        echo -e "\n${white}[+] ${blue}Yay is not installed, installing...${nocolor}\n"
         sudo pacman -S build-essential git
         git clone https://aur.archlinux.org/yay.git
         cd yay
@@ -96,7 +96,7 @@ check_4_yay(){
 
 update_yay(){
     clear
-    echo -e "\n${white}#> ${blue}Updating Arch Linux with yay... ${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Updating Arch Linux with yay... ${nocolor}\n"
     sleep 2
 	check_4_yay
     yay -Syyu
@@ -106,7 +106,7 @@ update_yay(){
 
 update_pacman(){
 	clear
-	echo -e "\n${white}#> ${blue}Updating Arch Linux with pacman... ${nocolor}\n"
+	echo -e "\n${white}[+] ${blue}Updating Arch Linux with pacman... ${nocolor}\n"
 	sleep 2
 	sudo pacman -Syyu
 	echo
@@ -115,7 +115,7 @@ update_pacman(){
 
 update_mirrorlist(){
 	clear
-	echo -e "\n${white}#> ${blue}Updating Arch Linux mirrorlist with reflector... ${nocolor}\n"
+	echo -e "\n${white}[+] ${blue}Updating Arch Linux mirrorlist with reflector... ${nocolor}\n"
 	sleep 2
 	if ! command -v reflector &> /dev/null ; then
         sudo pacman -S reflector rsync
@@ -128,7 +128,7 @@ update_mirrorlist(){
 
 clean_arch(){
     clear
-	echo -e "\n${white}#> ${blue}Cleaning Arch Linux...${nocolor}\n"
+	echo -e "\n${white}[+] ${blue}Cleaning Arch Linux...${nocolor}\n"
 	sleep 2
     check_4_yay
 	echo -e "${cyan} Size of current user's cache: ${nocolor}\n"
@@ -181,7 +181,7 @@ clean_arch(){
 
 update_debtap(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating debtap...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing or updating debtap...${nocolor}\n"
 	sleep 2
     check_4_yay
 	if ! command -v debtap &> /dev/null ; then

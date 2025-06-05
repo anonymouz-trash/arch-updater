@@ -1,4 +1,5 @@
 cnrdrvcups-lb-bin
+gearlever
 mkinitcpio-firmware
 proton-ge-custom-bin
 protontricks-git

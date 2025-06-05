@@ -2,7 +2,7 @@
 
 cust_simple-arch-grub-theme(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating Simple Arch Linux GRUB theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing or updating Simple Arch Linux GRUB theme...${nocolor}\n"
     sleep 2
     if [ -d "/boot/grub/themes/arch-silence_black-blue" ] || [ -d "/boot/grub/themes/arch-silence_black-red" ]; then
         read -p "Do you want to (r)emove it? [y/N] " input
@@ -32,7 +32,7 @@ cust_simple-arch-grub-theme(){
 
 cust_xenlism-arch-grub-theme(){
     clear
-    echo -e "\n${white}#> ${blue}Installing Xenlism Arch Linux GRUB theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing Xenlism Arch Linux GRUB theme...${nocolor}\n"
     sleep 2
     if [ -d "/boot/grub/themes/xenlism-grub-arch" ]; then
         read -p "Do you want to (r)emove it? [y/N] " input
@@ -52,7 +52,7 @@ cust_xenlism-arch-grub-theme(){
 
 cust_rog-grub-theme(){
     clear
-    echo -e "\n${white}#> ${blue}Installing Republic of Gamers GRUB theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing Republic of Gamers GRUB theme...${nocolor}\n"
     sleep 2
     if [ -d "/boot/grub/themes/rog-grub-theme" ]; then
         read -p "Do you want to (r)emove it? [y/N] " input
@@ -72,7 +72,7 @@ cust_rog-grub-theme(){
 
 cust_colloid(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating Colloid icon theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing or updating Colloid icon theme...${nocolor}\n"
     sleep 2
     cd ~/.cache/arch-updater
     if [[ -d "/usr/share/icons/Colloid" ]]; then 
@@ -109,7 +109,7 @@ cust_colloid(){
 
 cust_obsidian(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating Obsidian icon theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing or updating Obsidian icon theme...${nocolor}\n"
 	sleep 2
     cd ~/.cache/arch-updater
     if [ -d "/usr/share/icons/Obsidian" ]; then
@@ -146,7 +146,7 @@ cust_obsidian(){
 
 cust_reversal(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating Reversal icon theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing or updating Reversal icon theme...${nocolor}\n"
 	sleep 2
     cd ~/.cache/arch-updater
     if [ -d "/usr/share/icons/Reversal-icon-theme" ]; then
@@ -183,7 +183,7 @@ cust_reversal(){
 
 cust_whitesur_icon(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating WhiteSur icon theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing or updating WhiteSur icon theme...${nocolor}\n"
     sleep 2
     cd ~/.cache/arch-updater
     if [ -d "/usr/share/icons/WhiteSur" ]; then
@@ -221,7 +221,7 @@ cust_whitesur_icon(){
 
 cust_lavanda(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating Lavanda GTK/KDE theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing or updating Lavanda GTK/KDE theme...${nocolor}\n"
 	sleep 2
 	cd ~/.cache/arch-updater
 
@@ -277,7 +277,7 @@ cust_lavanda(){
 
 cust_whitesur(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating WhiteSur GTK/KDE theme...${nocolor}"
+    echo -e "\n${white}[+} ${blue}Installing or updating WhiteSur GTK/KDE theme...${nocolor}"
     echo -e "\n${blue}!!!${nocolor} Please use background pictures without spaces in the filename ${blue}!!!${nocolor}\n"
     sleep 2
     cd ~/.cache/arch-updater
@@ -337,7 +337,7 @@ cust_whitesur(){
 
 cust_bibata(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating Bibata cursor theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing or updating Bibata cursor theme...${nocolor}\n"
 	sleep 2
 	check_4_yay
     if [ "$(yay -Qe bibata-cursor-theme-bin | wc -l)" -ge 1 ]; then
@@ -355,7 +355,7 @@ cust_bibata(){
 
 cust_firefox(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating Firefox WhiteSur theme...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing or updating Firefox WhiteSur theme...${nocolor}\n"
     sleep 2
     cd ~/.cache/arch-updater
     if [ -d "WhiteSur-firefox-theme" ]; then
@@ -391,10 +391,10 @@ cust_firefox(){
 
 cust_fastfetch(){
     clear
-    echo -e "\n${white}#> ${blue}Installing / Removing fastfetch...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing / Removing fastfetch...${nocolor}\n"
 	sleep 2
 	if [ "$(pacman -Qe bash | wc -l)" -ge 1 ] | [ "$(pacman -Qe bash | wc -l)" -ge 1 ] ; then
-        echo -e "\n${white}#> ${cyan}Neither BASH or ZSH are installed, aborting...${nocolor}\n"
+        echo -e "\n${white}[+} ${cyan}Neither BASH or ZSH are installed, aborting...${nocolor}\n"
         sleep 2
     else
         if [ "$(pacman -Qe fastfetch | wc -l)" -ge 1 ]; then
@@ -450,7 +450,7 @@ cust_fastfetch(){
 
 cust_tmux(){
     clear
-    echo -e "\n${white}#> ${blue}Installing / Removing tmux...${nocolor}\n"
+    echo -e "\n${white}[+} ${blue}Installing / Removing tmux...${nocolor}\n"
 	sleep 2
 	if [ "$(pacman -Qe tmux | wc -l)" -ge 1 ] && [ -f ~/.tmux.conf ] ; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input

@@ -191,17 +191,17 @@ do
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[${blue} 1${cyan}] ${white}Install/Remove Chaotic (precompiled AUR packages)     ${magenta}|${noclor}";
                 echo -e "${magenta}| ${cyan}[${blue} 2${cyan}] ${white}Install/Remove CachyOS (gaming optimized packages)    ${magenta}|${noclor}";
-                echo -e "${magenta}| ${white}     Configuration: ${red}https://wiki.cachyos.org/${nocolor}              ${magenta}|${nocolor}";
+                echo -e "${magenta}| ${white}   Use with caution: ${red}https://wiki.cachyos.org/${nocolor}             ${magenta}|${nocolor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${white}>> Gaming (including GPU drivers)                          ${magenta}|${nocolor}";
+                echo -e "${magenta}|                                                            |${nocolor}";
+                echo -e "${magenta}| ${cyan}[${blue} 3${cyan}] ${white}Launch archgaming script by xi-Rick                   ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 4${cyan}] ${white}Launch Non-Steam-Launchers script by moraroy          ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Additional packages                                     ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue} 3${cyan}] ${white}Install additional pacman / yay / cachyos packages    ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue} 4${cyan}] ${white}Install additional Windows fonts                      ${magenta}|${noclor}";
-                echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${white}>> Gaming                                                  ${magenta}|${nocolor}";
-                echo -e "${magenta}|                                                            |${nocolor}";
-                echo -e "${magenta}| ${cyan}[${blue} 5${cyan}] ${white}Launch archgaming script by xi-Rick                   ${magenta}|${noclor}";
-                echo -e "${magenta}| ${cyan}[${blue} 6${cyan}] ${white}Launch Non-Steam-Launchers script by moraroy          ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 5${cyan}] ${white}Install additional pacman / yay / cachyos packages    ${magenta}|${noclor}";
+                echo -e "${magenta}| ${cyan}[${blue} 6${cyan}] ${white}Install additional Windows fonts                      ${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${white}>> Performance & Tweaks                                    ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
@@ -235,16 +235,16 @@ do
                         opt_cachyos
                         ;;
                     3)
-                        opt_packages
-                        ;;
-                    4)
-                        opt_fonts
-                        ;;
-                    5)
                         opt_archgaming
                         ;;
-                    6)
+                    4)
                         opt_nsl
+                        ;;
+                    5)
+                        opt_packages
+                        ;;
+                    6)
+                        opt_fonts
                         ;;
                     7)
                         opt_batocera
@@ -336,26 +336,29 @@ do
                 echo -e "${magenta}| ${white}Credits and big thanks to:                                 ${magenta}|${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${blue}Arch Silence GRUB Theme                                    ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://www.pling.com/p/1111545                         ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://www.pling.com/p/1111545                           ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}Xenlism Arch GRUB Theme                                    ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/xenlism/Grub-themes                  ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/xenlism/Grub-themes                    ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}ROG GRUB Theme                                             ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/thekarananand/ROG_GRUB_Theme         ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/thekarananand/ROG_GRUB_Theme           ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}Colloid Icon Theme                                         ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/vinceliuice/Colloid-icon-theme       ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/vinceliuice/Colloid-icon-theme         ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}Obsidian Icon Theme                                        ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/madmaxms/iconpack-obsidian           ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/madmaxms/iconpack-obsidian             ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}Reversal Icon Theme                                        ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/yeyushengfan258/Reversal-icon-theme  ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/yeyushengfan258/Reversal-icon-theme    ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}GTK/KDE/Icon Themes                                        ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/vinceliuice                          ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/vinceliuice                            ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}Bibata Cursor Theme                                        ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/ful1e5/Bibata_Cursor                 ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/ful1e5/Bibata_Cursor                   ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}My own Fastfetch Preset Fork from examples                 ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/fastfetch-cli/fastfetch              ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/fastfetch-cli/fastfetch                ${magenta}|${noclor}";
                 echo -e "${magenta}| ${blue}OhMyZsh!                                                   ${magenta}|${noclor}";
-                echo -e "${magenta}|    ${white}https://github.com/ohmyzsh/ohmyzsh                      ${magenta}|${noclor}";
-
+                echo -e "${magenta}|  ${white}https://github.com/ohmyzsh/ohmyzsh                        ${magenta}|${noclor}";
+                echo -e "${magenta}| ${blue}archgaming script                                          ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/xi-Rick/archgaming                     ${magenta}|${noclor}";
+                echo -e "${magenta}| ${blue}NonSteamLaunchers on Steam Deck                            ${magenta}|${noclor}";
+                echo -e "${magenta}|  ${white}https://github.com/moraroy/NonSteamLaunchers-On-Steam-Deck${magenta}|${noclor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}|                                                            |${nocolor}";
                 echo -e "${magenta}| ${cyan}[ ${blue}b${cyan}] ${white}Back                                                  ${magenta}|${noclor}";

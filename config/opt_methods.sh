@@ -2,7 +2,7 @@
 
 opt_chaotic(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating Chaotic AUR repository...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing or updating Chaotic AUR repository...${nocolor}\n"
 	sleep 2
 
     if [ "$(pacman -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
@@ -32,7 +32,7 @@ opt_chaotic(){
 
 opt_cachyos(){
     clear
-    echo -e "\n${white}#> ${blue}Installing or updating CachyOS repository...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing or updating CachyOS repository...${nocolor}\n"
     sleep 2
     cd ~/.cache/arch-updater
     if [ "$(pacman -Qe cachyos-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
@@ -52,7 +52,7 @@ opt_cachyos(){
 
 opt_packages(){
     clear
-    echo -e "\n${white}#> ${blue}Installing additional packages...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing additional packages...${nocolor}\n"
     sleep 2
 
     read -p 'Do you want to edit pacman package list before installing? [y/N] ' input
@@ -85,7 +85,7 @@ opt_packages(){
 
 opt_archgaming(){
     clear
-    echo -e "\n${white}#> ${blue}Launching archgaming script...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Launching archgaming script...${nocolor}\n"
     sleep 2
     cd ~/.cache/arch-updater
     if [ -d archgaming ]; then
@@ -97,8 +97,16 @@ opt_archgaming(){
         cd archgaming
         sudo ./gaming.sh
     fi
+    if ! pacman -Q gamescope &> /dev/null ; then
+        echo
+        read -p "Do you want to install Valve's upscaler gamescope? [y/N] " input
+        echo
+        if [[ ${input} == "y" ]]; then
+            sudo pacman -S --needed gamescope
+        fi
+    fi
     echo
-    echo "For some services like Battle.net it's important to have a correct /etc/hosts-file, so ..."
+    echo "For some services like Battle.net it's important to have a correct '/etc/hosts'-file, so ..."
     echo "What's your local domain? E.g. for Fritz!Box users 'fritz.box' is common. "
     read -p "If you just press Enter 'localdomain' would be set: " input
     if [[ ${input} == "" ]]; then
@@ -106,6 +114,7 @@ opt_archgaming(){
     else
         LOCALDOMAIN=${input}
     fi
+    echo "[+] Write: 127.0.0.1  localhost       $(hostnamectl hostname).$LOCALDOMAIN $(hostnamectl hostname) >> /etc/hosts"
     if grep -q "127.0.0.1" "/etc/hosts"; then
         sudo sed -i "s/.*127.0.0.1.*/127.0.0.1  localhost       $(hostnamectl hostname).$LOCALDOMAIN $(hostnamectl hostname)/g" /etc/hosts
     else
@@ -118,7 +127,8 @@ opt_archgaming(){
 
 opt_nsl(){
     clear
-    echo -e "\n${white}#> ${blue}Get out of WINE dependency hell...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Launch NonSteamLaunchers On Steam Deck...${nocolor}\n"
+    echo -e "${white}Don't worry this also works on Desktops. ;-)${nocolor}"
     sleep 2
     cd ~/.cache/arch-updater
     if [ -d NonSteamLaunchers-On-Steam-Deck ]; then
@@ -137,7 +147,7 @@ opt_nsl(){
 
 opt_batocera(){
     clear
-    echo -e "\n${white}#> ${blue}Make Batocera Dual-Bootable...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Make Batocera Dual-Bootable...${nocolor}\n"
 	sleep 2
     if [ -f /etc/grub.d/15_batocera ]; then
         read -p 'Boot entry already exists! Do you want to remove it? [y/N] ' input
@@ -161,7 +171,7 @@ opt_batocera(){
 
 opt_fonts(){
     clear
-    echo -e "\n${white}#> ${blue}Installing additional Windows fonts...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing additional Windows fonts...${nocolor}\n"
 	sleep 2
     check_4_yay
     yay -S --needed ttf-ms-win10-auto
@@ -172,7 +182,7 @@ opt_fonts(){
 
 opt_cleartype(){
     clear
-    echo -e "\n${white}#> ${blue}Installing ClearType rendering...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing ClearType rendering...${nocolor}\n"
 	sleep 2
     check_4_yay
     if [ "$(yay -Qe freetype2 | wc -l)" -ge 1 ]; then
@@ -198,7 +208,7 @@ opt_cleartype(){
 
 opt_io-performance(){
     clear
-    echo -e "\n${white}#> ${blue}Configure I/O performance...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Configure I/O performance...${nocolor}\n"
 	sleep 2
     if [ -f /etc/udev/rules.d/60-ioschedulers.rules ]; then
         read -p 'I/O performance rule already exists! Do you want to remove it? [y/N] ' input
@@ -216,7 +226,7 @@ opt_io-performance(){
 
 opt_dev-performance(){
     clear
-    echo -e "\n${white}#> ${blue}Configure device performance...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Configure device performance...${nocolor}\n"
 	sleep 2
     if [ "$(pacman -Qe tuned | wc -l)" -ge 1 ]; then
         read -p 'Device performance settings are applied! Do you want to remove it? [y/N] ' input
@@ -245,7 +255,7 @@ opt_dev-performance(){
 
 opt_smbshares(){
     clear
-    echo -e "\n${white}#> ${blue}Add SMB-Shares...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Add SMB-Shares...${nocolor}\n"
 	sleep 2
     if grep -Fxq "#SMB-Shares" /etc/fstab; then
         read -p "#SMB-Shares comment found! Do you want to edit fstab? [y/N] " input
@@ -272,7 +282,7 @@ opt_smbshares(){
 
 opt_sftpshares(){
     clear
-    echo -e "\n${white}#> ${blue}Add SFTP-Shares...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Add SFTP-Shares...${nocolor}\n"
 	sleep 2
     if grep -Fxq "#SFTP-Shares" /etc/fstab; then
         read -p "#SFTP-Shares comment found! Do you want to edit fstab? [y/N] " input
@@ -295,7 +305,7 @@ opt_sftpshares(){
 
 opt_wireguard-sh(){
     clear
-    echo -e "\n${white}#> Add wireguard activate/deactivate script in /usr/local/bin...${nocolor}\n"
+    echo -e "\n${white}[+] Add wireguard activate/deactivate script in /usr/local/bin...${nocolor}\n"
     echo -e "\n${white}   Don't forget to put your wireguard profile in /etc/wireguard/wg0.conf${nocolor}\n"
 	sleep 2
     if [ -f /usr/local/bin/wireguard-vpn ]; then
@@ -315,7 +325,7 @@ opt_wireguard-sh(){
 
 opt_fan-profile-sh(){
     clear
-    echo -e "\n${white}#> Add show-fan-profile script in /usr/local/bin...${nocolor}\n"
+    echo -e "\n${white}[+] Add show-fan-profile script in /usr/local/bin...${nocolor}\n"
 	sleep 2
     if [ -f /usr/local/bin/show-fan-profile ]; then
         read -p 'Show-fan-profile script already exists! Do you want to remove it? [y/N] ' input
