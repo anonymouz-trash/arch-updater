@@ -315,8 +315,8 @@ cust_whitesur(){
         sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/tweaks.sh -g -b "$curBg" -c Dark -i arch
     elif [[ ${de,,} =~ "kde" ]]; then
         sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -m -o normal -t all
-        sudo $app_home/.cache/arch-updater/WhiteSur-kde/install.sh --opaque
-        sudo $app_home/.cache/arch-updater/WhiteSur-kde/sddm/6.0/install.sh
+        sudo $app_home/.cache/arch-updater/WhiteSur-kde/install.sh
+        sudo $app_home/.cache/arch-updater/WhiteSur-kde/sddm/install.sh
     fi
     if [ -d "WhiteSur-gtk-theme" ]; then
         echo
