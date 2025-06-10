@@ -309,10 +309,10 @@ cust_whitesur(){
     fi
     if [[ ${de,,} =~ "gnome" ]]; then
         curBg="$(gsettings get org.gnome.desktop.background picture-uri | cut -d\' -f2 | cut -c 8-)"
-        ./WhiteSur-gtk-theme/install.sh -l -m -o normal -c Dark -t all -i arch -b "$curBg" -N glassy
-        sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -m -o normal -t all -i arch -b "$curBg" -N glassy
+	$app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -o normal -c dark -t all -m -l -N stable --shell -i arch -b "${curBg}"
+	sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -d /usr/share/themes -o normal -c dark -t all -m -N stable --shell -i arch -b "${curBg}"
         sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/tweaks.sh -g -r
-        sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/tweaks.sh -g -b "$curBg" -c Dark -i arch
+        sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/tweaks.sh -c Dark -g -i arch -b "$curBg"
     elif [[ ${de,,} =~ "kde" ]]; then
         sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -m -o normal -t all
         sudo $app_home/.cache/arch-updater/WhiteSur-kde/install.sh
