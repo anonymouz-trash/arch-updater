@@ -149,11 +149,11 @@ cust_reversal(){
     echo -e "\n${white}[+] ${blue}Installing or updating Reversal icon theme...${nocolor}\n"
 	sleep 2
     cd ~/.cache/arch-updater
-    if [ -d "/usr/share/icons/Reversal-icon-theme" ]; then
+    if [ -d "/usr/share/icons/Reversal" ]; then
         read -p "Do you want to (r)emove or just update it? [r/U] " input
         if [[ ${input} == "r" ]]; then
-            rm -rfv ./iconpack-obsidian
-            sudo rm -rfv /usr/share/icons/Obsidian*
+            rm -rfv ./Reversal-icon-theme
+            sudo rm -rfv /usr/share/icons/Reversal*
             return
         else
             if [[ -d "Reversal-icon-theme" ]] ; then
