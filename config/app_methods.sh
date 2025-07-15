@@ -1,10 +1,5 @@
 #!/usr/bin/bash
 
-if [ ! -d ~/.cache/arch-updater ]; then
-	mkdir ~/.cache/arch-updater
-	echo "cache dir created"
-fi
-
 ### config read/write function
 ## Very nice, credits: https://unix.stackexchange.com/a/433816
 

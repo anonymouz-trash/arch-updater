@@ -12,11 +12,6 @@ red='\033[1;31m'
 white='\033[1;37m'
 nocolor='\033[0m'
 
-# Check if arch-updater cache directory exists
-if ! [ -d "~/.cache/arch-updater" ]; then
-	mkdir -p ~/.cache/arch-updater
-fi
-
 # Check current desktop
 de=$XDG_CURRENT_DESKTOP
 

@@ -26,6 +26,10 @@ fi
 until [ "$CHOICE" = "q" ] ;
 do
     clear
+    # Check if arch-updater cache directory exists
+    if ! [ -d "~/.cache/arch-updater" ]; then
+        mkdir -p ~/.cache/arch-updater
+    fi
     cd ${app_pwd}
     echo -e "${magenta}+---<[ ${cyan}Arch Linux Updater Script ${magenta}]>--------------------------+${nocolor}";
     echo -e "${magenta}|                                                            |${nocolor}";
