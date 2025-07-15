@@ -122,6 +122,10 @@ update_mirrorlist(){
         sudo systemctl enable reflector.timer --now
     fi
     sudo reflector -c ${country} -a ${age} -p ${protocol} -l ${latest} --sort rate --ipv4 --verbose --save /etc/pacman.d/mirrorlist
+    sudo pacman -S archlinux-keyring
+    if [ "$(pacman -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
+        sudo pacman -S chaotic-keyring
+    fi
     echo
     read -p "Press any key to resume ..."
 }
