@@ -128,15 +128,13 @@ update_mirrorlist(){
 clean_arch(){
     clear
 	echo -e "\n${white}[+] ${blue}Cleaning Arch Linux...${nocolor}\n"
-	sleep 2
-    check_4_yay
-	echo -e "${cyan} Size of current user's cache: ${nocolor}\n"
-	du -sh ~/.cache
-
-	echo -e "${cyan} Size of pacman cache: ${nocolor}\n"
-	du -sh /var/cache/pacman/pkg
+	check_4_yay
+    cache_size=$(du -sh ~/.cache)
+    paccache_size=$(du -sh /var/cache/pacman/pkg)
+    sleep 2
+	echo -e "${cyan} Size of current user's cache: ${nocolor}  ${cache_size}\n"
+	echo -e "${cyan} Size of pacman cache:         ${nocolor}  ${paccache_size}\n"
     echo
-
 	if command -v yay &> /dev/null ; then
 		echo
         read -p 'Do you want to clear all (y) cached packages or just the ones that are not installed (N)? [y/N] ' input
@@ -146,7 +144,7 @@ clean_arch(){
 			yay -Sc
 		fi
 		unused=$(yay -Qtdq)
-		if [ "$(echo ${unused} | wc -l)" -gt 1 ]; then
+		if [ "$(echo ${unused} | wc -l)" -ge 1 ]; then
             echo -e "\n${cyan} This is a list of packages not used by anyone... ${nocolor}\n"
             echo -e "${red}${unused}${nocolor}\n"
             read -p 'Do you want to remove these packages? [y/N] ' input
@@ -155,7 +153,7 @@ clean_arch(){
             fi
         fi
 	fi
-
+	echo
     read -p 'Do you want to delete the contents of ~/.cache directory? [y/N] ' input
     if [[ ${input} == "y" ]]; then
 		rm -rfv ~/.cache/*
@@ -165,17 +163,15 @@ clean_arch(){
             rm -rfv ~/.cache/yay/*
         fi
 	fi
-
 	clear
-
-	echo -e "${cyan} Size of current User's cache: ${nocolor}\n"
-	du -sh ~/.cache
+	cache_size=$(du -sh ~/.cache)
+    paccache_size=$(du -sh /var/cache/pacman/pkg)
     echo
-	echo -e "${cyan} Size of pacman cache: ${nocolor}\n"
-	du -sh /var/cache/pacman/pkg
-    echo
+    echo -e "${cyan} Size of current user's cache: ${nocolor}  ${cache_size}\n"
+    echo -e "${cyan} Size of pacman cache:         ${nocolor}  ${paccache_size}\n"
     echo
     read -p "Press any key to resume ..."
+    unset paccache_size cache_size unused input
 }
 
 update_debtap(){
