@@ -47,6 +47,8 @@ do
     echo -e "${magenta}|                                                            |${nocolor}";
     echo -e "${magenta}| ${cyan}[${blue}10${cyan}] ${white}Credits                                               ${magenta}|${noclor}";
     echo -e "${magenta}|                                                            |${nocolor}";
+    echo -e "${magenta}| ${cyan}[${blue}11${cyan}] ${white}Check for updates                                     ${magenta}|${noclor}";
+    echo -e "${magenta}|                                                            |${nocolor}";
     echo -e "${magenta}|                                                            |${nocolor}";
     echo -e "${magenta}| ${cyan}[ ${blue}q${cyan}] ${white}Quit the script                                       ${magenta}|${noclor}";
     echo -e "${magenta}|                                                            |${nocolor}";
@@ -389,6 +391,12 @@ do
                         ;;
                 esac
             done
+            ;;
+        11)
+            clear
+            git pull
+            echo -e "\n${white}[+] ${blue}if update happens restart the script...${nocolor}\n"
+            read -p "Press any key to resume ..."
             ;;
         q)
             echo

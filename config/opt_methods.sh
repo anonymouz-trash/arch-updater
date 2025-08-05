@@ -91,11 +91,11 @@ opt_archgaming(){
     if [ -d archgaming ]; then
         cd archgaming
         git pull
-        sudo ./gaming.sh
+        sudo -E ./gaming.sh
     else
         git clone https://github.com/anonymouz-trash/archgaming.git
         cd archgaming
-        sudo ./gaming.sh
+        sudo -E ./gaming.sh
     fi
     if ! pacman -Q gamescope &> /dev/null ; then
         echo
