@@ -328,22 +328,25 @@ opt_sftpshares(){
 
 opt_wireguard-sh(){
     clear
-    echo -e "\n${white}[+] Add wireguard activate/deactivate script in /usr/local/bin...${nocolor}\n"
-    echo -e "\n${white}   Don't forget to put your wireguard profile in /etc/wireguard/wg0.conf${nocolor}\n"
+    echo -e "\n${white}[+] Copy wireguard activate/deactivate script in /usr/local/sbin/wireguard-vpn${nocolor}\n"
+    echo -e "${white}    Don't forget to put your wireguard profile in /etc/wireguard as wg0.conf${nocolor}\n"
 	sleep 2
-    if [ -f /usr/local/bin/wireguard-vpn ]; then
+    if [ -f /usr/local/sbin/wireguard-vpn ]; then
         read -p 'Wireguard scripts already exists! Do you want to remove it? [y/N] ' input
         if [[ ${input} == "y" ]]; then
-            sudo rm -v /usr/local/bin/wireguard-vpn
-	    sudo pacman -Rsnc openresolv wireguard-tools
+            sudo rm -v /usr/local/sbin/wireguard-vpn
+            sudo rm -v /etc/NetworkManager/conf.d/rc-manager.conf
+            sudo pacman -Rsnc openresolv wireguard-tools
         fi
     else
         if ! pacman -Q openresolv wireguard-tools &> /dev/null ; then
             sudo pacman -S openresolv wireguard-tools
         fi
         sudo cp ./assets/opt_wireguard-vpn.sh /usr/local/sbin/wireguard-vpn
+        sudo cp ./assets/opt_rc-manager.conf /etc/NetworkManager/conf.d/rc-manager.conf
     fi
     echo
+    echo -e "\n${white}[+] Reboot your system to let function openresolv properly${nocolor}\n"
     read -p "Press any key to resume ..."
 }
 
