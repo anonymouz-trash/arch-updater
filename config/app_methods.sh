@@ -144,7 +144,7 @@ clean_arch(){
 			yay -Sc
 		fi
 		unused=$(yay -Qtdq)
-		if [ "$(${unused} | wc -l)" -ge 1 ]; then
+		if [ "$(echo ${unused} | wc -l)" -ge 1 ]; then
             echo -e "\n${cyan} This is a list of packages not used by anyone... ${nocolor}\n"
             echo -e "${red}${unused}${nocolor}\n"
             read -p 'Do you want to remove these packages? [y/N] ' input
