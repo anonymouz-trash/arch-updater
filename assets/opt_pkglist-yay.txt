@@ -1,4 +1,6 @@
-cnrdrvcups-lb-bin
+cnrdrvcups-lb
+jbigkit
+libxml2-legacy
 gearlever
 mkinitcpio-firmware
 proton-ge-custom-bin

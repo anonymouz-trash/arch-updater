@@ -8,7 +8,6 @@ htop
 libguestfs
 libreoffice-fresh
 libreoffice-fresh-de
-libxml2-legacy
 lutris
 mc
 mixxx
