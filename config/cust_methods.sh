@@ -30,120 +30,6 @@ cust_simple-arch-grub-theme(){
     read -p "Press any key to resume ..."
 }
 
-cust_xenlism-arch-grub-theme(){
-    clear
-    echo -e "\n${white}[+] ${blue}Installing Xenlism Arch Linux GRUB theme...${nocolor}\n"
-    sleep 2
-    if [ -d "/boot/grub/themes/xenlism-grub-arch" ]; then
-        read -p "Do you want to (r)emove it? [y/N] " input
-        if [ ${input} == "y" ]; then
-            sudo rm -rfv /boot/grub/themes/xenlism-grub-arch
-            sudo sed -i '/GRUB_THEME=/c\#GRUB_THEME=""' /etc/default/grub
-            sudo grub-mkconfig -o /boot/grub/grub.cfg
-        fi
-    else
-        sudo cp -rv ./assets/xenlism-grub-arch /boot/grub/themes
-        sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/xenlism-grub-arch/theme.txt"' /etc/default/grub
-        sudo grub-mkconfig -o /boot/grub/grub.cfg
-    fi
-    echo
-    read -p "Press any key to resume ..."
-}
-
-cust_rog-grub-theme(){
-    clear
-    echo -e "\n${white}[+] ${blue}Installing Republic of Gamers GRUB theme...${nocolor}\n"
-    sleep 2
-    if [ -d "/boot/grub/themes/rog-grub-theme" ]; then
-        read -p "Do you want to (r)emove it? [y/N] " input
-        if [ ${input} == "y" ]; then
-            sudo rm -rfv /boot/grub/themes/rog-grub-theme
-            sudo sed -i '/GRUB_THEME=/c\#GRUB_THEME=""' /etc/default/grub
-            sudo grub-mkconfig -o /boot/grub/grub.cfg
-        fi
-    else
-        sudo cp -rv ./assets/rog-grub-theme /boot/grub/themes
-        sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/rog-grub-theme/theme.txt"' /etc/default/grub
-        sudo grub-mkconfig -o /boot/grub/grub.cfg
-    fi
-    echo
-    read -p "Press any key to resume ..."
-}
-
-cust_colloid(){
-    clear
-    echo -e "\n${white}[+] ${blue}Installing or updating Colloid icon theme...${nocolor}\n"
-    sleep 2
-    cd ~/.cache/arch-updater
-    if [[ -d "/usr/share/icons/Colloid" ]]; then 
-        read -p "Do you want to (r)emove or just update it? [r/U] " input
-        if [[ ${input} == "r" ]]; then
-            rm -rfv ./Colloid-icon-theme
-            sudo rm -rfv /usr/share/icons/Colloid*
-            return
-        else
-            if [[ -d "Colloid-icon-theme" ]]; then
-                cd Colloid-icon-theme
-                git pull
-                cd ..
-                git clone https://github.com/vinceliuice/Colloid-icon-theme.git
-            fi
-        fi
-    else
-        git clone https://github.com/vinceliuice/Colloid-icon-theme.git
-    fi
-    if [[ -d "Colloid-icon-theme" ]] ; then
-        sudo ./Colloid-icon-theme/install.sh -d /usr/share/icons -s all -t all
-        echo
-        echo
-        echo "Do you want to remove previously downloaded files? "
-        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
-        if [[ ${input} == "y" ]]; then
-            rm -rfv ./Colloid-icon-theme
-        fi
-    fi
-    cd ${pwd}
-    echo
-    read -p "Press any key to resume ..."
-}
-
-cust_obsidian(){
-    clear
-    echo -e "\n${white}[+] ${blue}Installing or updating Obsidian icon theme...${nocolor}\n"
-	sleep 2
-    cd ~/.cache/arch-updater
-    if [ -d "/usr/share/icons/Obsidian" ]; then
-        read -p "Do you want to (r)emove or just update it? [r/U] " input
-        if [[ ${input} == "r" ]]; then
-            rm -rfv ./iconpack-obsidian
-            sudo rm -rfv /usr/share/icons/Obsidian*
-            return
-        else
-            if [[ -d "iconpack-obsidian" ]] ; then
-                cd iconpack-obsidian
-                git pull
-                cd ..
-                git clone https://github.com/madmaxms/iconpack-obsidian.git
-            fi
-        fi
-    else
-        git clone https://github.com/madmaxms/iconpack-obsidian.git
-    fi
-    if [[ -d "iconpack-obsidian" ]] ; then
-        sudo cp -rv ./iconpack-obsidian/Obsidian* /usr/share/icons
-        echo
-        echo
-        echo "Do you want to remove previously downloaded files? "
-        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
-        if [[ ${input} == "y" ]]; then
-            rm -rfv ./iconpack-obsidian
-        fi
-    fi
-    cd ${pwd}
-    echo
-    read -p "Press any key to resume ..."
-}
-
 cust_reversal(){
     clear
     echo -e "\n${white}[+] ${blue}Installing or updating Reversal icon theme...${nocolor}\n"
@@ -174,44 +60,6 @@ cust_reversal(){
         read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
         if [[ ${input} == "y" ]]; then
             rm -rfv ./Reversal-icon-theme
-        fi
-    fi
-    cd ${pwd}
-    echo
-    read -p "Press any key to resume ..."
-}
-
-cust_whitesur_icon(){
-    clear
-    echo -e "\n${white}[+] ${blue}Installing or updating WhiteSur icon theme...${nocolor}\n"
-    sleep 2
-    cd ~/.cache/arch-updater
-    if [ -d "/usr/share/icons/WhiteSur" ]; then
-        read -p "Do you want to (r)emove or just update it? [r/U] " input
-        if [[ ${input} == "r" ]]; then
-            rm -rfv ./WhiteSur-icon-theme
-            sudo rm -rfv /usr/share/icons/WhiteSur*
-            return
-        else
-            if [[ -d "WhiteSur-icon-theme" ]] ; then
-                cd WhiteSur-icon-theme
-                git pull
-                cd ..
-            else
-                git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
-            fi
-        fi
-    else
-        git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
-    fi
-    if [[ -d "WhiteSur-icon-theme" ]] ; then
-        sudo ./WhiteSur-icon-theme/install.sh -d /usr/share/icons -a -t all
-        echo
-        echo
-        echo "Do you want to remove previously downloaded files? "
-        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
-        if [[ ${input} == "y" ]]; then
-            rm -rfv ./WhiteSur-icon-theme
         fi
     fi
     cd ${pwd}
@@ -267,6 +115,61 @@ cust_lavanda(){
             rm -rf Lavanda-gtk-theme
             if [ -d "Lavanda-kde" ]; then
                 rm -rf Lavanda-kde
+            fi
+        fi
+    fi
+    echo
+    read -p "Press any key to resume ..."
+    cd ${pwd}
+}
+
+cust_layan(){
+    clear
+    echo -e "\n${white}[+] ${blue}Installing or updating Layan GTK/KDE theme...${nocolor}\n"
+	sleep 2
+	cd ~/.cache/arch-updater
+
+    if [ -d "Layan-gtk-theme" ]; then
+        read -p "Do you want to (r)emove or just update it? [r/U] " input
+        if [[ ${input} == "r" ]]; then
+            sudo ./Layan-gtk-theme/install.sh -u
+            rm -rf ./Layan-gtk-theme
+            if [[ -d Layan-kde ]]; then
+                sudo ./Layan-kde/uninstall.sh
+                rm -rf ./Layan-kde
+                sudo rm -rf /usr/share/sddm/themes/Layan*
+            fi
+        else
+            cd Layan-gtk-theme
+            git pull
+            cd ..
+            if [[ -d Layan-kde ]]; then
+                cd Layan-kde
+                git pull
+                cd ..
+            fi
+        fi
+    else
+        git clone https://github.com/vinceliuice/Layan-gtk-theme.git
+        if [[ ${de,,} =~ "kde" ]]; then
+            git clone https://github.com/vinceliuice/Layan-kde.git
+        fi
+    fi
+    sudo ${app_home}/.cache/arch-updater/Layan-gtk-theme/install.sh -d /usr/share/themes
+    if [[ ${de,,} =~ "kde" ]]; then
+        sudo ${app_home}/.cache/arch-updater/Layan-kde/install.sh
+        sudo ${app_home}/.cache/arch-updater/Layan-kde/sddm/6.0/install.sh
+    fi
+    if [[ -d "Layan-gtk-theme" ]]; then
+        echo
+        echo
+        echo "Do you want to remove previously downloaded files? "
+        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
+
+        if [[ ${input} == "y" ]]; then
+            rm -rf Layan-gtk-theme
+            if [ -d "Layan-kde" ]; then
+                rm -rf Layan-kde
             fi
         fi
     fi
@@ -347,46 +250,10 @@ cust_bibata(){
             return
         fi
     else
-        yay -S bibata-cursor-theme-bin
+        yay -S bibata-cursor-theme
     fi
     echo
     read -p "Press any key to resume ..."
-}
-
-cust_firefox(){
-    clear
-    echo -e "\n${white}[+] ${blue}Installing or updating Firefox WhiteSur theme...${nocolor}\n"
-    sleep 2
-    cd ~/.cache/arch-updater
-    if [ -d "WhiteSur-firefox-theme" ]; then
-        read -p "Do you want to (r)emove or just update it? [r/U] " input
-        if [[ ${input} == "r" ]]; then
-            ./WhiteSur-firefox-theme/install.sh -r
-            rm -rfv ./WhiteSur-firefox-theme
-            return
-        else
-            cd WhiteSur-firefox-theme
-            git pull
-            cd ..
-        fi
-    else
-        git clone https://github.com/vinceliuice/WhiteSur-firefox-theme.git
-    fi
-    ./WhiteSur-firefox-theme/install.sh -a
-    if [[ -d "WhiteSur-firefox-theme" ]] ; then
-        echo
-        echo
-        echo "Do you want to remove previously downloaded files? "
-        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
-        if [[ ${input} == "y" ]]; then
-            rm -rfv ./WhiteSur-firefox-theme
-        fi
-    fi
-    cd ${pwd}
-    echo
-    read -p "Press any key to resume ..."
-
-
 }
 
 cust_fastfetch(){
