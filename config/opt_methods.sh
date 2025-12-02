@@ -93,7 +93,7 @@ opt_archgaming(){
         git pull
         sudo -E ./gaming.sh
     else
-        git clone https://github.com/anonymouz-trash/archgaming.git
+        git clone https://github.com/xi-Rick/archgaming.git
         cd archgaming
         sudo -E ./gaming.sh
     fi
@@ -136,7 +136,7 @@ opt_nsl(){
         git pull
         ./NonSteamLaunchers.sh
     else
-        git clone https://github.com/anonymouz-trash/NonSteamLaunchers-On-Steam-Deck.git
+        git clone https://github.com/moraroy/NonSteamLaunchers-On-Steam-Deck.git
         cd NonSteamLaunchers-On-Steam-Deck
         ./NonSteamLaunchers.sh
     fi
