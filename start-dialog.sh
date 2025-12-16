@@ -22,6 +22,11 @@ source ./config/opt_methods.sh
 check_4_dialog
 
 while true; do
+  # Check if arch-updater cache directory exists
+  if ! [ -d "~/.cache/arch-updater" ]; then
+    mkdir -p ~/.cache/arch-updater
+  fi
+  cd ${app_pwd}
   CHOICE=$(dialog --clear --colors \
     --backtitle "\Z5 Arch Linux Updater \Zn" \
     --title "\Z6 Main Menu \Zn" \
