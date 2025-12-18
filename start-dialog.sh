@@ -22,6 +22,10 @@ source ./config/opt_methods.sh
 check_4_dialog
 
 while true; do
+  ### Check if a config is available
+  if ! [ -f ~/.config/arch_updater.conf ]; then
+    set_reflector
+  fi
   # Check if arch-updater cache directory exists
   if ! [ -d "~/.cache/arch-updater" ]; then
     mkdir -p ~/.cache/arch-updater
@@ -70,6 +74,9 @@ while true; do
            4 "Layan KDE/GTK theme" \
            5 "WhiteSur KDE/GTK theme" \
            6 "Bibata cursor theme" \
+           7 "OhMyZsh! shell addon" \
+           8 "Fastfetch config" \
+           9 "Tmux config" \
            b "Back" \
            q "Quit" \
          2>&1 >/dev/tty)
@@ -80,6 +87,9 @@ while true; do
          4) cust_layan ;;
          5) cust_whitesur ;;
          6) cust_bibata ;;
+         7) cust_ohmyzsh ;;
+         8) cust_fastfetch ;;
+         9) cust_tmux ;;
          b) continue ;;
          q) exit ;;
          *) continue ;;
@@ -99,6 +109,7 @@ while true; do
            6 "Install additional Windows fonts" \
            7 "Copy wireguard scripts to /usr/local/sbin" \
            8 "Copy fan-profile script to /usr/local/bin" \
+           9 "Install iptables with preconfigured ruleset" \
            b "Back" \
            q "Quit" \
          2>&1 >/dev/tty)
@@ -111,6 +122,7 @@ while true; do
          6) opt_fonts ;;
          7) opt_wireguard-sh ;;
          8) opt_fan-profile-sh ;;
+         9) opt_iptables ;;
          b) continue ;;
          q) exit ;;
          *) continue ;;

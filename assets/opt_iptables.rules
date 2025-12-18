@@ -1,0 +1,48 @@
+*nat
+
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+
+# NAT für VMs über virbr0 ins Internet
+-A POSTROUTING -s 192.168.122.0/24 -o enp2s0 -j MASQUERADE
+-A POSTROUTING -s 192.168.122.0/24 -o wlan0  -j MASQUERADE
+-A POSTROUTING -s 192.168.122.0/24 -o wg0    -j MASQUERADE
+
+COMMIT
+
+*filter
+
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+
+# Loopback
+-A INPUT  -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
+
+# bestehende Verbindungen
+-A INPUT   -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+-A OUTPUT  -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+-A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# virtuelle Umgebung (Host <-> VMs)
+-A INPUT  -i virbr0 -j ACCEPT
+-A OUTPUT -o virbr0 -j ACCEPT
+
+# VMs -> Internet (neu gestartete Verbindungen)
+-A FORWARD -i virbr0 -o enp2s0 -m conntrack --ctstate NEW -j ACCEPT
+-A FORWARD -i virbr0 -o wlan0  -m conntrack --ctstate NEW -j ACCEPT
+-A FORWARD -i virbr0 -o wg0    -m conntrack --ctstate NEW -j ACCEPT
+
+# WireGuard VPN
+-A INPUT  -i wg0 -j ACCEPT
+-A OUTPUT -o wg0 -j ACCEPT
+
+# Internet (nur ausgehend vom Host)
+-A OUTPUT -o enp2s0 -j ACCEPT
+-A OUTPUT -o wlan0  -j ACCEPT
+
+COMMIT
+
