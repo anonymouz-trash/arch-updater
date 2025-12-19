@@ -15,13 +15,5 @@ nocolor='\033[0m'
 # Check current desktop
 de=$XDG_CURRENT_DESKTOP
 
-### Check if dialog is installed, if not it will be installed
-check_4_dialog(){
-    if ! command -v dialog &> /dev/null ; then
-        echo -e "\n${white}[+] ${blue}dialog is not installed, installing...${nocolor}\n"
-        sudo pacman -S dialog --noconfirm
-    fi
-}
-
 # set dialog theme
 export DIALOGRC="$app_pwd/config/dialogrc"
