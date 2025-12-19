@@ -22,3 +22,6 @@ check_4_dialog(){
         sudo pacman -S dialog --noconfirm
     fi
 }
+
+# set dialog theme
+export DIALOGRC="$app_pwd/config/dialogrc"

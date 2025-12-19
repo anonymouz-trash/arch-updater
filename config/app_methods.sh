@@ -76,6 +76,14 @@ set_reflector(){
     fi
 }
 
+### Check if dialog is installed, if not it will be installed
+check_4_dialog(){
+    if ! command -v dialog &> /dev/null ; then
+        echo -e "\n${white}[+] ${blue}dialog is not installed, installing...${nocolor}\n"
+        sudo pacman -S dialog --noconfirm
+    fi
+}
+
 ### Check if yay AUR helper is installed, if not it will be installed
 check_4_yay(){
     if ! command -v yay &> /dev/null ; then
