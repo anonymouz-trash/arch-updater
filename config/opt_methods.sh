@@ -195,3 +195,32 @@ opt_fan-profile-sh(){
     echo
     read -p "Press any key to resume ..."
 }
+
+opt_iptables(){
+    clear
+    echo -e "\n${white}[+] Add preconfigured iptables ruleset script to /etc/iptables...${nocolor}\n"
+    sleep 2
+    if grep -qx "# Do not delete this file or edit this first comment! It is from arch-updater!" /etc/iptables/iptables.ruleset; then
+        read -p 'Iptables ruleset already exists! Do you want to remove it? [y/N] ' input
+        if [[ ${input} == "y" ]]; then
+            sudo systemctl disable --now iptables.service
+            sudo rm -v /etc/iptables/iptables.rules
+            sudo touch /etc/iptables/iptables.rules
+            if pacman -Q iptables &> /dev/null ; then
+                read -p 'Do you also want iptables itself to be removed? [y/N] ' input
+                if [[ ${input} == "y" ]]; then
+                    sudo pacman -Rsnc iptables
+                fi
+            fi
+        fi
+    else
+        if ! pacman -Q iptables &> /dev/null ; then
+            sudo pacman -S iptables
+        fi
+        sudo systemctl disable --now iptables.service
+        sudo cp -v ./assets/opt_iptables.rules /etc/iptables/iptables.rules
+        sudo systemctl enable --now iptables.service
+    fi
+    echo
+    read -p "Press any key to resume ..."
+}

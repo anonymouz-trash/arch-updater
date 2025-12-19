@@ -1,3 +1,4 @@
+# Do not delete this file or edit this first comment! It is from arch-updater!
 *nat
 
 :PREROUTING ACCEPT [0:0]
