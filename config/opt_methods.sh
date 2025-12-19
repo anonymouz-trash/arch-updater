@@ -158,7 +158,7 @@ opt_fonts(){
 
 opt_wireguard-sh(){
     clear
-    echo -e "\n${white}[+] Copy wireguard activate/deactivate script in /usr/local/sbin/wireguard-vpn${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Copy wireguard activate/deactivate script in /usr/local/sbin/wireguard-vpn${nocolor}\n"
     echo -e "${white}    Don't forget to put your wireguard profile in /etc/wireguard as wg0.conf${nocolor}\n"
 	sleep 2
     if [ -f /usr/local/sbin/wireguard-vpn ]; then
@@ -176,13 +176,13 @@ opt_wireguard-sh(){
         sudo cp ./assets/opt_rc-manager.conf /etc/NetworkManager/conf.d/rc-manager.conf
     fi
     echo
-    echo -e "\n${white}[+] Reboot your system to let function openresolv properly${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Reboot your system to let function openresolv properly${nocolor}\n"
     read -p "Press any key to resume ..."
 }
 
 opt_fan-profile-sh(){
     clear
-    echo -e "\n${white}[+] Add show-fan-profile script in /usr/local/bin...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Add show-fan-profile script in /usr/local/bin...${nocolor}\n"
 	sleep 2
     if [ -f /usr/local/bin/show-fan-profile ]; then
         read -p 'Show-fan-profile script already exists! Do you want to remove it? [y/N] ' input
@@ -198,9 +198,9 @@ opt_fan-profile-sh(){
 
 opt_iptables(){
     clear
-    echo -e "\n${white}[+] Add preconfigured iptables ruleset script to /etc/iptables...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Add preconfigured iptables ruleset script to /etc/iptables...${nocolor}\n"
     sleep 2
-    if grep -qx "# Do not delete this file or edit this first comment! It is from arch-updater!" /etc/iptables/iptables.ruleset; then
+    if grep -qx "# Do not delete this file or edit this first comment! It is from arch-updater!" /etc/iptables/iptables.rules; then
         read -p 'Iptables ruleset already exists! Do you want to remove it? [y/N] ' input
         if [[ ${input} == "y" ]]; then
             sudo systemctl disable --now iptables.service
