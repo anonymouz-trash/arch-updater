@@ -53,7 +53,7 @@ cust_reversal(){
         git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git
     fi
     if [[ -d "Reversal-icon-theme" ]] ; then
-        sudo ./Reversal-icon-theme/install.sh -a -d /usr/share/icons
+        sudo ./Reversal-icon-theme/install.sh -a -d /usr/share/icons -t all
         echo
         echo
         echo "Do you want to remove previously downloaded files? "
