@@ -1,0 +1,50 @@
+# anti-virus
+clamav
+clamtk
+
+# gaming
+lutris
+steam
+
+# multimedia
+dragon
+elisa
+mixxx
+spotify
+
+# networking
+dnsutils
+net-tools
+nmap
+
+# office suite
+kaddressbook
+korganizer
+kdepim-addons
+libreoffice-fresh
+libreoffice-fresh-de
+
+# picture editor
+gimp
+gimp-help-de
+
+# system
+7zip
+cdemu-daemon
+kde-cdemu-manager
+kvantum
+partitionmanager
+htop
+mc
+ncdu
+terminus-font
+unrar
+unrar-free
+
+# virtual environment
+bridge-utils
+dnsmasq
+guestfs-tools
+iptables
+libguestfs
+virt-manager

@@ -1,4 +1,10 @@
 # Do not delete this file or edit this first comment! It is from arch-updater!
+
+# This section enables NAT-Masquerading for virtual machines to access the internet
+# * check enabled bridging network
+# * check included network devices
+# * you can safely remove the whole *nat section to COMMIT if you don't use virt-manager
+
 *nat
 
 :PREROUTING ACCEPT [0:0]
@@ -13,37 +19,43 @@
 
 COMMIT
 
+# This section describes the actual filter rules.
+# * check that you only allow your active network devices
+# * check network device names
+
 *filter
 
+# Implicit deny from-any to-any (whitelisting mode)
 :INPUT DROP [0:0]
 :FORWARD DROP [0:0]
 :OUTPUT DROP [0:0]
 
-# Loopback
+# Loopback (important for local services like printing with cups)
 -A INPUT  -i lo -j ACCEPT
 -A OUTPUT -o lo -j ACCEPT
 
-# bestehende Verbindungen
+# Enable "Stateful Inspection"
 -A INPUT   -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 -A OUTPUT  -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
-# virtuelle Umgebung (Host <-> VMs)
+# Allow all traffic within your virtual environment (Host <-> VMs)
 -A INPUT  -i virbr0 -j ACCEPT
 -A OUTPUT -o virbr0 -j ACCEPT
 
-# VMs -> Internet (neu gestartete Verbindungen)
+# Allow VMs connecting to the Internet (for new connections)
 -A FORWARD -i virbr0 -o enp2s0 -m conntrack --ctstate NEW -j ACCEPT
 -A FORWARD -i virbr0 -o wlan0  -m conntrack --ctstate NEW -j ACCEPT
 -A FORWARD -i virbr0 -o wg0    -m conntrack --ctstate NEW -j ACCEPT
 
-# WireGuard VPN
+# Allow WireGuard VPN connections
 -A INPUT  -i wg0 -j ACCEPT
 -A OUTPUT -o wg0 -j ACCEPT
 
-# Internet (nur ausgehend vom Host)
+# Allow traffic to the Internet (also blocks all incoming traffic from the internet)
 -A OUTPUT -o enp2s0 -j ACCEPT
 -A OUTPUT -o wlan0  -j ACCEPT
 
+# Apply the rules
 COMMIT
 

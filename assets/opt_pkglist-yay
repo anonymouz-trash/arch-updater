@@ -1,10 +1,19 @@
+# printer driver (canon)
 cnrdrvcups-lb
 jbigkit
 libxml2-legacy
+
+# AppImage manager
 gearlever
-mkinitcpio-firmware
+
+# gaming compatibility
 proton-ge-custom-bin
 protontricks-git
 sof-firmware
+
+# multimedia
 mp3directcut
 mp3tag
+
+# system
+mkinitcpio-firmware

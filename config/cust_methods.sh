@@ -260,54 +260,70 @@ cust_fastfetch(){
     clear
     echo -e "\n${white}[+] ${blue}Installing / Removing fastfetch...${nocolor}\n"
 	sleep 2
-	if [ "$(pacman -Qe bash | wc -l)" -ge 1 ] | [ "$(pacman -Qe bash | wc -l)" -ge 1 ] ; then
+	if [ "$(${pacman_cmd} -Qe bash | wc -l)" -ge 1 ] | [ "$(${pacman_cmd} -Qe bash | wc -l)" -ge 1 ] ; then
         echo -e "\n${white}[+] ${cyan}Neither BASH or ZSH are installed, aborting...${nocolor}\n"
         sleep 2
     else
-        if [ "$(pacman -Qe fastfetch | wc -l)" -ge 1 ]; then
+        if [ "$(${pacman_cmd} -Qe fastfetch | wc -l)" -ge 1 ]; then
             read -p "Already installed! Do you want to (r)emove it? [r/N] " input
             if [[ ${input} == "r" ]]; then
-                sudo pacman -Rsnc fastfetch
+                sudo ${pacman_cmd} -Rsnc fastfetch
                 rm -rf ~/.config/fastfetch
                 if [[ ${SHELL,,} =~ "zsh" ]]; then
                     grep -v 'echo ""'  ~/.zshrc > ~/.tmp_user_zshrc
                     sudo mv ~/.tmp_user_zshrc  ~/.zshrc
-                    grep -v "myarch.jsonc"  ~/.zshrc > ~/.tmp_user_zshrc
+                    grep -v "customcfg.jsonc"  ~/.zshrc > ~/.tmp_user_zshrc
                     sudo mv ~/.tmp_user_zshrc  ~/.zshrc
 
                     grep -v 'echo ""' /root/.zshrc > ~/.tmp_root_zshrc
                     sudo mv ~/.tmp_root_zshrc /root/.zshrc
-                    grep -v "myarch.jsonc" /root/.zshrc > ~/.tmp_root_zshrc
+                    grep -v "customcfg.jsonc" /root/.zshrc > ~/.tmp_root_zshrc
                     sudo mv ~/.tmp_root_zshrc /root/.zshrc
                 elif [[ ${SHELL,,} =~ "bash" ]]; then
                     grep -v 'echo ""'  ~/.bashrc > ~/.tmp_user_bashrc
                     sudo mv ~/.tmp_user_bashrc  ~/.bashrc
-                    grep -v "myarch.jsonc"  ~/.bashrc > ~/.tmp_user_bashrc
+                    grep -v "customcfg.jsonc"  ~/.bashrc > ~/.tmp_user_bashrc
                     sudo mv ~/.tmp_user_bashrc  ~/.bashrc
 
                     grep -v 'echo ""' /root/.bashrc > ~/.tmp_root_bashrc
                     sudo mv ~/.tmp_root_bashrc /root/.bashrc
-                    grep -v "myarch.jsonc" /root/.bashrc > ~/.tmp_root_bashrc
+                    grep -v "customcfg.jsonc" /root/.bashrc > ~/.tmp_root_bashrc
                     sudo mv ~/.tmp_root_bashrc /root/.bashrc
                 fi
             fi
         else
-            sudo pacman -S fastfetch
+            sudo ${pacman_cmd} -S fastfetch
             cd assets
             mkdir ~/.config/fastfetch
-            cp cust_myarch.jsonc ~/.config/fastfetch/
+            if [[ "${system_os}" == "SteamOS" ]]; then
+                cp cust_steamos.jsonc ~/.config/fastfetch/customcfg.jsonc
+            elif [[ "${system_os}" == "EndeavourOS" ]]; then
+                cp cust_endeavouros.jsonc ~/.config/fastfetch/customcfg.jsonc
+            elif [[ "${system_os}" == "CachyOS" ]]; then
+                cp cust_cachyos.jsonc ~/.config/fastfetch/customcfg.jsonc
+            elif [[ "${system_os}" == "Garuda Linux" ]]; then
+                cp cust_garuda.jsonc ~/.config/fastfetch/customcfg.jsonc
+            elif [[ "${system_os}" == "Manjaro" ]]; then
+                cp cust_majaro.jsonc ~/.config/fastfetch/customcfg.jsonc
+            elif [[ "${system_os}" == "Arch Linux" ]]; then
+                cp cust_arch.jsonc ~/.config/fastfetch/customcfg.jsonc
+            fi
             if [[ ${SHELL,,} =~ "zsh" ]]; then
                 echo "${white}Identified standard shell: ${blue}ZSH${nocolor}"
                 echo 'echo ""' >> ~/.zshrc
-                echo "fastfetch -c ~/.config/fastfetch/cust_myarch.jsonc" >> ~/.zshrc
+                echo "fastfetch -c ~/.config/fastfetch/customcfg.jsonc" >> ~/.zshrc
+                echo 'echo ""' >> ~/.zshrc
                 echo 'echo ""' | sudo tee -a /root/.zshrc > /dev/null
-                echo "fastfetch -c /home/${USER}/.config/fastfetch/cust_myarch.jsonc" | sudo tee -a /root/.zshrc > /dev/null
+                echo "fastfetch -c /home/${USER}/.config/fastfetch/customcfg.jsonc" | sudo tee -a /root/.zshrc > /dev/null
+                echo 'echo ""' | sudo tee -a /root/.zshrc > /dev/null
             elif [[ ${SHELL,,} =~ "bash" ]]; then
                 echo "${white}Identified standard shell: ${blue}BASH${nocolor}"
                 echo 'echo ""' >> ~/.bashrc
-                echo "fastfetch -c ~/.config/fastfetch/cust_myarch.jsonc" >> ~/.bashrc
+                echo "fastfetch -c ~/.config/fastfetch/customcfg.jsonc" >> ~/.bashrc
+                echo 'echo ""' >> ~/.bashrc
                 echo 'echo ""' | sudo tee -a /root/.bashrc > /dev/null
-                echo "fastfetch -c /home/${USER}/.config/fastfetch/cust_myarch.jsonc" | sudo tee -a /root/.bashrc > /dev/null
+                echo "fastfetch -c /home/${USER}/.config/fastfetch/customcfg.jsonc" | sudo tee -a /root/.bashrc > /dev/null
+                echo 'echo ""' | sudo tee -a /root/.bashrc > /dev/null
             fi
         fi
     fi
@@ -319,14 +335,14 @@ cust_tmux(){
     clear
     echo -e "\n${white}[+] ${blue}Installing / Removing tmux...${nocolor}\n"
 	sleep 2
-	if [ "$(pacman -Qe tmux | wc -l)" -ge 1 ] && [ -f ~/.tmux.conf ] ; then
+	if [ "$(${pacman_cmd} -Qe tmux | wc -l)" -ge 1 ] && [ -f ~/.tmux.conf ] ; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
         if [[ ${input} == "r" ]]; then
-            sudo pacman -Rsnc tmux
+            sudo ${pacman_cmd} -Rsnc tmux
             rm -rf ~/.tmux.conf
         fi
     else
-        sudo pacman -S tmux
+        sudo ${pacman_cmd} -S tmux
         cp ./assets/cust_tmux.conf ~/.tmux.conf
     fi
     echo
@@ -335,7 +351,7 @@ cust_tmux(){
 
 cust_ohmyzsh(){
     clear
-    if [ "$(pacman -Qe zsh | wc -l)" -ge 1 ]; then
+    if [ "$(${pacman_cmd} -Qe zsh | wc -l)" -ge 1 ]; then
 		echo "Install Oh My ZSH! for logged in user"
 		sleep 1
 		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

@@ -5,14 +5,14 @@ opt_chaotic(){
     echo -e "\n${white}[+] ${blue}Installing or updating Chaotic AUR repository...${nocolor}\n"
 	sleep 2
 
-    if [ "$(pacman -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
+    if [ "$(${pacman_cmd} -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
         if [[ ${input} == "r" ]]; then
-            sudo pacman -Rsnc chaotic-keyring chaotic-mirrorlist
-            sudo sed -i 's/\[chaotic-aur\]//g' /etc/pacman.conf
-            sudo sed -i 's/Include = \/etc\/pacman\.d\/chaotic-mirrorlist//g' /etc/pacman.conf
+            sudo ${pacman_cmd} -Rsnc chaotic-keyring chaotic-mirrorlist
+            sudo sed -i 's/\[chaotic-aur\]//g' ${PACMAN_CONF}
+            sudo sed -i 's/Include = \/etc\/pacman\.d\/chaotic-mirrorlist//g' ${PACMAN_CONF}
         fi
-        sudo pacman -Sy
+        sudo ${pacman_cmd} -Sy
         return
     else
         echo -e "${blue}Please copy the key after\n\n${magenta}pacman-key --recv-key${blue} or ${magenta}pacman-key --lsign-key\n\n${blue}on the next webpage and paste it in here.${nocolor}\n"
@@ -21,10 +21,10 @@ opt_chaotic(){
         read -p "Enter key: " key_keyserver
         sudo pacman-key --recv-key ${key_keyserver} --keyserver keyserver.ubuntu.com
 		sudo pacman-key --lsign-key ${key_keyserver}
-		sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-		echo '[chaotic-aur]' | sudo tee -a /etc/pacman.conf > /dev/null
-		echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf > /dev/null
-		sudo pacman -Sy
+		sudo ${pacman_cmd} -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+		echo '[chaotic-aur]' | sudo tee -a ${PACMAN_CONF} > /dev/null
+		echo 'Include = ${PACMAN_DIR}/chaotic-mirrorlist' | sudo tee -a ${PACMAN_CONF} > /dev/null
+		sudo ${pacman_cmd} -Sy
     fi
     echo
     read -p "Press any key to resume ..."
@@ -35,7 +35,7 @@ opt_cachyos(){
     echo -e "\n${white}[+] ${blue}Installing or updating CachyOS repository...${nocolor}\n"
     sleep 2
     cd ~/.cache/arch-updater
-    if [ "$(pacman -Qe cachyos-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
+    if [ "$(${pacman_cmd} -Qe cachyos-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
         if [[ ${input} == "r" ]]; then
             sudo ./cachyos-repo/cachyos-repo.sh --remove
@@ -57,27 +57,27 @@ opt_packages(){
 
     read -p 'Do you want to edit pacman package list before installing? [y/N] ' input
     if [[ ${input} == "y" ]]; then
-        nano ./assets/opt_pkglist-pacman.txt
+        nano ./assets/opt_pkglist-pacman
     fi
-    sudo pacman -S --needed - < ./assets/opt_pkglist-pacman.txt
+    sudo ${pacman_cmd} -S --needed - < <(grep -Ev '^[[:space:]]*(#|$)' ./assets/opt_pkglist-pacman)
 
     read -p 'Do you want to install additional yay packages? [y/N] ' input
     if [[ ${input} == "y" ]]; then
         check_4_yay
         read -p 'Do you want to edit yay package list before installing? [y/N] ' input
         if [[ ${input} == "y" ]]; then
-            nano ./assets/opt_pkglist-yay.txt
+            nano ./assets/opt_pkglist-yay
         fi
-        yay -S --needed - < ./assets/opt_pkglist-yay.txt
+        yay -S --needed - < <(grep -Ev '^[[:space:]]*(#|$)' ./assets/opt_pkglist-yay)
     fi
 
     read -p 'Do you want to install additional CachyOS packages? [y/N] ' input
     if [[ ${input} == "y" ]]; then
         read -p 'Do you want to edit CachyOS package list before installing? [y/N] ' input
         if [[ ${input} == "y" ]]; then
-            nano ./assets/opt_pkglist-cachyos.txt
+            nano ./assets/opt_pkglist-cachyos
         fi
-        sudo pacman -S --needed - < ./assets/opt_pkglist-cachyos.txt
+        sudo ${pacman_cmd} -S --needed - < <(grep -Ev '^[[:space:]]*(#|$)' ./assets/opt_pkglist-cachyos)
     fi
     echo
     read -p "Press any key to resume ..."
@@ -97,12 +97,12 @@ opt_archgaming(){
         cd archgaming
         sudo -E ./gaming.sh
     fi
-    if ! pacman -Q gamescope &> /dev/null ; then
+    if ! ${pacman_cmd} -Q gamescope &> /dev/null ; then
         echo
         read -p "Do you want to install Valve's upscaler gamescope? [y/N] " input
         echo
         if [[ ${input} == "y" ]]; then
-            sudo pacman -S --needed gamescope
+            sudo ${pacman_cmd} -S --needed gamescope
         fi
     fi
     echo
@@ -166,11 +166,11 @@ opt_wireguard-sh(){
         if [[ ${input} == "y" ]]; then
             sudo rm -v /usr/local/sbin/wireguard-vpn
             sudo rm -v /etc/NetworkManager/conf.d/rc-manager.conf
-            sudo pacman -Rsnc openresolv wireguard-tools
+            sudo ${pacman_cmd} -Rsnc openresolv wireguard-tools
         fi
     else
-        if ! pacman -Q openresolv wireguard-tools &> /dev/null ; then
-            sudo pacman -S openresolv wireguard-tools
+        if ! ${pacman_cmd} -Q openresolv wireguard-tools &> /dev/null ; then
+            sudo ${pacman_cmd} -S openresolv wireguard-tools
         fi
         sudo cp ./assets/opt_wireguard-vpn.sh /usr/local/sbin/wireguard-vpn
         sudo cp ./assets/opt_rc-manager.conf /etc/NetworkManager/conf.d/rc-manager.conf
@@ -206,21 +206,51 @@ opt_iptables(){
             sudo systemctl disable --now iptables.service
             sudo rm -v /etc/iptables/iptables.rules
             sudo touch /etc/iptables/iptables.rules
-            if pacman -Q iptables &> /dev/null ; then
+            if ${pacman_cmd} -Q iptables &> /dev/null ; then
                 read -p 'Do you also want iptables itself to be removed? [y/N] ' input
                 if [[ ${input} == "y" ]]; then
-                    sudo pacman -Rsnc iptables
+                    sudo ${pacman_cmd} -Rsnc iptables
                 fi
             fi
         fi
     else
-        if ! pacman -Q iptables &> /dev/null ; then
-            sudo pacman -S iptables
+        if ! ${pacman_cmd} -Q iptables &> /dev/null ; then
+            sudo ${pacman_cmd} -S iptables
         fi
         sudo systemctl disable --now iptables.service
+        read -p 'Do you want to edit iptables rulelist before installing? [y/N] ' input
+        if [[ ${input} == "y" ]]; then
+            nano ./assets/opt_iptables.rules
+        fi
         sudo cp -v ./assets/opt_iptables.rules /etc/iptables/iptables.rules
         sudo systemctl enable --now iptables.service
     fi
+    echo
+    read -p "Press any key to resume ..."
+}
+
+opt_sd_pacman_normal(){
+    clear
+    echo -e "\n${white}[+] ${blue}Enabling pacman ${purple}system-wide normally${blue}...${nocolor}\n"
+    sleep 2
+    sudo steamos-readonly disable
+    if [ -d ${PACMAN_DIR}/gnupg ]; then
+        sudo rm -rfv ${PACMAN_DIR}/gnupg
+    fi
+    sudo pacman-key --init
+    sudo pacman-key --populate archlinux
+    sudo pacman-key --populate holo
+    sudo ${pacman_cmd} -Syu
+    #sudo steamos-readonly enable
+    echo
+    read -p "Press any key to resume ..."
+}
+
+opt_sd_pacman_userspace(){
+    clear
+    echo -e "\n${white}[+] ${blue}Enabling pacman in ${purple}userspace${blue}...${nocolor}\n"
+    sleep 2
+    sudo ./assets/opt_sd_pacman_userspace.sh
     echo
     read -p "Press any key to resume ..."
 }

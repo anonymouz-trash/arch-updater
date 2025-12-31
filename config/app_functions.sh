@@ -12,8 +12,41 @@ red='\033[1;31m'
 white='\033[1;37m'
 nocolor='\033[0m'
 
-# Check current desktop
+# check current desktop
 de=$XDG_CURRENT_DESKTOP
 
+# check current linux system
+if grep -q "steamos" /etc/os-release; then
+    system_os="SteamOS"
+elif grep -q "Arch Linux" /etc/os-release; then
+    system_os="Arch Linux"
+elif grep -q "CachyOS" /etc/os-release; then
+    system_os="CachyOS"
+elif grep -q "EndeavourOS" /etc/os-release; then
+    system_os="EndeavourOS"
+elif grep -q "Manjaro" /etc/os-release; then
+    system_os="Manjaro"
+elif grep -q "Garuda" /etc/os-release; then
+    system_os="Garuda Linux"
+else
+    system_os="Something else (use at your own risk)"
+fi
+
 # set dialog theme
-export DIALOGRC="$app_pwd/config/dialogrc"
+export DIALOGRC="$app_pwd/config/app_dialogrc"
+
+# check if pacman_ alias exists (steamdeck)
+if alias pacman_ &>/dev/null; then
+    # Set up main variables
+    USERROOT="/home/deck/.root"
+    PACMAN_CONF="${USERROOT}/etc/pacman.conf"
+    PACMAN_DIR="${USERROOT}/etc/pacman.d"
+    GPG_DIR="${USERROOT}/etc/pacman.d/gnupg"
+    pacman_cmd="pacman_ "
+    packey_cmd="pacman-key --gpgdir "${GPG_DIR}""
+else
+    PACMAN_CONF="/etc/pacman.conf"
+    PACMAN_DIR="/etc/pacman.d"
+    pacman_cmd="pacman "
+    packey_cmd="pacman-key "
+fi

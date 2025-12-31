@@ -11,7 +11,15 @@ As you know: No backup, no mercy. ;)
 THIS IS WORK IN PROGRESS!!
 
 I'm not responsible for any damage and I highly recommend to see through the entire project/code before using it!
-The whole project is adjusted to my needs.
+The whole project is adjusted to my needs. As Arch-user I think you know what you're doing. :smile:
+
+# Features
+* easy to use repeating tasks, like updating, cleaning and installing packages
+* annoying installation and configuration things when reinstalling the entire system
+* included the amazing Non-Steam-Launchers script for Desktop and Steamdeck
+* extra Steamdeck optimization section
+* error detection and prevention depending on what system you are (hopefully) :grin:
+* when things are more customizable, like packages to install, the script asks
 
 # Prerequisites
 * dialog    (The menu itself)
@@ -31,12 +39,11 @@ Just clone the repo and run it like below at any preferred location you want.
 
 > Hint: Configure a global hotkey in your system to use it.
 
-> Info: This script and its core functions, like updating, cleaning and installing packages, can used on nearly all Arch-based distros. If you are using Hyprland please read `Clean Arch`-Section, because during the process you get asked for cleaning `.cache`-directory and there maybe cached things that would be deleted like wallpapers. 
-
 # Changelog
 > Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
 
-* Add:    preconfigured iptables ruleset (`check ./assets/opt_iptables.rules`)
+* Add:    Steamdeck optimization section :grin:
+* Add:    preconfigured iptables ruleset (`check ./assets/opt_iptables.rules` :warning:)
 * Add:    changed TUI to dialog with custom theming
 * Misc:   Code cleanup
 

@@ -1,0 +1,63 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "Garuda_small",
+        "type": "auto",
+        "color":
+        {
+            "1": "blue"
+        }
+    },
+    "display": {
+        "size": {
+            "binaryPrefix": "si"
+	}
+    },
+    "modules": [
+        {        
+           "keyColor": "magenta",
+           "type": "host"
+        },
+        {        
+           "keyColor": "magenta",
+           "type": "cpu"
+        },
+        {        
+           "keyColor": "magenta",
+           "type": "os"
+        },
+        {        
+           "keyColor": "magenta",
+           "type": "kernel"
+        },
+        {        
+           "keyColor": "magenta",
+           "type": "uptime"
+        },
+        {        
+           "keyColor": "magenta",
+           "type": "de"
+        },
+        {        
+           "keyColor": "magenta",
+           "type": "shell"
+        },
+        {        
+           "keyColor": "magenta",
+           "type": "memory"
+        },
+        {
+            "type": "disk",
+            "folders": "/:/home:/boot:/efi:/run/media/tommy/_gamez:/run/media/tommy/share-local",
+            "keyColor": "magenta"
+        },
+        {        
+           "keyColor": "magenta",
+           "type": "localip"
+        },
+        {        
+           "keyColor": "magenta",
+           "type": "publicip"
+        }
+    ]
+}

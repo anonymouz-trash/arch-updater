@@ -80,7 +80,7 @@ set_reflector(){
 check_4_dialog(){
     if ! command -v dialog &> /dev/null ; then
         echo -e "\n${white}[+] ${blue}dialog is not installed, installing...${nocolor}\n"
-        sudo pacman -S dialog --noconfirm
+        sudo ${pacman_cmd} -S dialog --noconfirm
     fi
 }
 
@@ -88,12 +88,16 @@ check_4_dialog(){
 check_4_yay(){
     if ! command -v yay &> /dev/null ; then
         echo -e "\n${white}[+] ${blue}Yay is not installed, installing...${nocolor}\n"
-        sudo pacman -S build-essential git
-        git clone https://aur.archlinux.org/yay.git
-        cd yay
-        makepkg -si
-        cd ..
-        rm -rf yay
+        if [ "$(${pacman_cmd} -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
+            sudo ${pacman_cmd} -S yay
+        else
+            sudo ${pacman_cmd} -S build-essential git
+            git clone https://aur.archlinux.org/yay.git
+            cd yay
+            makepkg -si
+            cd ..
+            rm -rf yay
+        fi
     fi
 }
 
@@ -111,7 +115,7 @@ update_pacman(){
 	clear
 	echo -e "\n${white}[+] ${blue}Updating Arch Linux with pacman... ${nocolor}\n"
 	sleep 2
-	sudo pacman -Syyu
+	sudo ${pacman_cmd} -Syyu
 	echo
     read -p "Press any key to resume ..."
 }
@@ -121,13 +125,13 @@ update_mirrorlist(){
 	echo -e "\n${white}[+] ${blue}Updating Arch Linux mirrorlist with reflector... ${nocolor}\n"
 	sleep 2
 	if ! command -v reflector &> /dev/null ; then
-        sudo pacman -S reflector rsync
+        sudo ${pacman_cmd} -S reflector rsync
         sudo systemctl enable reflector.timer --now
     fi
-    sudo reflector -c ${country} -a ${age} -p ${protocol} -l ${latest} --sort rate --ipv4 --verbose --save /etc/pacman.d/mirrorlist
-    sudo pacman -S archlinux-keyring
-    if [ "$(pacman -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
-        sudo pacman -S chaotic-keyring
+    sudo reflector -c ${country} -a ${age} -p ${protocol} -l ${latest} --sort rate --ipv4 --verbose --save ${PACMAN_DIR}/mirrorlist
+    sudo ${pacman_cmd} -S archlinux-keyring
+    if [ "$(${pacman_cmd} -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
+        sudo ${pacman_cmd} -S chaotic-keyring
     fi
     echo
     read -p "Press any key to resume ..."
