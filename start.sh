@@ -157,7 +157,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
              5 "Launch Non-Steam-Launchers script" \
              6 "Launch Decky Loader script" \
              7 "Install iptables with preconfigured ruleset" \
-             8 "Install Fastfetch and apply custom config"
+             8 "Install Fastfetch and apply custom config" \
              b "Back" \
              q "Quit" \
            2>&1 >/dev/tty)
