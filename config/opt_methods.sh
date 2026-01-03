@@ -9,8 +9,8 @@ opt_chaotic(){
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
         if [[ ${input} == "r" ]]; then
             sudo ${pacman_cmd} -Rsnc chaotic-keyring chaotic-mirrorlist
-            sudo sed -i 's/\[chaotic-aur\]//g' ${PACMAN_CONF}
-            sudo sed -i 's/Include = \/etc\/pacman\.d\/chaotic-mirrorlist//g' ${PACMAN_CONF}
+            sudo sed -i "s/\[chaotic-aur\]//g" ${PACMAN_CONF}
+            sudo sed -i "s/Include = ${PACMAN_DIR}\/chaotic-mirrorlist//g" ${PACMAN_CONF}
         fi
         sudo ${pacman_cmd} -Sy
         return
@@ -22,8 +22,8 @@ opt_chaotic(){
         sudo pacman-key --recv-key ${key_keyserver} --keyserver keyserver.ubuntu.com
 		sudo pacman-key --lsign-key ${key_keyserver}
 		sudo ${pacman_cmd} -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-		echo '[chaotic-aur]' | sudo tee -a ${PACMAN_CONF} > /dev/null
-		echo 'Include = ${PACMAN_DIR}/chaotic-mirrorlist' | sudo tee -a ${PACMAN_CONF} > /dev/null
+		echo "[chaotic-aur]" | sudo tee -a ${PACMAN_CONF} > /dev/null
+		echo "Include = ${PACMAN_DIR}/chaotic-mirrorlist" | sudo tee -a ${PACMAN_CONF} > /dev/null
 		sudo ${pacman_cmd} -Sy
     fi
     echo

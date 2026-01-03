@@ -246,7 +246,7 @@ cust_bibata(){
     if [ "$(yay -Qe bibata-cursor-theme-bin | wc -l)" -ge 1 ]; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
         if [[ ${input} == "r" ]]; then
-            yay -Rsnc bibata-cursor-theme-bin
+            yay -Rsnc bibata-cursor-theme
             return
         fi
     else

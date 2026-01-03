@@ -91,7 +91,7 @@ check_4_yay(){
         if [ "$(${pacman_cmd} -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
             sudo ${pacman_cmd} -S yay
         else
-            sudo ${pacman_cmd} -S build-essential git
+            sudo ${pacman_cmd} -S fakeroot debugedit git
             git clone https://aur.archlinux.org/yay.git
             cd yay
             makepkg -si
