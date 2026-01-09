@@ -39,35 +39,33 @@ while true; do
     --backtitle "\Z5 Arch Linux Updater \Zn" \
     --title "\Z6 Main Menu \Zn" \
     --menu "Choose an option:" 20 70 12 \
-      1 "Update Arch Linux (yay)" \
-      2 "Update Arch Linux (pacman)" \
-      3 "Update Mirrorlist (reflector)" \
-      4 "Update debtap database" \
-      5 "Clean Arch Linux" \
-      6 "All above at once" \
-      7 ">> Customization submenu" \
-      8 ">> Optimizations & Tweaks submenu" \
-      9 ">> Steamdeck optimization submenu" \
-      10 "Settings / Environment" \
-      11 "Credits" \
-      12 "Check for updates (script)" \
+      1 "Update Arch Linux (yay/pacman + flatpaks)" \
+      2 "Update Mirrorlist (reflector)" \
+      3 "Update debtap database" \
+      4 "Clean Arch Linux" \
+      5 "All above at once" \
+      6 ">> Customization submenu" \
+      7 ">> Optimizations & Tweaks submenu" \
+      8 ">> Steamdeck optimization submenu" \
+      9 "Settings / Environment" \
+      10 "Credits" \
+      11 "Check for updates (script)" \
       q "Quit" \
     2>&1 >/dev/tty)
 
   clear
   case "$CHOICE" in
-    1) update_yay ;;
-    2) update_pacman ;;
-    3) update_mirrorlist ;;
-    4) update_debtap ;;
-    5) clean_arch ;;
-    6)
+    1) update_arch ;;
+    2) update_mirrorlist ;;
+    3) update_debtap ;;
+    4) clean_arch ;;
+    5)
        update_mirrorlist
        update_yay
        update_debtap
        clean_arch
        ;;
-    7)
+    6)
        if ! [[ "${system_os}" == "SteamOS" ]]; then
            # Beispiel Untermenü: Customization
            SUB=$(dialog --clear --colors \
@@ -105,7 +103,7 @@ while true; do
 This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
        fi
        ;;
-    8)
+    7)
        if ! [[ "${system_os}" == "SteamOS" ]]; then
            # Submenu: Optimizations & Tweaks — analog
            SUB=$(dialog --clear --colors \
@@ -143,7 +141,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
 This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
        fi
        ;;
-    9)
+    8)
        if [[ "${system_os}" == "SteamOS" ]]; then
            # Submenu: Steamdeck optimization submenu
            SUB=$(dialog --clear --colors \
@@ -196,7 +194,7 @@ Read \Z5https://www.jeromeswannack.com/projects/2024/11/29/steamdeck-userspace-p
 This section is \Z5disabled\Zn for systems other than Steamdeck!\n\n" 10 65
        fi
       ;;
-    10)
+    9)
        # Settings / Environment submenu
        SUB=$(dialog --clear --colors \
          --backtitle "\Z5 Arch Linux Updater \Zn" \
@@ -227,7 +225,7 @@ This section is \Z5disabled\Zn for systems other than Steamdeck!\n\n" 10 65
          *) continue ;;
        esac
        ;;
-    11)
+    10)
        # Credits — z. B. msgbox
        dialog --clear --colors --msgbox "Credits & Thanks:\n\n \
 \Z5Arch Silence GRUB Theme\Zn\n \
@@ -249,7 +247,7 @@ This section is \Z5disabled\Zn for systems other than Steamdeck!\n\n" 10 65
 \Z5Steam Deck hacking: Setting up user space pacman\Zn\n
    https://www.jeromeswannack.com/projects/2024/11/29/steamdeck-userspace-pacman.html\n" 35 95
        ;;
-    12)
+    11)
        git pull 2>&1 | dialog --title "<[ Running script update... ]>" --colors --progressbox 20 70
        sleep 5
        dialog --clear --colors --msgbox "If script got updated please restart the script." 6 60

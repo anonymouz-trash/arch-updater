@@ -50,3 +50,17 @@ else
     pacman_cmd="pacman "
     packey_cmd="pacman-key "
 fi
+
+# check 4 yay
+if ! command -v yay &> /dev/null ; then
+    app_yay=0
+else
+    app_yay=1
+fi
+
+# check 4 flatpak
+if ! command -v flatpak &> /dev/null ; then
+    app_flatpak=0
+else
+    app_flatpak=1
+fi

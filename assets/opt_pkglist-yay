@@ -9,6 +9,7 @@ gearlever
 # gaming compatibility
 proton-ge-custom-bin
 protontricks-git
+sgdboop-bin
 sof-firmware
 
 # multimedia
@@ -16,4 +17,5 @@ mp3directcut
 mp3tag
 
 # system
-mkinitcpio-firmware
+envycontrol
+# mkinitcpio-firmware

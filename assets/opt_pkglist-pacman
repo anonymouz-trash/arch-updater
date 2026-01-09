@@ -5,10 +5,18 @@ clamtk
 # gaming
 lutris
 steam
+umu-launcher
+vkd3d
+lib32-vkd3d
 
 # multimedia
 dragon
 elisa
+fluidsynth
+gst-plugins-bad
+gst-plugins-good
+gst-plugins-ugly
+gwenview
 mixxx
 spotify
 
@@ -23,6 +31,7 @@ korganizer
 kdepim-addons
 libreoffice-fresh
 libreoffice-fresh-de
+okular
 
 # picture editor
 gimp
@@ -38,6 +47,7 @@ htop
 mc
 ncdu
 terminus-font
+unace
 unrar
 unrar-free
 

@@ -63,7 +63,9 @@ opt_packages(){
 
     read -p 'Do you want to install additional yay packages? [y/N] ' input
     if [[ ${input} == "y" ]]; then
-        check_4_yay
+        if { app_yay -eq 0 }; then
+            install_yay
+        fi
         read -p 'Do you want to edit yay package list before installing? [y/N] ' input
         if [[ ${input} == "y" ]]; then
             nano ./assets/opt_pkglist-yay
@@ -149,7 +151,9 @@ opt_fonts(){
     clear
     echo -e "\n${white}[+] ${blue}Installing additional Windows fonts...${nocolor}\n"
 	sleep 2
-    check_4_yay
+    if { app_yay -eq 0 }; then
+        install_yay
+	fi
     yay -S --needed ttf-ms-win10-auto
     yay -S --needed ttf-ms-win11-auto
     echo

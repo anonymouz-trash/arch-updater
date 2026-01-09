@@ -84,8 +84,8 @@ check_4_dialog(){
     fi
 }
 
-### Check if yay AUR helper is installed, if not it will be installed
-check_4_yay(){
+### install yay AUR helper
+install_yay(){
     if ! command -v yay &> /dev/null ; then
         echo -e "\n${white}[+] ${blue}Yay is not installed, installing...${nocolor}\n"
         if [ "$(${pacman_cmd} -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
@@ -98,25 +98,26 @@ check_4_yay(){
             cd ..
             rm -rf yay
         fi
+        echo -e "\n${white}[+] ${blue}Yay should be installed. Please run operation again...${nocolor}\n"
     fi
 }
 
-update_yay(){
+update_arch(){
     clear
-    echo -e "\n${white}[+] ${blue}Updating Arch Linux with yay... ${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Updating Arch Linux... ${nocolor}\n"
     sleep 2
-	check_4_yay
-    yay -Syyu
+	if [[ ${app_yay} == "1" ]]; then
+        echo -e "\n${white}[+] ${blue}...using yay ${nocolor}\n"
+        yay -Syu
+    else
+        echo -e "\n${white}[+] ${blue}...using pacman ${nocolor}\n"
+        sudo pacman -Syu
+    fi
+    if [[ ${app_flatpak} == "1" ]]; then
+        echo -e "\n${white}[+] ${blue}...updating flatpaks ${nocolor}\n"
+        flatpak update
+    fi
     echo
-    read -p "Press any key to resume ..."
-}
-
-update_pacman(){
-	clear
-	echo -e "\n${white}[+] ${blue}Updating Arch Linux with pacman... ${nocolor}\n"
-	sleep 2
-	sudo ${pacman_cmd} -Syyu
-	echo
     read -p "Press any key to resume ..."
 }
 
@@ -140,7 +141,6 @@ update_mirrorlist(){
 clean_arch(){
     clear
 	echo -e "\n${white}[+] ${blue}Cleaning Arch Linux...${nocolor}\n"
-	check_4_yay
     cache_size=$(du -sh ~/.cache)
     paccache_size=$(du -sh /var/cache/pacman/pkg)
     sleep 2
@@ -151,17 +151,25 @@ clean_arch(){
 		echo
         read -p 'Do you want to clear all (y) cached packages or just the ones that are not installed (N)? [y/N] ' input
 		if [[ ${input} == "y" ]]; then
-			yay -Scc
+			if { app_yay -eq 1 }; then
+                yay -Scc
+            else
+                sudo pacman -Scc
+            fi
 		else
-			yay -Sc
+            if { app_yay -eq 1 }; then
+                yay -Sc
+            else
+                sudo pacman -Sc
+            fi
 		fi
-		unused=$(yay -Qtdq)
+		unused=$(pacman -Qtdq)
 		if [ "$(echo ${unused} | wc -l)" -ge 1 ]; then
             echo -e "\n${cyan} This is a list of packages not used by anyone... ${nocolor}\n"
             echo -e "${red}${unused}${nocolor}\n"
             read -p 'Do you want to remove these packages? [y/N] ' input
             if [[ ${input} == "y" ]]; then
-                yay -Rns $(yay -Qtdq)
+                sudo pacman -Rnsc $(yay -Qtdq)
             fi
         fi
 	fi
@@ -190,7 +198,9 @@ update_debtap(){
     clear
     echo -e "\n${white}[+] ${blue}Installing or updating debtap...${nocolor}\n"
 	sleep 2
-    check_4_yay
+	if { app_yay -eq 0 }; then
+        install_yay
+	fi
 	if ! command -v debtap &> /dev/null ; then
 		yay -S debtap
 	fi
