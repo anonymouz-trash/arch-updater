@@ -1,4 +1,7 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+
+### Enable debugging
+# set -x
 
 ### Declare environment variables
 
@@ -129,8 +132,8 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
                4) opt_nsl ;;
                5) opt_packages ;;
                6) opt_fonts ;;
-               7) opt_wireguard-sh ;;
-               8) opt_fan-profile-sh ;;
+               7) opt_wireguard ;;
+               8) opt_fan-profile ;;
                9) opt_iptables ;;
                b) continue ;;
                q) exit ;;
@@ -156,6 +159,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
              6 "Launch Decky Loader script" \
              7 "Install iptables with preconfigured ruleset" \
              8 "Install Fastfetch and apply custom config" \
+             9 "Install Wireguard & copy wireguard scripts to /usr/local/sbin" \
              b "Back" \
              q "Quit" \
            2>&1 >/dev/tty)
@@ -185,6 +189,7 @@ Read \Z5https://www.jeromeswannack.com/projects/2024/11/29/steamdeck-userspace-p
              6) opt_decky ;;
              7) opt_iptables ;;
              8) cust_fastfetch_steam ;;
+             9) opt_wireguard-sh ;;
              b) continue ;;
              q) exit ;;
              *) continue ;;

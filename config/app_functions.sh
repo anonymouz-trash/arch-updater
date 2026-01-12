@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Get the directory from which the script is started
 # This is useful if you plan to start the script via global hotkey
 # because of the assets and the the use of relative paths

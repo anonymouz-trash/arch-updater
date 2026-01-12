@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 cust_simple-arch-grub-theme(){
     clear

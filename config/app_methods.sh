@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 ### config read/write function
 ## Very nice, credits: https://unix.stackexchange.com/a/433816

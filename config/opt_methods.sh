@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 opt_chaotic(){
     clear
@@ -63,7 +63,7 @@ opt_packages(){
 
     read -p 'Do you want to install additional yay packages? [y/N] ' input
     if [[ ${input} == "y" ]]; then
-        if { app_yay -eq 0 }; then
+        if [[ ${app_yay} == "0" ]]; then
             install_yay
         fi
         read -p 'Do you want to edit yay package list before installing? [y/N] ' input
@@ -151,16 +151,16 @@ opt_fonts(){
     clear
     echo -e "\n${white}[+] ${blue}Installing additional Windows fonts...${nocolor}\n"
 	sleep 2
-    if { app_yay -eq 0 }; then
-        install_yay
-	fi
+    if [[ ${app_yay} == "0" ]]; then
+            install_yay
+    fi
     yay -S --needed ttf-ms-win10-auto
     yay -S --needed ttf-ms-win11-auto
     echo
     read -p "Press any key to resume ..."
 }
 
-opt_wireguard-sh(){
+opt_wireguard(){
     clear
     echo -e "\n${white}[+] ${blue}Copy wireguard activate/deactivate script in /usr/local/sbin/wireguard-vpn${nocolor}\n"
     echo -e "${white}    Don't forget to put your wireguard profile in /etc/wireguard as wg0.conf${nocolor}\n"
@@ -169,22 +169,23 @@ opt_wireguard-sh(){
         read -p 'Wireguard scripts already exists! Do you want to remove it? [y/N] ' input
         if [[ ${input} == "y" ]]; then
             sudo rm -v /usr/local/sbin/wireguard-vpn
-            sudo rm -v /etc/NetworkManager/conf.d/rc-manager.conf
-            sudo ${pacman_cmd} -Rsnc openresolv wireguard-tools
+            sudo rm -v /etc/NetworkManager/conf.d/dns.conf
+            sudo systemctl disable --now systemd-resolved.service
+            sudo ${pacman_cmd} -Rsnc systemd-resolvconf wireguard-tools
         fi
     else
-        if ! ${pacman_cmd} -Q openresolv wireguard-tools &> /dev/null ; then
-            sudo ${pacman_cmd} -S openresolv wireguard-tools
+        if ! ${pacman_cmd} -Qi systemd-resolvconf wireguard-tools &> /dev/null ; then
+            sudo ${pacman_cmd} -S systemd-resolvconf wireguard-tools
         fi
         sudo cp ./assets/opt_wireguard-vpn.sh /usr/local/sbin/wireguard-vpn
-        sudo cp ./assets/opt_rc-manager.conf /etc/NetworkManager/conf.d/rc-manager.conf
+        sudo cp ./assets/opt_wireguard-dns.conf /etc/NetworkManager/conf.d/dns.conf
     fi
     echo
-    echo -e "\n${white}[+] ${blue}Reboot your system to let function openresolv properly${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Reboot your system to let ${white}systemd-resolved & NetworkManager${blue} load properly${nocolor}\n"
     read -p "Press any key to resume ..."
 }
 
-opt_fan-profile-sh(){
+opt_fan-profile(){
     clear
     echo -e "\n${white}[+] ${blue}Add show-fan-profile script in /usr/local/bin...${nocolor}\n"
 	sleep 2
@@ -204,22 +205,22 @@ opt_iptables(){
     clear
     echo -e "\n${white}[+] ${blue}Add preconfigured iptables ruleset script to /etc/iptables...${nocolor}\n"
     sleep 2
-    if grep -qx "# Do not delete this file or edit this first comment! It is from arch-updater!" /etc/iptables/iptables.rules; then
+    if grep -qx "# Do not delete this file or edit this first comment! It is from arch-updater!" /etc/iptables/iptables.rules ; then
         read -p 'Iptables ruleset already exists! Do you want to remove it? [y/N] ' input
         if [[ ${input} == "y" ]]; then
             sudo systemctl disable --now iptables.service
             sudo rm -v /etc/iptables/iptables.rules
             sudo touch /etc/iptables/iptables.rules
-            if ${pacman_cmd} -Q iptables &> /dev/null ; then
+            if ${pacman_cmd} -Q iptables-nft &> /dev/null ; then
                 read -p 'Do you also want iptables itself to be removed? [y/N] ' input
                 if [[ ${input} == "y" ]]; then
-                    sudo ${pacman_cmd} -Rsnc iptables
+                    sudo ${pacman_cmd} -Rsnc iptables-nft
                 fi
             fi
         fi
     else
-        if ! ${pacman_cmd} -Q iptables &> /dev/null ; then
-            sudo ${pacman_cmd} -S iptables
+        if ! ${pacman_cmd} -Q iptables-nft &> /dev/null ; then
+            sudo ${pacman_cmd} -S iptables-nft
         fi
         sudo systemctl disable --now iptables.service
         read -p 'Do you want to edit iptables rulelist before installing? [y/N] ' input
