@@ -151,13 +151,13 @@ clean_arch(){
 		echo
         read -p 'Do you want to clear all (y) cached packages or just the ones that are not installed (N)? [y/N] ' input
 		if [[ ${input} == "y" ]]; then
-			if { app_yay -eq 1 }; then
+			if [[ ${app_yay} == "1" ]]; then
                 yay -Scc
             else
                 sudo pacman -Scc
             fi
 		else
-            if { app_yay -eq 1 }; then
+            if [[ ${app_yay} == "1" ]]; then
                 yay -Sc
             else
                 sudo pacman -Sc
@@ -192,19 +192,4 @@ clean_arch(){
     echo
     read -p "Press any key to resume ..."
     unset paccache_size cache_size unused input
-}
-
-update_debtap(){
-    clear
-    echo -e "\n${white}[+] ${blue}Installing or updating debtap...${nocolor}\n"
-	sleep 2
-	if { app_yay -eq 0 }; then
-        install_yay
-	fi
-	if ! command -v debtap &> /dev/null ; then
-		yay -S debtap
-	fi
-	sudo debtap -u
-    echo
-    read -p "Press any key to resume ..."
 }
