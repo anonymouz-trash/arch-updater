@@ -107,10 +107,10 @@ update_arch(){
     echo -e "\n${white}[+] ${blue}Updating Arch Linux... ${nocolor}\n"
     sleep 2
 	if [[ ${app_yay} == "1" ]]; then
-        echo -e "\n${white}[+] ${blue}...using yay ${nocolor}\n"
+        echo -e "${white}[+] ${blue}...using yay ${nocolor}\n"
         yay -Syu
     else
-        echo -e "\n${white}[+] ${blue}...using pacman ${nocolor}\n"
+        echo -e "${white}[+] ${blue}...using pacman ${nocolor}\n"
         sudo pacman -Syu
     fi
     if [[ ${app_flatpak} == "1" ]]; then
