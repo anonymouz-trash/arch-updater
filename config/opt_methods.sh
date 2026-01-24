@@ -50,6 +50,37 @@ opt_cachyos(){
     read -p "Press any key to resume ..."
 }
 
+opt_check-updates-service(){
+    clear
+    echo -e "\n${white}[+] ${blue}Installing or removing ${white}check-updates.service${blue}...${nocolor}\n"
+    sleep 2
+    if [ -f ~/.config/systemd/user/check-updates-notify.service ] ; then
+        read -p "Already installed! Do you want to (r)emove it? [r/N] " input
+        if [[ ${input} == "r" ]]; then
+            systemctl --user disable --now check-updates-notify.timer
+            rm -fv ~/.config/systemd/user/check-updates-notify.*
+            rm -fv ~/.local/bin/check-updates-notify
+            systemctl --user daemon-reexec
+        fi
+    else
+        if ! ${pacman_cmd} -Qi libnotify pacman-contrib &> /dev/null ; then
+            sudo ${pacman_cmd} -S libnotify pacman-contrib
+        fi
+        install -Dm755 ./assets/opt_check-updates-notify.sh ~/.local/bin/check-updates-notify
+        cp ./assets/opt_check-updates-notify.timer ~/.config/systemd/user/check-updates-notify.timer
+        cp ./assets/opt_check-updates-notify.service ~/.config/systemd/user/check-updates-notify.service
+        systemctl --user daemon-reexec
+        systemctl --user enable --now check-updates-notify.timer
+        systemctl --user start check-updates-notify.service
+        echo -e "\n${white}[+] ${blue}Status of ${white}check-updates-notify.timer${blue}...${nocolor}\n"
+        systemctl --user status check-updates-notify.timer
+        echo -e "\n${white}[+] ${blue}Log of ${white}check-updates-notify.service${blue}...${nocolor}\n"
+        journalctl --user -u update-check.service
+    fi
+    echo
+    read -p "Press any key to resume ..."
+}
+
 opt_packages(){
     clear
     echo -e "\n${white}[+] ${blue}Installing additional packages...${nocolor}\n"

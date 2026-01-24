@@ -24,7 +24,6 @@ The whole project is adjusted to my needs. As Arch-user I think you know what yo
 # Prerequisites
 * dialog    (The menu itself)
 * yay       (AUR-Helper)
-* debtap    (for installing *.deb-packages)
 * reflector (Updating Arch mirrorlist)
 * bash      (Default shell on most systems)
 * zsh       (Please have a look at option 9 in main menu, if you just installed it, you have to reboot!)
@@ -42,10 +41,10 @@ Just clone the repo and run it like below at any preferred location you want.
 # Changelog
 > Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
 
+* Add:    A (Arch-) distro independent method to check for updates as a systemd (user) service (`check ./assets/opt_check-updates-notify.*`)
+* Remove: debtap (I think there's no more need for that)
 * Add:    Steamdeck optimization section :grin:
 * Add:    preconfigured iptables ruleset (`check ./assets/opt_iptables.rules` :warning:)
-* Add:    changed TUI to dialog with custom theming
-* Misc:   Code cleanup
 
 # Screenshots
 ![Arch Linux Updater - Main Menu](https://github.com/anonymouz-trash/arch-updater/blob/main/screenshots/arch-updater-dialog.png?raw=true)

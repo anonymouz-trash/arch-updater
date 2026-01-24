@@ -119,6 +119,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
                7 "Copy wireguard scripts to /usr/local/sbin" \
                8 "Copy fan-profile script to /usr/local/bin" \
                9 "Install iptables with preconfigured ruleset" \
+              10 "Install update-checker service for '\Z5$USER\Zn'" \
                b "Back" \
                q "Quit" \
              2>&1 >/dev/tty)
@@ -132,6 +133,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
                7) opt_wireguard ;;
                8) opt_fan-profile ;;
                9) opt_iptables ;;
+              10) opt_check-updates-service ;;
                b) continue ;;
                q) exit ;;
                *) continue ;;
@@ -157,6 +159,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
              7 "Install iptables with preconfigured ruleset" \
              8 "Install Fastfetch and apply custom config" \
              9 "Install Wireguard & copy wireguard scripts to /usr/local/sbin" \
+            10 "Install update-checker service for '\Z5$USER\Zn'" \
              b "Back" \
              q "Quit" \
            2>&1 >/dev/tty)
@@ -187,6 +190,7 @@ Read \Z5https://www.jeromeswannack.com/projects/2024/11/29/steamdeck-userspace-p
              7) opt_iptables ;;
              8) cust_fastfetch_steam ;;
              9) opt_wireguard-sh ;;
+            10) opt_check-updates-service ;;
              b) continue ;;
              q) exit ;;
              *) continue ;;
