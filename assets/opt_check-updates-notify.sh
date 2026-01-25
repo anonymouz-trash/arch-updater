@@ -34,8 +34,9 @@ fi
 # ---- Notification ----
 if (( ${#BODY[@]} > 0 )); then
     notify-send \
+        -t 5000 \
         --icon=system-software-update \
-        --urgency=normal \
+        --urgency=critical \
         "$TITLE" \
         "$(printf "%s\n" "${BODY[@]}")"
 fi
