@@ -129,6 +129,16 @@ update_mirrorlist(){
         sudo ${pacman_cmd} -S reflector rsync
         sudo systemctl enable reflector.timer --now
     fi
+    if [ -f /etc/xdg/reflector/reflector.conf ]; then
+        sudo rm /etc/xdg/reflector/reflector.conf
+    fi
+    echo "--country ${country}" | sudo tee -a /etc/xdg/reflector/reflector.conf > /dev/null
+    echo "--age ${age}" | sudo tee -a /etc/xdg/reflector/reflector.conf > /dev/null
+    echo "--protocol ${protocol}" | sudo tee -a /etc/xdg/reflector/reflector.conf > /dev/null
+    echo "--latest ${latest}" | sudo tee -a /etc/xdg/reflector/reflector.conf > /dev/null
+    echo "--sort rate" | sudo tee -a /etc/xdg/reflector/reflector.conf > /dev/null
+    echo "--ipv4" | sudo tee -a /etc/xdg/reflector/reflector.conf > /dev/null
+    echo "--save ${PACMAN_DIR}/mirrorlist" | sudo tee -a /etc/xdg/reflector/reflector.conf > /dev/null
     sudo reflector -c ${country} -a ${age} -p ${protocol} -l ${latest} --sort rate --ipv4 --verbose --save ${PACMAN_DIR}/mirrorlist
     sudo ${pacman_cmd} -S archlinux-keyring
     if [ "$(${pacman_cmd} -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then

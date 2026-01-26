@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# important for systemd User Services
+# Environment for systemd user services
 export DISPLAY=${DISPLAY:-:0}
 export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}
 
-TITLE="Updates availabe"
-BODY=()
+TITLE="System updates available"
+LINES=()
 
-# ---- Pacman / Yay ----
+MAX_LINES=10
+
+# ---- Yay / Pacman (Top 10, detailed) ----
 if command -v yay >/dev/null 2>&1; then
     UPDATES=$(yay -Qu 2>/dev/null || true)
 elif command -v checkupdates >/dev/null 2>&1; then
@@ -18,26 +20,46 @@ else
 fi
 
 if [[ -n "$UPDATES" ]]; then
-    COUNT=$(echo "$UPDATES" | wc -l)
-    BODY+=("📦 $COUNT Systempackages")
-fi
+    TOTAL=$(echo "$UPDATES" | wc -l)
+    TOP=$(echo "$UPDATES" | head -n "$MAX_LINES")
 
-# ---- Flatpak ----
-if command -v flatpak >/dev/null 2>&1; then
-    FLATPAK_UPDATES=$(flatpak remote-ls --updates 2>/dev/null || true)
-    if [[ -n "$FLATPAK_UPDATES" ]]; then
-        COUNT=$(echo "$FLATPAK_UPDATES" | wc -l)
-        BODY+=("📦 $COUNT Flatpak packages")
+    LINES+=("📦 $TOTAL system package updates")
+    LINES+=("")
+    LINES+=("$TOP")
+
+    if (( TOTAL > MAX_LINES )); then
+        LINES+=("")
+        LINES+=("…and $((TOTAL - MAX_LINES)) more")
     fi
 fi
 
+# ---- Flatpak (Top 10, detailed) ----
+if command -v flatpak >/dev/null 2>&1; then
+    FLATPAK_UPDATES=$(flatpak update --app --assumeno 2>/dev/null \
+        | awk '/->/ {print $1 " (" $NF ")"}' \
+        | head -n 10 || true)
+
+    if [[ -n "$FLATPAK_UPDATES" ]]; then
+        TOTAL=$(flatpak update --app --assumeno 2>/dev/null | awk '/->/' | wc -l)
+
+        LINES+=("")
+        LINES+=("📦 $TOTAL Flatpak updates")
+        LINES+=("")
+        LINES+=("$FLATPAK_UPDATES")
+
+        if (( TOTAL > 10 )); then
+            LINES+=("")
+            LINES+=("…and $((TOTAL - 10)) more")
+        fi
+    fi
+fi
+
+
 # ---- Notification ----
-if (( ${#BODY[@]} > 0 )); then
+if (( ${#LINES[@]} > 0 )); then
     notify-send \
-        -t 5000 \
         --icon=system-software-update \
         --urgency=critical \
         "$TITLE" \
-        "$(printf "%s\n" "${BODY[@]}")"
+        "$(printf "%s\n" "${LINES[@]}")"
 fi
-
