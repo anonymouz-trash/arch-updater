@@ -242,7 +242,7 @@ cust_bibata(){
     clear
     echo -e "\n${white}[+] ${blue}Installing or updating Bibata cursor theme...${nocolor}\n"
 	sleep 2
-	if { app_yay -eq 0 }; then
+	if [[ ${app_yay} == "0" ]]; then
         install_yay
 	fi
     if [ "$(yay -Qe bibata-cursor-theme-bin | wc -l)" -ge 1 ]; then

@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 ### Enable debugging
+# set -Eeuo pipefail
+# trap 'echo "ERROR in $0:${LINENO}: $BASH_COMMAND" >&2' ERR
+# PS4='+ ${BASH_SOURCE}:${LINENO}: '
 # set -x
+
 
 ### Declare environment variables
 
@@ -12,13 +16,13 @@ app_home=$HOME
 # This is useful if you plan to start the script via global hotkey
 # because of the assets and the the use of relative paths
 app_pwd=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-cd ${app_pwd}
+cd "${app_pwd}"
 
 ### Include required functions
-source ./config/app_functions.sh
-source ./config/app_methods.sh
-source ./config/cust_methods.sh
-source ./config/opt_methods.sh
+for f in ./config/{app_functions,app_methods,cust_methods,opt_methods}.sh; do
+  [[ -f $f ]] || { echo "Missing $f" >&2; exit 1; }
+  source "$f"
+done
 
 ### Check if a config is available
 if ! [ -f ~/.config/arch_updater.conf ]; then
@@ -34,7 +38,7 @@ while true; do
     set_reflector
   fi
   # Check if arch-updater cache directory exists
-  if ! [ -d "~/.cache/arch-updater" ]; then
+  if ! [ -d "$HOME/.cache/arch-updater" ]; then
     mkdir -p ~/.cache/arch-updater
   fi
   cd ${app_pwd}
@@ -52,6 +56,7 @@ while true; do
       8 "Settings / Environment" \
       9 "Credits" \
       10 "Check for updates (script)" \
+      11 "Show explicit installed packages" \
       q "Quit" \
     2>&1 >/dev/tty)
 
@@ -256,6 +261,9 @@ This section is \Z5disabled\Zn for systems other than Steamdeck!\n\n" 10 65
     10)
        git pull 2>&1 | dialog --title "<[ Running script update... ]>" --colors --progressbox 20 70
        dialog --clear --colors --msgbox "If script got updated please restart the script." 6 60
+       ;;
+    11)
+       installed_packages
        ;;
     q) break ;;
     *) break ;;

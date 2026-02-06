@@ -203,3 +203,27 @@ clean_arch(){
     read -p "Press any key to resume ..."
     unset paccache_size cache_size unused input
 }
+
+installed_packages(){
+    # Check if pacgraph is installed
+    if ! command -v pacgraph &> /dev/null; then
+        echo -e "\n${white}[+] ${blue}Pacgraph is not installed, installing...${nocolor}\n"
+        sudo ${pacman_cmd} -S pacgraph
+        exit 1
+    fi
+
+    # Temporary file
+    TMPFILE=$(mktemp)
+
+    # Run pacgraph for explicits with console summary
+    pacgraph -c -e > "$TMPFILE" 2>/dev/null
+
+    # Filter only lines starting with a number and overwrite TMPFILE
+    grep -E '^[0-9]' "$TMPFILE" > "${TMPFILE}.clean"
+
+    # Show all output in dialog textbox
+    dialog --title "Pacgraph Package Size Summary" --textbox "${TMPFILE}.clean" 35 95
+
+    # Clean up
+    rm "$TMPFILE" "${TMPFILE}.clean"
+}
