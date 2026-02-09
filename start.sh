@@ -45,7 +45,7 @@ while true; do
   CHOICE=$(dialog --clear --colors \
     --backtitle "\Z5 Arch Linux Updater \Zn" \
     --title "\Z6 Main Menu \Zn" \
-    --menu "Choose an option:" 20 70 12 \
+    --menu "Choose an option:" 22 70 12 \
       1 "Update Arch Linux (yay/pacman + flatpaks)" \
       2 "Update Mirrorlist (reflector)" \
       3 "Clean Arch Linux" \
@@ -76,29 +76,35 @@ while true; do
            SUB=$(dialog --clear --colors \
              --backtitle "\Z5 Arch Linux Updater \Zn" \
              --title "\Z6 Customization \Zn" \
-             --menu "Choose an option:" 20 70 12 \
-               1 "Arch Silence GRUB Theme" \
-               2 "Reversal Icon Theme" \
-               3 "Lavanda KDE/GTK theme" \
-               4 "Layan KDE/GTK theme" \
-               5 "WhiteSur KDE/GTK theme" \
-               6 "Bibata cursor theme" \
-               7 "OhMyZsh! shell addon" \
-               8 "Fastfetch config" \
-               9 "Tmux config" \
+             --menu "Choose an option:" 22 70 12 \
+               1 "[ CONFIG ] Fastfetch" \
+               2 "[ CONFIG ] Tmux" \
+               3 "[ CURSOR ] Bibata" \
+               4 "[ GRUB   ] Arch Silence" \
+               5 "[ GTK    ] Lavanda" \
+               6 "[ GTK    ] Layan" \
+               7 "[ GTK    ] WhiteSur" \
+               8 "[ ICON   ] Reversal" \
+               9 "[ KDE    ] Lavanda" \
+              10 "[ KDE    ] Layan" \
+              11 "[ KDE    ] WhiteSur" \
+              12 "[ SHELL  ] OhMyZsh!" \
                b "Back" \
                q "Quit" \
              2>&1 >/dev/tty)
            case "$SUB" in
-             1) cust_simple-arch-grub-theme ;;
-             2) cust_reversal ;;
-             3) cust_lavanda ;;
-             4) cust_layan ;;
-             5) cust_whitesur ;;
-             6) cust_bibata ;;
-             7) cust_ohmyzsh ;;
-             8) cust_fastfetch ;;
-             9) cust_tmux ;;
+             1) cust_fastfetch ;;
+             2) cust_tmux ;;
+             3) cust_bibata ;;
+             4) cust_grub_arch_silence ;;
+             5) cust_gtk_lavanda ;;
+             6) cust_gtk_layan ;;
+             7) cust_gtk_whitesur ;;
+             8) cust_reversal ;;
+             9) cust_kde_lavanda ;;
+            10) cust_kde_layan ;;
+            11) cust_kde_whitesur;;
+            12) cust_ohmyzsh ;;
              b) continue ;;
              q) exit ;;
              *) continue ;;
@@ -114,7 +120,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
            SUB=$(dialog --clear --colors \
              --backtitle "\Z5 Arch Linux Updater \Zn" \
              --title "\Z6 Optimizations \Zn" \
-             --menu "Choose an option:" 20 70 12 \
+             --menu "Choose an option:" 22 70 12 \
                1 "Install/Remove Chaotic (precompiled AUR packages)" \
                2 "Install/Remove CachyOS (gaming optimized packages)" \
                3 "Launch archgaming script by xi-Rick" \

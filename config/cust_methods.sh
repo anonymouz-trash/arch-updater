@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-cust_simple-arch-grub-theme(){
+cust_grub_arch_silence(){
     clear
-    echo -e "\n${white}[+] ${blue}Installing or updating Simple Arch Linux GRUB theme...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing or updating Arch Silence GRUB theme...${nocolor}\n"
     sleep 2
     if [ -d "/boot/grub/themes/arch-silence_black-blue" ] || [ -d "/boot/grub/themes/arch-silence_black-red" ]; then
         read -p "Do you want to (r)emove it? [y/N] " input
@@ -35,25 +35,24 @@ cust_reversal(){
     echo -e "\n${white}[+] ${blue}Installing or updating Reversal icon theme...${nocolor}\n"
 	sleep 2
     cd ~/.cache/arch-updater
-    if [ -d "/usr/share/icons/Reversal" ]; then
+    if [ -d "$HOME/.local/share/icons/Reversal" ]; then
         read -p "Do you want to (r)emove or just update it? [r/U] " input
         if [[ ${input} == "r" ]]; then
+            ./Reversal-icon-theme/install.sh -u
             rm -rfv ./Reversal-icon-theme
-            sudo rm -rfv /usr/share/icons/Reversal*
             return
         else
             if [[ -d "Reversal-icon-theme" ]] ; then
                 cd Reversal-icon-theme
                 git pull
                 cd ..
-                git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git
             fi
         fi
     else
         git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git
     fi
     if [[ -d "Reversal-icon-theme" ]] ; then
-        sudo ./Reversal-icon-theme/install.sh -a -d /usr/share/icons -t all
+        ./Reversal-icon-theme/install.sh -a -t all
         echo
         echo
         echo "Do you want to remove previously downloaded files? "
@@ -67,9 +66,9 @@ cust_reversal(){
     read -p "Press any key to resume ..."
 }
 
-cust_lavanda(){
+cust_gtk_lavanda(){
     clear
-    echo -e "\n${white}[+] ${blue}Installing or updating Lavanda GTK/KDE theme...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing or updating Lavanda GTK theme...${nocolor}\n"
 	sleep 2
 	cd ~/.cache/arch-updater
 
@@ -77,35 +76,22 @@ cust_lavanda(){
     if [ -d "Lavanda-gtk-theme" ]; then
         read -p "Do you want to (r)emove or just update it? [r/U] " input
         if [[ ${input} == "r" ]]; then
-            sudo ./Lavanda-gtk-theme/install.sh -u
+            ./Lavanda-gtk-theme/install.sh -u
             rm -rf ./Lavanda-gtk-theme
-            if [[ -d Lavanda-kde ]]; then
-                sudo ./Lavanda-kde/uninstall.sh
-                rm -rf ./Lavanda-kde
-                sudo rm -rf /usr/share/sddm/themes/Lavanda*
-            fi
         else
             cd Lavanda-gtk-theme
             git pull
             cd ..
-            if [[ -d Lavanda-kde ]]; then
-                cd Lavanda-kde
-                git pull
-                cd ..
-            fi
         fi
     else
         git clone https://github.com/vinceliuice/Lavanda-gtk-theme.git
-        if [[ ${de,,} =~ "kde" ]]; then
-            git clone https://github.com/vinceliuice/Lavanda-kde.git
-        fi
-    fi
-    sudo ${app_home}/.cache/arch-updater/Lavanda-gtk-theme/install.sh -d /usr/share/themes -l -i arch
-    if [[ ${de,,} =~ "kde" ]]; then
-        sudo ${app_home}/.cache/arch-updater/Lavanda-kde/install.sh
-        sudo ${app_home}/.cache/arch-updater/Lavanda-kde/sddm/6.0/install.sh
     fi
     if [[ -d "Lavanda-gtk-theme" ]]; then
+        if [[ ${de,,} =~ "kde" ]]; then
+            ./Lavanda-gtk-theme/install.sh -i arch
+        else
+            ./Lavanda-gtk-theme/install.sh -l -i arch -t standard -c dark
+        fi
         echo
         echo
         echo "Do you want to remove previously downloaded files? "
@@ -113,9 +99,6 @@ cust_lavanda(){
 
         if [[ ${input} == "y" ]]; then
             rm -rf Lavanda-gtk-theme
-            if [ -d "Lavanda-kde" ]; then
-                rm -rf Lavanda-kde
-            fi
         fi
     fi
     echo
@@ -123,54 +106,75 @@ cust_lavanda(){
     cd ${pwd}
 }
 
-cust_layan(){
+cust_kde_lavanda(){
     clear
-    echo -e "\n${white}[+] ${blue}Installing or updating Layan GTK/KDE theme...${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing or updating Lavanda KDE theme...${nocolor}\n"
 	sleep 2
 	cd ~/.cache/arch-updater
+
+	# Check if WhiteSur got pulled and is up to date
+    if [ -d "Lavanda-kde" ]; then
+        read -p "Do you want to (r)emove or just update it? [r/U] " input
+        if [[ ${input} == "r" ]]; then
+            ./Lavanda-kde/uninstall.sh
+            rm -rfv ./Lavanda-kde
+            sudo rm -rfv /usr/share/sddm/themes/Lavanda*
+        else
+            cd Lavanda-kde
+            git pull
+            cd ..
+        fi
+    else
+        git clone https://github.com/vinceliuice/Lavanda-kde.git
+    fi
+    if [[ -d "Lavanda-kde" ]]; then
+        ./Lavanda-kde/install.sh
+        sudo ./Lavanda-kde/sddm/6.0/install.sh
+        echo
+        echo
+        echo "Do you want to remove previously downloaded files? "
+        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
+        if [[ ${input} == "y" ]]; then
+            rm -rfv Lavanda-kde
+        fi
+    fi
+    echo
+    read -p "Press any key to resume ..."
+    cd ${pwd}
+}
+
+cust_gtk_layan(){
+    clear
+    echo -e "\n${white}[+] ${blue}Installing or updating Layan GTK theme...${nocolor}\n"
+    sleep 2
+    cd ~/.cache/arch-updater
 
     if [ -d "Layan-gtk-theme" ]; then
         read -p "Do you want to (r)emove or just update it? [r/U] " input
         if [[ ${input} == "r" ]]; then
             sudo ./Layan-gtk-theme/install.sh -u
-            rm -rf ./Layan-gtk-theme
-            if [[ -d Layan-kde ]]; then
-                sudo ./Layan-kde/uninstall.sh
-                rm -rf ./Layan-kde
-                sudo rm -rf /usr/share/sddm/themes/Layan*
-            fi
+            rm -rfv ./Layan-gtk-theme
         else
             cd Layan-gtk-theme
             git pull
             cd ..
-            if [[ -d Layan-kde ]]; then
-                cd Layan-kde
-                git pull
-                cd ..
-            fi
         fi
     else
         git clone https://github.com/vinceliuice/Layan-gtk-theme.git
-        if [[ ${de,,} =~ "kde" ]]; then
-            git clone https://github.com/vinceliuice/Layan-kde.git
-        fi
-    fi
-    sudo ${app_home}/.cache/arch-updater/Layan-gtk-theme/install.sh -d /usr/share/themes
-    if [[ ${de,,} =~ "kde" ]]; then
-        sudo ${app_home}/.cache/arch-updater/Layan-kde/install.sh
-        sudo ${app_home}/.cache/arch-updater/Layan-kde/sddm/6.0/install.sh
     fi
     if [[ -d "Layan-gtk-theme" ]]; then
+        if [[ ${de,,} =~ "kde" ]]; then
+            ./Layan-gtk-theme/install.sh
+        else
+            ./Layan-gtk-theme/install.sh -c dark -l
+        fi
         echo
         echo
         echo "Do you want to remove previously downloaded files? "
         read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
 
         if [[ ${input} == "y" ]]; then
-            rm -rf Layan-gtk-theme
-            if [ -d "Layan-kde" ]; then
-                rm -rf Layan-kde
-            fi
+            rm -rfv Layan-gtk-theme
         fi
     fi
     echo
@@ -178,60 +182,115 @@ cust_layan(){
     cd ${pwd}
 }
 
-cust_whitesur(){
+cust_kde_layan(){
     clear
-    echo -e "\n${white}[+] ${blue}Installing or updating WhiteSur GTK/KDE theme...${nocolor}"
-    echo -e "\n${blue}!!!${nocolor} Please use background pictures without spaces in the filename ${blue}!!!${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Installing or updating Layan KDE theme...${nocolor}\n"
+	sleep 2
+	cd ~/.cache/arch-updater
+
+    if [ -d "Layan-kde" ]; then
+        read -p "Do you want to (r)emove or just update it? [r/U] " input
+        if [[ ${input} == "r" ]]; then
+            ./Layan-kde/uninstall.sh
+            rm -rfv ./Layan-kde
+            sudo rm -rfv /usr/share/sddm/themes/Layan*
+        else
+            cd Layan-kde
+            git pull
+            cd ..
+        fi
+    else
+        git clone https://github.com/vinceliuice/Layan-kde.git
+    fi
+    if [[ -d "Layan-kde" ]]; then
+        ./Layan-kde/install.sh
+        sudo ./Layan-kde/sddm/6.0/install.sh
+        echo
+        echo
+        echo "Do you want to remove previously downloaded files? "
+        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
+
+        if [[ ${input} == "y" ]]; then
+            rm -rfv Layan-kde
+        fi
+    fi
+    echo
+    read -p "Press any key to resume ..."
+    cd ${pwd}
+}
+
+cust_gtk_whitesur(){
+    clear
+    echo -e "\n${white}[+] ${blue}Installing or updating WhiteSur GTK theme...${nocolor}"
+    if [[ ${de,,} =~ "gnome" ]]; then
+        echo -e "\n${white}[+] ${blue}!!!${nocolor} Please use background pictures without spaces in the filename ${blue}!!!${nocolor}\n"
+    fi
     sleep 2
     cd ~/.cache/arch-updater
     if [ -d "WhiteSur-gtk-theme" ]; then
         read -p "Do you want to (r)emove or just update it? [r/U] " input
         if [[ ${input} == "r" ]]; then
             sudo ./WhiteSur-gtk-theme/install.sh -r
-            rm -rf ./WhiteSur-gtk-theme
-            if [[ -d WhiteSur-kde ]]; then
-                rm -rf ./WhiteSur-kde
-                sudo rm -rf /usr/share/themes/WhiteSur*
-                sudo rm -rf /usr/share/sddm/themes/WhiteSur*
-            fi
+            rm -rfv ./WhiteSur-gtk-theme
         else
             cd WhiteSur-gtk-theme
             git pull
             cd ..
-            if [[ -d WhiteSur-kde ]]; then
-                cd WhiteSur-kde
-                git pull
-                cd ..
-            fi
         fi
     else
         git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
-        if [[ ${de,,} =~ "kde" ]]; then
-            git clone https://github.com/vinceliuice/WhiteSur-kde.git
-        fi
-    fi
-    if [[ ${de,,} =~ "gnome" ]]; then
-        curBg="$(gsettings get org.gnome.desktop.background picture-uri | cut -d\' -f2 | cut -c 8-)"
-	$app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -o normal -c dark -t all -m -l -N stable --shell -i arch -b "${curBg}"
-	sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -d /usr/share/themes -o normal -c dark -t all -m -N stable --shell -i arch -b "${curBg}"
-        sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/tweaks.sh -g -r
-        sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/tweaks.sh -c Dark -g -i arch -b "$curBg"
-    elif [[ ${de,,} =~ "kde" ]]; then
-        sudo $app_home/.cache/arch-updater/WhiteSur-gtk-theme/install.sh -m -o normal -t all
-        sudo $app_home/.cache/arch-updater/WhiteSur-kde/install.sh
-        sudo $app_home/.cache/arch-updater/WhiteSur-kde/sddm/install.sh
     fi
     if [ -d "WhiteSur-gtk-theme" ]; then
+        if [[ ${de,,} =~ "gnome" ]]; then
+            curBg="$(gsettings get org.gnome.desktop.background picture-uri | cut -d\' -f2 | cut -c 8-)"
+            ./WhiteSur-gtk-theme/install.sh -o normal -c dark -t all -m -l -N stable --shell -i arch -b "${curBg}"
+            sudo ./WhiteSur-gtk-theme/tweaks.sh -g -r
+            sudo ./WhiteSur-gtk-theme/tweaks.sh -c Dark -g -i arch -b "$curBg"
+        else
+            ./WhiteSur-gtk-theme/install.sh -m -o normal -t all
+        fi
         echo
         echo
         echo "Do you want to remove previously downloaded files? "
         read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
 
         if [[ ${input} == "y" ]]; then
-            rm -rf WhiteSur-gtk-theme
-            if [ -d "WhiteSur-kde" ]; then
-                rm -rf WhiteSur-kde
-            fi
+            rm -rfv WhiteSur-gtk-theme
+        fi
+    fi
+    echo
+    read -p "Press any key to resume ..."
+}
+
+cust_kde_whitesur(){
+    clear
+    echo -e "\n${white}[+] ${blue}Installing or updating WhiteSur KDE theme...${nocolor}"
+    sleep 2
+    cd ~/.cache/arch-updater
+    if [ -d "WhiteSur-kde" ]; then
+        read -p "Do you want to (r)emove or just update it? [r/U] " input
+        if [[ ${input} == "r" ]]; then
+            ./WhiteSur-kde/uninstall.sh
+            rm -rfv ./WhiteSur-kde
+            sudo rm -rfv /usr/share/sddm/themes/WhiteSur*
+        else
+            cd WhiteSur-kde
+            git pull
+            cd ..
+        fi
+    else
+        git clone https://github.com/vinceliuice/WhiteSur-kde.git
+    fi
+    if [ -d "WhiteSur-kde" ]; then
+        ./WhiteSur-kde/install.sh
+        sudo ./WhiteSur-kde/sddm/install.sh
+        echo
+        echo
+        echo "Do you want to remove previously downloaded files? "
+        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
+
+        if [[ ${input} == "y" ]]; then
+            rm -rf WhiteSur-kde
         fi
     fi
     echo
@@ -245,7 +304,7 @@ cust_bibata(){
 	if [[ ${app_yay} == "0" ]]; then
         install_yay
 	fi
-    if [ "$(yay -Qe bibata-cursor-theme-bin | wc -l)" -ge 1 ]; then
+    if [ "$(yay -Qe bibata-cursor-theme | wc -l)" -ge 1 ]; then
         read -p "Already installed! Do you want to (r)emove it? [r/N] " input
         if [[ ${input} == "r" ]]; then
             yay -Rsnc bibata-cursor-theme
