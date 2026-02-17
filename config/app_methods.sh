@@ -209,7 +209,6 @@ installed_packages(){
     if ! command -v pacgraph &> /dev/null; then
         echo -e "\n${white}[+] ${blue}Pacgraph is not installed, installing...${nocolor}\n"
         sudo ${pacman_cmd} -S pacgraph
-        exit 1
     fi
 
     # Temporary file
