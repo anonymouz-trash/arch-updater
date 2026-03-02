@@ -199,8 +199,8 @@ Read \Z5https://www.jeromeswannack.com/projects/2024/11/29/steamdeck-userspace-p
              5) opt_nsl ;;
              6) opt_decky ;;
              7) opt_iptables ;;
-             8) cust_fastfetch_steam ;;
-             9) opt_wireguard-sh ;;
+             8) cust_fastfetch ;;
+             9) opt_wireguard ;;
             10) opt_check-updates-service ;;
              b) continue ;;
              q) exit ;;
