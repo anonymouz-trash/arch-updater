@@ -8,14 +8,13 @@ gearlever
 
 # gaming compatibility
 proton-ge-custom-bin
-protontricks-git
-sgdboop-bin
 sof-firmware
 
 # multimedia
-mp3directcut
-mp3tag
 
 # system
-envycontrol
+# nvidia optimus gpu switcher, optional
+# envycontrol
+
+# All mkinitcpio firmware modules to get rid of unwanted warnings during compilation, optional
 # mkinitcpio-firmware

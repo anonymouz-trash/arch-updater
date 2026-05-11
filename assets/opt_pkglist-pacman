@@ -4,7 +4,7 @@ clamtk
 
 # gaming
 lutris
-steam
+#steam
 umu-launcher
 vkd3d
 lib32-vkd3d
@@ -13,12 +13,13 @@ lib32-vkd3d
 dragon
 elisa
 fluidsynth
-gst-plugins-bad
-gst-plugins-good
-gst-plugins-ugly
-gwenview
+#gst-plugins-bad
+#gst-plugins-base
+#gst-plugins-good
+#gst-plugins-ugly
+#gwenview
 mixxx
-spotify
+#spotify
 
 # networking
 dnsutils
@@ -39,11 +40,11 @@ gimp-help-de
 
 # system
 7zip
+cdemu-client
 cdemu-daemon
-kde-cdemu-manager
+#kde-cdemu-manager
 kvantum
 partitionmanager
-htop
 mc
 ncdu
 terminus-font
@@ -52,9 +53,9 @@ unrar
 unrar-free
 
 # virtual environment
-bridge-utils
-dnsmasq
-guestfs-tools
+#bridge-utils
+#dnsmasq
+#guestfs-tools
 iptables
-libguestfs
-virt-manager
+#libguestfs
+#virt-manager
