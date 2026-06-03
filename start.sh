@@ -52,11 +52,10 @@ while true; do
       4 "All above at once" \
       5 ">> Customization submenu" \
       6 ">> Optimizations & Tweaks submenu" \
-      7 ">> Steamdeck optimization submenu" \
-      8 "Settings / Environment" \
-      9 "Credits" \
-      10 "Check for updates (script)" \
-      11 "Show explicit installed packages" \
+      7 "Settings / Environment" \
+      8 "Credits" \
+      9 "Check for updates (script)" \
+      10 "Show explicit installed packages" \
       q "Quit" \
     2>&1 >/dev/tty)
 
@@ -144,7 +143,6 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
                7) opt_wireguard ;;
                8) opt_fan-profile ;;
                9) opt_iptables ;;
-              10) opt_check-updates-service ;;
                b) continue ;;
                q) exit ;;
                *) continue ;;
@@ -155,63 +153,6 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
        fi
        ;;
     7)
-       if [[ "${system_os}" == "SteamOS" ]]; then
-           # Submenu: Steamdeck optimization submenu
-           SUB=$(dialog --clear --colors \
-           --backtitle "\Z5 Arch Linux Updater \Zn" \
-           --title "\Z6 Steamdeck optimizations \Zn" \
-           --menu "Choose an option:" 20 70 12 \
-             1 "Enable password for 'deck' user to enable sudo" \
-             2 "Enable Pacman repositories (normal)" \
-             3 "Enable Pacman repositories (userspace) [\Z1experimental\Zn]" \
-             4 "Install/Remove Chaotic (precompiled AUR packages)" \
-             5 "Launch Non-Steam-Launchers script" \
-             6 "Launch Decky Loader script" \
-             7 "Install iptables with preconfigured ruleset" \
-             8 "Install Fastfetch and apply custom config" \
-             9 "Install Wireguard & copy wireguard scripts to /usr/local/sbin" \
-            10 "Install update-checker service for '\Z5$USER\Zn'" \
-             b "Back" \
-             q "Quit" \
-           2>&1 >/dev/tty)
-           case "$SUB" in
-             1) passwd ;;
-             2) dialog --clear --colors --msgbox "\Z1Important notice:\Zn\n\n \
-This will enable the \Z5pacman\Zn command \Z5system-wide\Zn!\n\n \
-This also means:\n \
-  * this workaround\n \
-  * when Chaotic repo is enabled you may also install \Z5yay\Zn\n \
-  * all installed packages\n\n \
-will \Z5revert\Zn on every SteamOS system update!" 15 65
-              opt_sd_pacman_normal ;;
-             3) dialog --clear --colors --msgbox "\Z1Important notice:\Zn\n\n \
-This will install the \Z5pacman\Zn command in \Z5userspace\Zn!\n\n \
-This means:\n \
-  * alias command is \Z5'pacman_'\Zn\n \
-  * when Chaotic repo is enabled you may also install \Z5yay\Zn\n \
-  * keep in mind that yay is \Z5not using 'pacman_'\Zn alias\n \
-  * installing packages in \Z5'~/.root\Zn\n \
-  * installed packages will survive SteamOS system update \n\n \
-There \Z5maybe problems\Zn with 'falsly' linked libraries.\n \
-Read \Z5https://www.jeromeswannack.com/projects/2024/11/29/steamdeck-userspace-pacman.html\Zn!" 20 95
-              opt_sd_pacman_userspace ;;
-             4) opt_chaotic ;;
-             5) opt_nsl ;;
-             6) opt_decky ;;
-             7) opt_iptables ;;
-             8) cust_fastfetch ;;
-             9) opt_wireguard ;;
-            10) opt_check-updates-service ;;
-             b) continue ;;
-             q) exit ;;
-             *) continue ;;
-           esac
-       else
-           dialog --clear --colors --msgbox "\Z1Important notice:\Zn\n\n \
-This section is \Z5disabled\Zn for systems other than Steamdeck!\n\n" 10 65
-       fi
-      ;;
-    8)
        # Settings / Environment submenu
        SUB=$(dialog --clear --colors \
          --backtitle "\Z5 Arch Linux Updater \Zn" \
@@ -242,7 +183,7 @@ This section is \Z5disabled\Zn for systems other than Steamdeck!\n\n" 10 65
          *) continue ;;
        esac
        ;;
-    9)
+    8)
        # Credits — z. B. msgbox
        dialog --clear --colors --msgbox "Credits & Thanks:\n\n \
 \Z5Arch Silence GRUB Theme\Zn\n \
@@ -264,11 +205,12 @@ This section is \Z5disabled\Zn for systems other than Steamdeck!\n\n" 10 65
 \Z5Steam Deck hacking: Setting up user space pacman\Zn\n
    https://www.jeromeswannack.com/projects/2024/11/29/steamdeck-userspace-pacman.html\n" 35 95
        ;;
-    10)
+    9)
        git pull 2>&1 | dialog --title "<[ Running script update... ]>" --colors --progressbox 20 70
+       read -p "Press any key to resume ..."
        dialog --clear --colors --msgbox "If script got updated please restart the script." 6 60
        ;;
-    11)
+    10)
        installed_packages
        ;;
     q) break ;;
