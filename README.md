@@ -41,6 +41,7 @@ Just clone the repo and run it like below at any preferred location you want.
 # Changelog
 > Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
 
+* Add:    iptables: allow rdp connections from a private network (edit if needed)
 * Add:    A (Arch-) distro independent method to check for updates as a systemd (user) service (`check ./assets/opt_check-updates-notify.*`)
 * Remove: debtap (I think there's no more need for that)
 * Add:    Steamdeck optimization section :grin:
