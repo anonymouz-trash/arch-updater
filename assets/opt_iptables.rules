@@ -52,13 +52,18 @@ COMMIT
 -A INPUT  -i wg0 -j ACCEPT
 -A OUTPUT -o wg0 -j ACCEPT
 
-# Allow RDP connections from 192.168.178.0/24
--A INPUT -p tcp --dport 3389 -s 192.168.178.0/24 -j ACCEPT
--A INPUT -p udp --dport 3389 -s 192.168.178.0/24 -j ACCEPT
-
 # Allow traffic to the Internet (also blocks all incoming traffic from the internet)
 -A OUTPUT -o enp2s0 -j ACCEPT
 -A OUTPUT -o wlan0  -j ACCEPT
+
+# Allow UDP from printer (for WSD-Discovery-Answers)
+-I INPUT 3 -p udp -s 192.168.178.7 -j ACCEPT
+
+# Allow RDP tcp connections
+-A INPUT -p tcp --dport 3389 -s 192.168.178.0/24 -j ACCEPT
+
+# Allow RDP udp for RDP-Optimizing, e.g. Audio/Video
+-A INPUT -p udp --dport 3389 -s 192.168.178.0/24 -j ACCEPT
 
 # Apply the rules
 COMMIT
