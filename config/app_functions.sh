@@ -58,6 +58,13 @@ else
     app_yay=1
 fi
 
+# check 4 paru
+if ! command -v paru &> /dev/null ; then
+    app_paru=0
+else
+    app_paru=1
+fi
+
 # check 4 flatpak
 if ! command -v flatpak &> /dev/null ; then
     app_flatpak=0

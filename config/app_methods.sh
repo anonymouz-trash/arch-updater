@@ -106,12 +106,15 @@ update_arch(){
     clear
     echo -e "\n${white}[+] ${blue}Updating Arch Linux... ${nocolor}\n"
     sleep 2
+    echo -e "${white}[+] ${blue}...standard packages using pacman ${nocolor}\n"
+    sudo pacman -Syu
+    sleep 2
 	if [[ ${app_yay} == "1" ]]; then
-        echo -e "${white}[+] ${blue}...using yay ${nocolor}\n"
+        echo -e "${white}[+] ${blue}...AUR packages using yay ${nocolor}\n"
         yay -Syu
-    else
-        echo -e "${white}[+] ${blue}...using pacman ${nocolor}\n"
-        sudo pacman -Syu
+    elif [[ ${app_paru} == "1" ]]; then
+        echo -e "${white}[+] ${blue}...AUR packages paru ${nocolor}\n"
+        paru -Syu
     fi
     if [[ ${app_flatpak} == "1" ]]; then
         echo -e "\n${white}[+] ${blue}...updating flatpaks ${nocolor}\n"
