@@ -45,21 +45,29 @@ while true; do
   CHOICE=$(dialog --clear --colors \
     --backtitle "\Z5 Arch Linux Updater \Zn" \
     --title "\Z6 Main Menu \Zn" \
-    --menu "Choose an option:" 22 80 12 \
+    --menu "Choose an option:" 25 70 15 \
       1 "Update Arch Linux (yay/pacman + flatpaks)" \
       2 "Update Mirrorlist (reflector)" \
       3 "Clean Arch Linux" \
       4 "All above at once" \
+      "" "" \
       5 ">> Customization submenu" \
       6 ">> Optimizations & Tweaks submenu" \
+      "" "" \
       7 "Settings / Environment" \
       8 "Credits" \
       9 "Check for updates (script)" \
       10 "Show explicit installed packages" \
+      "" "" \
       q "Quit" \
     2>&1 >/dev/tty)
-
+  status=$?
   clear
+  # Cancel-Button oder Esc gedrückt -> Programm sauber beenden
+  if [ $status -eq 1 ] || [ $status -eq 255 ]; then
+    echo "Goodbye."
+    exit 0
+  fi
   case "$CHOICE" in
     1) update_arch ;;
     2) update_mirrorlist ;;
@@ -75,21 +83,28 @@ while true; do
            SUB=$(dialog --clear --colors \
              --backtitle "\Z5 Arch Linux Updater \Zn" \
              --title "\Z6 Customization \Zn" \
-             --menu "Choose an option:" 22 80 12 \
+             --menu "Choose an option:" 25 70 25 \
                1 "[ CONFIG ] Fastfetch" \
                2 "[ CONFIG ] Tmux" \
+               "" "" \
                3 "[ CURSOR ] Bibata" \
+               "" "" \
                4 "[ GRUB   ] Arch Silence" \
+               "" "" \
                5 "[ GTK    ] Fluent" \
                6 "[ GTK    ] Lavanda" \
                7 "[ GTK    ] Layan" \
                8 "[ GTK    ] WhiteSur" \
+               "" "" \
                9 "[ ICON   ] Reversal" \
+              "" "" \
               10 "[ KDE    ] Fluent" \
               11 "[ KDE    ] Lavanda" \
               12 "[ KDE    ] Layan" \
               13 "[ KDE    ] WhiteSur" \
+              "" "" \
               14 "[ SHELL  ] OhMyZsh!" \
+              "" "" \
                b "Back" \
                q "Quit" \
              2>&1 >/dev/tty)
@@ -108,6 +123,7 @@ while true; do
             12) cust_kde_layan ;;
             13) cust_kde_whitesur;;
             14) cust_ohmyzsh ;;
+            "") continue ;;
              b) continue ;;
              q) exit ;;
              *) continue ;;
@@ -123,16 +139,20 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
            SUB=$(dialog --clear --colors \
              --backtitle "\Z5 Arch Linux Updater \Zn" \
              --title "\Z6 Optimizations \Zn" \
-             --menu "Choose an option:" 22 80 12 \
+             --menu "Choose an option:" 25 70 15 \
                1 "Install/Remove Chaotic (precompiled AUR packages)" \
                2 "Install/Remove CachyOS (gaming optimized packages)" \
+               "" "" \
                3 "Launch archgaming script by xi-Rick" \
                4 "Launch Non-Steam-Launchers script by moraroy" \
+               "" "" \
                5 "Install additional pacman / yay / cachyos packages" \
                6 "Install additional Windows fonts" \
+               "" "" \
                7 "Copy wireguard scripts to /usr/local/sbin" \
                8 "Copy fan-profile script to /usr/local/bin" \
                9 "Install iptables with preconfigured ruleset" \
+               "" "" \
                b "Back" \
                q "Quit" \
              2>&1 >/dev/tty)
@@ -146,6 +166,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
                7) opt_wireguard ;;
                8) opt_fan-profile ;;
                9) opt_iptables ;;
+               "") continue ;;
                b) continue ;;
                q) exit ;;
                *) continue ;;
@@ -163,6 +184,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
          --menu "Choose an option:" 15 60 6 \
            1 "Set reflector settings" \
            2 "Show environment variables" \
+           "" "" \
            b "Back" \
            q "Quit" \
          2>&1 >/dev/tty)
@@ -181,6 +203,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
   \Z5Pacman-key cmd\Zn  = ${packey_cmd}\n \
   \Z5pacman.conf\Zn     = ${PACMAN_CONF}\n \
   \Z5pacman.d\Zn        = ${PACMAN_DIR}" 22 65 ;;
+         "") continue ;;
          b) continue ;;
          q) exit ;;
          *) continue ;;
@@ -215,6 +238,9 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
        ;;
     10)
        installed_packages
+       ;;
+    "")
+       continue
        ;;
     q) break ;;
     *) break ;;
