@@ -4,7 +4,7 @@ cust_grub_arch_silence(){
     clear
     echo -e "\n${white}[+] ${blue}Installing or updating Arch Silence GRUB theme...${nocolor}\n"
     sleep 2
-    if [ "$(${pacman_cmd} -Qe grub &> /dev/null | wc -l)" -ge 1 ] ; then
+    if [ "$(${pacman_cmd} -Qe grub 2> /dev/null | wc -l)" -ge 1 ] ; then
         if [ -d "/boot/grub/themes/arch-silence_black-blue" ] || [ -d "/boot/grub/themes/arch-silence_black-red" ]; then
             read -p "Do you want to (r)emove it? [y/N] " input
             if [[ ${input} == "y" ]]; then
