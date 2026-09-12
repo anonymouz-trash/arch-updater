@@ -4,27 +4,31 @@ cust_grub_arch_silence(){
     clear
     echo -e "\n${white}[+] ${blue}Installing or updating Arch Silence GRUB theme...${nocolor}\n"
     sleep 2
-    if [ -d "/boot/grub/themes/arch-silence_black-blue" ] || [ -d "/boot/grub/themes/arch-silence_black-red" ]; then
-        read -p "Do you want to (r)emove it? [y/N] " input
-        if [[ ${input} == "y" ]]; then
-            if [[ -d "/boot/grub/themes/arch-silence_black-blue" ]]; then
-                sudo rm -rfv /boot/grub/themes/arch-silence_black-blue
-            else
-                sudo rm -rfv /boot/grub/themes/arch-silence_black-red
+    if [ "$(${pacman_cmd} -Qe grub &> /dev/null | wc -l)" -ge 1 ] ; then
+        if [ -d "/boot/grub/themes/arch-silence_black-blue" ] || [ -d "/boot/grub/themes/arch-silence_black-red" ]; then
+            read -p "Do you want to (r)emove it? [y/N] " input
+            if [[ ${input} == "y" ]]; then
+                if [[ -d "/boot/grub/themes/arch-silence_black-blue" ]]; then
+                    sudo rm -rfv /boot/grub/themes/arch-silence_black-blue
+                else
+                    sudo rm -rfv /boot/grub/themes/arch-silence_black-red
+                fi
+                sudo sed -i '/GRUB_THEME=/c\#GRUB_THEME=""' /etc/default/grub
+                sudo grub-mkconfig -o /boot/grub/grub.cfg
             fi
-            sudo sed -i '/GRUB_THEME=/c\#GRUB_THEME=""' /etc/default/grub
+        else
+            read -p 'Do you want the blue or red Arch Linux GRUB theme? [b/r] ' input
+            if [[ ${input} == "b" ]]; then
+                sudo cp -rv ./assets/arch-silence_black-blue /boot/grub/themes
+                sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-blue/theme.txt"' /etc/default/grub
+            elif [[ ${input} == "r" ]];then
+                sudo cp -rv ./assets/arch-silence_black-red /boot/grub/themes
+                sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-red/theme.txt"' /etc/default/grub
+            fi
             sudo grub-mkconfig -o /boot/grub/grub.cfg
         fi
     else
-        read -p 'Do you want the blue or red Arch Linux GRUB theme? [b/r] ' input
-        if [[ ${input} == "b" ]]; then
-            sudo cp -rv ./assets/arch-silence_black-blue /boot/grub/themes
-            sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-blue/theme.txt"' /etc/default/grub
-        elif [[ ${input} == "r" ]];then
-            sudo cp -rv ./assets/arch-silence_black-red /boot/grub/themes
-            sudo sed -i '/GRUB_THEME=/c\GRUB_THEME="/boot/grub/themes/arch-silence_black-red/theme.txt"' /etc/default/grub
-        fi
-        sudo grub-mkconfig -o /boot/grub/grub.cfg
+        echo -e "\n${white}[+] ${blue}GRUB isn't installed, exiting...${nocolor}\n"
     fi
     echo
     read -p "Press any key to resume ..."
@@ -61,7 +65,6 @@ cust_reversal(){
             rm -rfv ./Reversal-icon-theme
         fi
     fi
-    cd ${pwd}
     echo
     read -p "Press any key to resume ..."
 }
@@ -103,7 +106,6 @@ cust_gtk_fluent(){
     fi
     echo
     read -p "Press any key to resume ..."
-    cd ${pwd}
 }
 
 cust_kde_fluent(){
@@ -140,7 +142,6 @@ cust_kde_fluent(){
     fi
     echo
     read -p "Press any key to resume ..."
-    cd ${pwd}
 }
 
 cust_gtk_lavanda(){
@@ -180,7 +181,6 @@ cust_gtk_lavanda(){
     fi
     echo
     read -p "Press any key to resume ..."
-    cd ${pwd}
 }
 
 cust_kde_lavanda(){
@@ -217,7 +217,6 @@ cust_kde_lavanda(){
     fi
     echo
     read -p "Press any key to resume ..."
-    cd ${pwd}
 }
 
 cust_gtk_layan(){
@@ -256,7 +255,6 @@ cust_gtk_layan(){
     fi
     echo
     read -p "Press any key to resume ..."
-    cd ${pwd}
 }
 
 cust_kde_layan(){
@@ -293,7 +291,6 @@ cust_kde_layan(){
     fi
     echo
     read -p "Press any key to resume ..."
-    cd ${pwd}
 }
 
 cust_gtk_whitesur(){
@@ -398,7 +395,7 @@ cust_fastfetch(){
     clear
     echo -e "\n${white}[+] ${blue}Installing / Removing fastfetch...${nocolor}\n"
 	sleep 2
-	if [ "$(${pacman_cmd} -Qe bash | wc -l)" -ge 1 ] | [ "$(${pacman_cmd} -Qe bash | wc -l)" -ge 1 ] ; then
+	if [ "$(${pacman_cmd} -Qe bash | wc -l)" -ge 1 ] || [ "$(${pacman_cmd} -Qe zsh | wc -l)" -ge 1 ] ; then
         echo -e "\n${white}[+] ${cyan}Neither BASH or ZSH are installed, aborting...${nocolor}\n"
         sleep 2
     else
@@ -409,30 +406,30 @@ cust_fastfetch(){
                 rm -rf ~/.config/fastfetch
                 if [[ ${SHELL,,} =~ "zsh" ]]; then
                     grep -v 'echo ""'  ~/.zshrc > ~/.tmp_user_zshrc
-                    sudo mv ~/.tmp_user_zshrc  ~/.zshrc
+                    mv ~/.tmp_user_zshrc  ~/.zshrc
                     grep -v "customcfg.jsonc"  ~/.zshrc > ~/.tmp_user_zshrc
-                    sudo mv ~/.tmp_user_zshrc  ~/.zshrc
+                    mv ~/.tmp_user_zshrc  ~/.zshrc
 
-                    grep -v 'echo ""' /root/.zshrc > ~/.tmp_root_zshrc
+                    sudo grep -v 'echo ""' /root/.zshrc > ~/.tmp_root_zshrc
                     sudo mv ~/.tmp_root_zshrc /root/.zshrc
-                    grep -v "customcfg.jsonc" /root/.zshrc > ~/.tmp_root_zshrc
+                    sudo grep -v "customcfg.jsonc" /root/.zshrc > ~/.tmp_root_zshrc
                     sudo mv ~/.tmp_root_zshrc /root/.zshrc
                 elif [[ ${SHELL,,} =~ "bash" ]]; then
                     grep -v 'echo ""'  ~/.bashrc > ~/.tmp_user_bashrc
-                    sudo mv ~/.tmp_user_bashrc  ~/.bashrc
+                    mv ~/.tmp_user_bashrc  ~/.bashrc
                     grep -v "customcfg.jsonc"  ~/.bashrc > ~/.tmp_user_bashrc
-                    sudo mv ~/.tmp_user_bashrc  ~/.bashrc
+                    mv ~/.tmp_user_bashrc  ~/.bashrc
 
-                    grep -v 'echo ""' /root/.bashrc > ~/.tmp_root_bashrc
+                    sudo grep -v 'echo ""' /root/.bashrc > ~/.tmp_root_bashrc
                     sudo mv ~/.tmp_root_bashrc /root/.bashrc
-                    grep -v "customcfg.jsonc" /root/.bashrc > ~/.tmp_root_bashrc
+                    sudo grep -v "customcfg.jsonc" /root/.bashrc > ~/.tmp_root_bashrc
                     sudo mv ~/.tmp_root_bashrc /root/.bashrc
                 fi
             fi
         else
             sudo ${pacman_cmd} -S fastfetch
             cd assets
-            mkdir ~/.config/fastfetch
+            mkdir -p ~/.config/fastfetch
             if [[ "${system_os}" == "SteamOS" ]]; then
                 cp cust_steamos.jsonc ~/.config/fastfetch/customcfg.jsonc
             elif [[ "${system_os}" == "EndeavourOS" ]]; then
@@ -442,7 +439,7 @@ cust_fastfetch(){
             elif [[ "${system_os}" == "Garuda Linux" ]]; then
                 cp cust_garuda.jsonc ~/.config/fastfetch/customcfg.jsonc
             elif [[ "${system_os}" == "Manjaro" ]]; then
-                cp cust_majaro.jsonc ~/.config/fastfetch/customcfg.jsonc
+                cp cust_manjaro.jsonc ~/.config/fastfetch/customcfg.jsonc
             elif [[ "${system_os}" == "Arch Linux" ]]; then
                 cp cust_arch.jsonc ~/.config/fastfetch/customcfg.jsonc
             fi

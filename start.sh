@@ -45,7 +45,7 @@ while true; do
   CHOICE=$(dialog --clear --colors \
     --backtitle "\Z5 Arch Linux Updater \Zn" \
     --title "\Z6 Main Menu \Zn" \
-    --menu "Choose an option:" 22 70 12 \
+    --menu "Choose an option:" 22 80 12 \
       1 "Update Arch Linux (yay/pacman + flatpaks)" \
       2 "Update Mirrorlist (reflector)" \
       3 "Clean Arch Linux" \
@@ -75,7 +75,7 @@ while true; do
            SUB=$(dialog --clear --colors \
              --backtitle "\Z5 Arch Linux Updater \Zn" \
              --title "\Z6 Customization \Zn" \
-             --menu "Choose an option:" 22 70 12 \
+             --menu "Choose an option:" 22 80 12 \
                1 "[ CONFIG ] Fastfetch" \
                2 "[ CONFIG ] Tmux" \
                3 "[ CURSOR ] Bibata" \
@@ -123,7 +123,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
            SUB=$(dialog --clear --colors \
              --backtitle "\Z5 Arch Linux Updater \Zn" \
              --title "\Z6 Optimizations \Zn" \
-             --menu "Choose an option:" 22 70 12 \
+             --menu "Choose an option:" 22 80 12 \
                1 "Install/Remove Chaotic (precompiled AUR packages)" \
                2 "Install/Remove CachyOS (gaming optimized packages)" \
                3 "Launch archgaming script by xi-Rick" \
@@ -133,7 +133,6 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
                7 "Copy wireguard scripts to /usr/local/sbin" \
                8 "Copy fan-profile script to /usr/local/bin" \
                9 "Install iptables with preconfigured ruleset" \
-              10 "Install update-checker service for '\Z5$USER\Zn'" \
                b "Back" \
                q "Quit" \
              2>&1 >/dev/tty)

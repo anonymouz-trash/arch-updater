@@ -45,7 +45,6 @@ opt_cachyos(){
         tar xvf cachyos-repo.tar.xz
         sudo ./cachyos-repo/cachyos-repo.sh --install
     fi
-    cd ${pwd}
     echo
     read -p "Press any key to resume ..."
 }
@@ -122,7 +121,6 @@ opt_archgaming(){
     else
         echo "127.0.0.1 localhost       $(hostnamectl hostname).${LOCALDOMAIN}  $(hostnamectl hostname)" | sudo tee -a /etc/hosts > /dev/null
     fi
-    cd ${pwd}
     echo
     read -p "Press any key to resume ..."
 }
@@ -142,7 +140,6 @@ opt_nsl(){
         cd NonSteamLaunchers-On-Steam-Deck
         ./NonSteamLaunchers.sh
     fi
-    cd ${pwd}
     echo
     read -p "Press any key to resume ..."
 }

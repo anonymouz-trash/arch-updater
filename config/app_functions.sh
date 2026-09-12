@@ -43,7 +43,7 @@ if alias pacman_ &>/dev/null; then
     PACMAN_DIR="${USERROOT}/etc/pacman.d"
     GPG_DIR="${USERROOT}/etc/pacman.d/gnupg"
     pacman_cmd="pacman_ "
-    packey_cmd="pacman-key --gpgdir "${GPG_DIR}""
+    packey_cmd="pacman-key --gpgdir ${GPG_DIR}"
 else
     PACMAN_CONF="/etc/pacman.conf"
     PACMAN_DIR="/etc/pacman.d"
