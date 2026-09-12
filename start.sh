@@ -45,7 +45,7 @@ while true; do
   CHOICE=$(dialog --clear --colors \
     --backtitle "\Z5 Arch Linux Updater \Zn" \
     --title "\Z6 Main Menu \Zn" \
-    --menu "Choose an option:" 25 70 15 \
+    --menu "Choose an option:" 21 70 14 \
       1 "Update Arch Linux (yay/pacman + flatpaks)" \
       2 "Update Mirrorlist (reflector)" \
       3 "Clean Arch Linux" \
@@ -83,7 +83,7 @@ while true; do
            SUB=$(dialog --clear --colors \
              --backtitle "\Z5 Arch Linux Updater \Zn" \
              --title "\Z6 Customization \Zn" \
-             --menu "Choose an option:" 25 70 25 \
+             --menu "Choose an option:" 30 70 23 \
                1 "[ CONFIG ] Fastfetch" \
                2 "[ CONFIG ] Tmux" \
                "" "" \
@@ -139,7 +139,7 @@ This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
            SUB=$(dialog --clear --colors \
              --backtitle "\Z5 Arch Linux Updater \Zn" \
              --title "\Z6 Optimizations \Zn" \
-             --menu "Choose an option:" 25 70 15 \
+             --menu "Choose an option:" 22 70 16 \
                1 "Install/Remove Chaotic (precompiled AUR packages)" \
                2 "Install/Remove CachyOS (gaming optimized packages)" \
                "" "" \
