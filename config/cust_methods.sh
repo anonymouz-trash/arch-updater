@@ -66,6 +66,83 @@ cust_reversal(){
     read -p "Press any key to resume ..."
 }
 
+cust_gtk_fluent(){
+    clear
+    echo -e "\n${white}[+] ${blue}Installing or updating Fluent GTK theme...${nocolor}\n"
+	sleep 2
+	cd ~/.cache/arch-updater
+
+	# Check if WhiteSur got pulled and is up to date
+    if [ -d "Fluent-gtk-theme" ]; then
+        read -p "Do you want to (r)emove or just update it? [r/U] " input
+        if [[ ${input} == "r" ]]; then
+            ./Fluent-gtk-theme/install.sh -u
+            rm -rf ./Fluent-gtk-theme
+        else
+            cd Fluent-gtk-theme
+            git pull
+            cd ..
+        fi
+    else
+        git clone https://github.com/vinceliuice/Fluent-gtk-theme.git
+    fi
+    if [[ -d "Fluent-gtk-theme" ]]; then
+        if [[ ${de,,} =~ "kde" ]]; then
+            ./Fluent-gtk-theme/install.sh --theme all
+        else
+            ./Fluent-gtk-theme/install.sh --theme all --icon arch --libadwaita --tweaks float --tweaks rounded
+        fi
+        echo
+        echo
+        echo "Do you want to remove previously downloaded files? "
+        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
+
+        if [[ ${input} == "y" ]]; then
+            rm -rf Fluent-gtk-theme
+        fi
+    fi
+    echo
+    read -p "Press any key to resume ..."
+    cd ${pwd}
+}
+
+cust_kde_fluent(){
+    clear
+    echo -e "\n${white}[+] ${blue}Installing or updating Fluent KDE theme...${nocolor}\n"
+	sleep 2
+	cd ~/.cache/arch-updater
+
+	# Check if WhiteSur got pulled and is up to date
+    if [ -d "Fluent-kde" ]; then
+        read -p "Do you want to (r)emove or just update it? [r/U] " input
+        if [[ ${input} == "r" ]]; then
+            ./Fluent-kde/uninstall.sh
+            rm -rfv ./Fluent-kde
+            sudo rm -rfv /usr/share/sddm/themes/Fluent*
+        else
+            cd Fluent-kde
+            git pull
+            cd ..
+        fi
+    else
+        git clone https://github.com/vinceliuice/Fluent-kde.git
+    fi
+    if [[ -d "Fluent-kde" ]]; then
+        ./Fluent-kde/install.sh --theme all --round
+        sudo ./Fluent-kde/sddm/install.sh
+        echo
+        echo
+        echo "Do you want to remove previously downloaded files? "
+        read -p "Type (n) or just press [Enter] if you want to update in the future [y/N] " input
+        if [[ ${input} == "y" ]]; then
+            rm -rfv Fluent-kde
+        fi
+    fi
+    echo
+    read -p "Press any key to resume ..."
+    cd ${pwd}
+}
+
 cust_gtk_lavanda(){
     clear
     echo -e "\n${white}[+] ${blue}Installing or updating Lavanda GTK theme...${nocolor}\n"
@@ -88,9 +165,9 @@ cust_gtk_lavanda(){
     fi
     if [[ -d "Lavanda-gtk-theme" ]]; then
         if [[ ${de,,} =~ "kde" ]]; then
-            ./Lavanda-gtk-theme/install.sh -i arch
+            ./Lavanda-gtk-theme/install.sh
         else
-            ./Lavanda-gtk-theme/install.sh -l -i arch -t standard -c dark
+            ./Lavanda-gtk-theme/install.sh --libadwaita --icon arch
         fi
         echo
         echo
@@ -166,7 +243,7 @@ cust_gtk_layan(){
         if [[ ${de,,} =~ "kde" ]]; then
             ./Layan-gtk-theme/install.sh
         else
-            ./Layan-gtk-theme/install.sh -c dark -l
+            ./Layan-gtk-theme/install.sh --libadwaita
         fi
         echo
         echo
@@ -282,7 +359,7 @@ cust_kde_whitesur(){
         git clone https://github.com/vinceliuice/WhiteSur-kde.git
     fi
     if [ -d "WhiteSur-kde" ]; then
-        ./WhiteSur-kde/install.sh
+        ./WhiteSur-kde/install.sh --opaque
         sudo ./WhiteSur-kde/sddm/install.sh
         echo
         echo

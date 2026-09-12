@@ -80,14 +80,16 @@ while true; do
                2 "[ CONFIG ] Tmux" \
                3 "[ CURSOR ] Bibata" \
                4 "[ GRUB   ] Arch Silence" \
-               5 "[ GTK    ] Lavanda" \
-               6 "[ GTK    ] Layan" \
-               7 "[ GTK    ] WhiteSur" \
-               8 "[ ICON   ] Reversal" \
-               9 "[ KDE    ] Lavanda" \
-              10 "[ KDE    ] Layan" \
-              11 "[ KDE    ] WhiteSur" \
-              12 "[ SHELL  ] OhMyZsh!" \
+               5 "[ GTK    ] Fluent" \
+               6 "[ GTK    ] Lavanda" \
+               7 "[ GTK    ] Layan" \
+               8 "[ GTK    ] WhiteSur" \
+               9 "[ ICON   ] Reversal" \
+              10 "[ KDE    ] Fluent" \
+              11 "[ KDE    ] Lavanda" \
+              12 "[ KDE    ] Layan" \
+              13 "[ KDE    ] WhiteSur" \
+              14 "[ SHELL  ] OhMyZsh!" \
                b "Back" \
                q "Quit" \
              2>&1 >/dev/tty)
@@ -96,14 +98,16 @@ while true; do
              2) cust_tmux ;;
              3) cust_bibata ;;
              4) cust_grub_arch_silence ;;
-             5) cust_gtk_lavanda ;;
-             6) cust_gtk_layan ;;
-             7) cust_gtk_whitesur ;;
-             8) cust_reversal ;;
-             9) cust_kde_lavanda ;;
-            10) cust_kde_layan ;;
-            11) cust_kde_whitesur;;
-            12) cust_ohmyzsh ;;
+             5) cust_gtk_fluent ;;
+             6) cust_gtk_lavanda ;;
+             7) cust_gtk_layan ;;
+             8) cust_gtk_whitesur ;;
+             9) cust_reversal ;;
+            10) cust_kde_fluent ;;
+            11) cust_kde_lavanda ;;
+            12) cust_kde_layan ;;
+            13) cust_kde_whitesur;;
+            14) cust_ohmyzsh ;;
              b) continue ;;
              q) exit ;;
              *) continue ;;

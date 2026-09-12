@@ -107,7 +107,7 @@ update_arch(){
     echo -e "\n${white}[+] ${blue}Updating Arch Linux... ${nocolor}\n"
     sleep 2
     echo -e "${white}[+] ${blue}...standard packages using pacman ${nocolor}\n"
-    sudo pacman -Syu
+    sudo ${pacman_cmd} -Syu
     sleep 2
 	if [[ ${app_yay} == "1" ]]; then
         echo -e "${white}[+] ${blue}...AUR packages using yay ${nocolor}\n"
@@ -167,22 +167,22 @@ clean_arch(){
 			if [[ ${app_yay} == "1" ]]; then
                 yay -Scc
             else
-                sudo pacman -Scc
+                sudo ${pacman_cmd} -Scc
             fi
 		else
             if [[ ${app_yay} == "1" ]]; then
                 yay -Sc
             else
-                sudo pacman -Sc
+                sudo ${pacman_cmd} -Sc
             fi
 		fi
-		unused=$(pacman -Qtdq)
+		unused=$(${pacman_cmd} -Qtdq)
 		if [ "$(echo ${unused} | wc -l)" -ge 1 ]; then
             echo -e "\n${cyan} This is a list of packages not used by anyone... ${nocolor}\n"
             echo -e "${red}${unused}${nocolor}\n"
             read -p 'Do you want to remove these packages? [y/N] ' input
             if [[ ${input} == "y" ]]; then
-                sudo pacman -Rnsc $(yay -Qtdq)
+                sudo ${pacman_cmd} -Rnsc $(yay -Qtdq)
             fi
         fi
 	fi
