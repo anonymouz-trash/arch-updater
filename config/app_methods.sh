@@ -98,7 +98,7 @@ install_yay(){
 update_arch(){
     clear
     draw_logo
-    echo -e "\n${white}[+] ${blue}Updating Arch Linux... ${nocolor}\n"
+    echo -e "\n${white}[+] ${blue}Updating ${system_os}... ${nocolor}\n"
     sleep 2
     echo -e "${white}[+] ${blue}...standard packages using pacman ${nocolor}\n"
     sudo pacman -Syu
@@ -121,7 +121,7 @@ update_arch(){
 update_mirrorlist(){
 	clear
 	draw_logo
-	echo -e "\n${white}[+] ${blue}Updating Arch Linux mirrorlist with reflector... ${nocolor}\n"
+	echo -e "\n${white}[+] ${blue}Updating ${system_os} mirrorlist with reflector... ${nocolor}\n"
 	sleep 2
 	if ! command -v reflector &> /dev/null ; then
         sudo pacman -S reflector rsync
@@ -149,7 +149,7 @@ update_mirrorlist(){
 clean_arch(){
     clear
     draw_logo
-	echo -e "\n${white}[+] ${blue}Cleaning Arch Linux...${nocolor}\n"
+	echo -e "\n${white}[+] ${blue}Cleaning ${system_os}...${nocolor}\n"
     cache_size=$(du -sh ~/.cache)
     paccache_size=$(du -sh /var/cache/pacman/pkg)
     sleep 2
@@ -245,6 +245,7 @@ EOF
 check_script_update(){
     clear
     draw_logo
+    echo -e "\n${white}[+] ${blue}Checking Git for updates...${nocolor}\n"
     git pull
     read -p "Press any key to resume ..."
 }
