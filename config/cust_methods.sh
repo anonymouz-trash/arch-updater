@@ -2,9 +2,10 @@
 
 cust_grub_arch_silence(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating Arch Silence GRUB theme...${nocolor}\n"
     sleep 2
-    if [ "$(${pacman_cmd} -Qe grub 2> /dev/null | wc -l)" -ge 1 ] ; then
+    if [ "$(pacman -Qe grub 2> /dev/null | wc -l)" -ge 1 ] ; then
         if [ -d "/boot/grub/themes/arch-silence_black-blue" ] || [ -d "/boot/grub/themes/arch-silence_black-red" ]; then
             read -p "Do you want to (r)emove it? [y/N] " input
             if [[ ${input} == "y" ]]; then
@@ -36,6 +37,7 @@ cust_grub_arch_silence(){
 
 cust_reversal(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating Reversal icon theme...${nocolor}\n"
 	sleep 2
     cd ~/.cache/arch-updater
@@ -71,6 +73,7 @@ cust_reversal(){
 
 cust_gtk_fluent(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating Fluent GTK theme...${nocolor}\n"
 	sleep 2
 	cd ~/.cache/arch-updater
@@ -110,6 +113,7 @@ cust_gtk_fluent(){
 
 cust_kde_fluent(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating Fluent KDE theme...${nocolor}\n"
 	sleep 2
 	cd ~/.cache/arch-updater
@@ -146,6 +150,7 @@ cust_kde_fluent(){
 
 cust_gtk_lavanda(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating Lavanda GTK theme...${nocolor}\n"
 	sleep 2
 	cd ~/.cache/arch-updater
@@ -185,6 +190,7 @@ cust_gtk_lavanda(){
 
 cust_kde_lavanda(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating Lavanda KDE theme...${nocolor}\n"
 	sleep 2
 	cd ~/.cache/arch-updater
@@ -221,6 +227,7 @@ cust_kde_lavanda(){
 
 cust_gtk_layan(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating Layan GTK theme...${nocolor}\n"
     sleep 2
     cd ~/.cache/arch-updater
@@ -259,6 +266,7 @@ cust_gtk_layan(){
 
 cust_kde_layan(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating Layan KDE theme...${nocolor}\n"
 	sleep 2
 	cd ~/.cache/arch-updater
@@ -295,6 +303,7 @@ cust_kde_layan(){
 
 cust_gtk_whitesur(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating WhiteSur GTK theme...${nocolor}"
     if [[ ${de,,} =~ "gnome" ]]; then
         echo -e "\n${white}[+] ${blue}!!!${nocolor} Please use background pictures without spaces in the filename ${blue}!!!${nocolor}\n"
@@ -338,6 +347,7 @@ cust_gtk_whitesur(){
 
 cust_kde_whitesur(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating WhiteSur KDE theme...${nocolor}"
     sleep 2
     cd ~/.cache/arch-updater
@@ -373,6 +383,7 @@ cust_kde_whitesur(){
 
 cust_bibata(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing or updating Bibata cursor theme...${nocolor}\n"
 	sleep 2
 	if [[ ${app_yay} == "0" ]]; then
@@ -393,16 +404,17 @@ cust_bibata(){
 
 cust_fastfetch(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Installing / Removing fastfetch...${nocolor}\n"
 	sleep 2
-	if [ "$(${pacman_cmd} -Qe bash | wc -l)" -ge 1 ] || [ "$(${pacman_cmd} -Qe zsh | wc -l)" -ge 1 ] ; then
+	if [ "$(pacman -Qe bash | wc -l)" -ge 1 ] || [ "$(pacman -Qe zsh | wc -l)" -ge 1 ] ; then
         echo -e "\n${white}[+] ${cyan}Neither BASH or ZSH are installed, aborting...${nocolor}\n"
         sleep 2
     else
-        if [ "$(${pacman_cmd} -Qe fastfetch | wc -l)" -ge 1 ]; then
+        if [ "$(pacman -Qe fastfetch | wc -l)" -ge 1 ]; then
             read -p "Already installed! Do you want to (r)emove it? [r/N] " input
             if [[ ${input} == "r" ]]; then
-                sudo ${pacman_cmd} -Rsnc fastfetch
+                sudo pacman -Rsnc fastfetch
                 rm -rf ~/.config/fastfetch
                 if [[ ${SHELL,,} =~ "zsh" ]]; then
                     grep -v 'echo ""'  ~/.zshrc > ~/.tmp_user_zshrc
@@ -427,7 +439,7 @@ cust_fastfetch(){
                 fi
             fi
         else
-            sudo ${pacman_cmd} -S fastfetch
+            sudo pacman -S fastfetch
             cd assets
             mkdir -p ~/.config/fastfetch
             if [[ "${system_os}" == "SteamOS" ]]; then
@@ -466,27 +478,10 @@ cust_fastfetch(){
     read -p "Press any key to resume ..."
 }
 
-cust_tmux(){
-    clear
-    echo -e "\n${white}[+] ${blue}Installing / Removing tmux...${nocolor}\n"
-	sleep 2
-	if [ "$(${pacman_cmd} -Qe tmux | wc -l)" -ge 1 ] && [ -f ~/.tmux.conf ] ; then
-        read -p "Already installed! Do you want to (r)emove it? [r/N] " input
-        if [[ ${input} == "r" ]]; then
-            sudo ${pacman_cmd} -Rsnc tmux
-            rm -rf ~/.tmux.conf
-        fi
-    else
-        sudo ${pacman_cmd} -S tmux
-        cp ./assets/cust_tmux.conf ~/.tmux.conf
-    fi
-    echo
-    read -p "Press any key to resume ..."
-}
-
 cust_ohmyzsh(){
     clear
-    if [ "$(${pacman_cmd} -Qe zsh | wc -l)" -ge 1 ]; then
+    draw_logo
+    if [ "$(pacman -Qe zsh | wc -l)" -ge 1 ]; then
 		echo "Install Oh My ZSH! for logged in user"
 		sleep 1
 		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

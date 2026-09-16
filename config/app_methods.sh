@@ -34,6 +34,7 @@ fi
 
 set_reflector(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}reflector settings...${nocolor}\n"
 	echo "     Country = $country"
 	echo "     Age = $age"
@@ -76,22 +77,14 @@ set_reflector(){
     fi
 }
 
-### Check if dialog is installed, if not it will be installed
-check_4_dialog(){
-    if ! command -v dialog &> /dev/null ; then
-        echo -e "\n${white}[+] ${blue}dialog is not installed, installing...${nocolor}\n"
-        sudo ${pacman_cmd} -S dialog --noconfirm
-    fi
-}
-
 ### install yay AUR helper
 install_yay(){
     if ! command -v yay &> /dev/null ; then
         echo -e "\n${white}[+] ${blue}Yay is not installed, installing...${nocolor}\n"
-        if [ "$(${pacman_cmd} -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
-            sudo ${pacman_cmd} -S yay
+        if [ "$(pacman -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
+            sudo pacman -S yay
         else
-            sudo ${pacman_cmd} -S fakeroot debugedit git
+            sudo pacman -S fakeroot debugedit git
             git clone https://aur.archlinux.org/yay.git
             cd yay
             makepkg -si
@@ -104,10 +97,11 @@ install_yay(){
 
 update_arch(){
     clear
+    draw_logo
     echo -e "\n${white}[+] ${blue}Updating Arch Linux... ${nocolor}\n"
     sleep 2
     echo -e "${white}[+] ${blue}...standard packages using pacman ${nocolor}\n"
-    sudo ${pacman_cmd} -Syu
+    sudo pacman -Syu
     sleep 2
 	if [[ ${app_yay} == "1" ]]; then
         echo -e "${white}[+] ${blue}...AUR packages using yay ${nocolor}\n"
@@ -126,10 +120,11 @@ update_arch(){
 
 update_mirrorlist(){
 	clear
+	draw_logo
 	echo -e "\n${white}[+] ${blue}Updating Arch Linux mirrorlist with reflector... ${nocolor}\n"
 	sleep 2
 	if ! command -v reflector &> /dev/null ; then
-        sudo ${pacman_cmd} -S reflector rsync
+        sudo pacman -S reflector rsync
         sudo systemctl enable reflector.timer --now
     fi
     if [ -f /etc/xdg/reflector/reflector.conf ]; then
@@ -143,9 +138,9 @@ update_mirrorlist(){
     echo "--ipv4" | sudo tee -a /etc/xdg/reflector/reflector.conf > /dev/null
     echo "--save ${PACMAN_DIR}/mirrorlist" | sudo tee -a /etc/xdg/reflector/reflector.conf > /dev/null
     sudo reflector -c ${country} -a ${age} -p ${protocol} -l ${latest} --sort rate --ipv4 --verbose --save ${PACMAN_DIR}/mirrorlist
-    sudo ${pacman_cmd} -S archlinux-keyring
-    if [ "$(${pacman_cmd} -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
-        sudo ${pacman_cmd} -S chaotic-keyring
+    sudo pacman -S archlinux-keyring
+    if [ "$(pacman -Qe chaotic-keyring 2> /dev/null | wc -l)" -ge 1 ] ; then
+        sudo pacman -S chaotic-keyring
     fi
     echo
     read -p "Press any key to resume ..."
@@ -153,6 +148,7 @@ update_mirrorlist(){
 
 clean_arch(){
     clear
+    draw_logo
 	echo -e "\n${white}[+] ${blue}Cleaning Arch Linux...${nocolor}\n"
     cache_size=$(du -sh ~/.cache)
     paccache_size=$(du -sh /var/cache/pacman/pkg)
@@ -167,22 +163,22 @@ clean_arch(){
 			if [[ ${app_yay} == "1" ]]; then
                 yay -Scc
             else
-                sudo ${pacman_cmd} -Scc
+                sudo pacman -Scc
             fi
 		else
             if [[ ${app_yay} == "1" ]]; then
                 yay -Sc
             else
-                sudo ${pacman_cmd} -Sc
+                sudo pacman -Sc
             fi
 		fi
-		unused=$(${pacman_cmd} -Qtdq)
-		if [ "$(echo ${unused} | wc -l)" -ge 1 ]; then
+		unused=$(pacman -Qtdq)
+		if [ "$(echo ${unused} | wc -l)" -gt 1 ]; then
             echo -e "\n${cyan} This is a list of packages not used by anyone... ${nocolor}\n"
             echo -e "${red}${unused}${nocolor}\n"
             read -p 'Do you want to remove these packages? [y/N] ' input
             if [[ ${input} == "y" ]]; then
-                sudo ${pacman_cmd} -Rnsc $(yay -Qtdq)
+                sudo pacman -Rnsc $(yay -Qtdq)
             fi
         fi
 	fi
@@ -207,25 +203,48 @@ clean_arch(){
     unset paccache_size cache_size unused input
 }
 
-installed_packages(){
-    # Check if pacgraph is installed
-    if ! command -v pacgraph &> /dev/null; then
-        echo -e "\n${white}[+] ${blue}Pacgraph is not installed, installing...${nocolor}\n"
-        sudo ${pacman_cmd} -S pacgraph
-    fi
+show_inst_pkg_official() {
+    clear
+    draw_logo
+    pacgraph -c
+    echo "Looking forward to a better solution..."
+    read -p "Press any key to resume ..."
+}
 
-    # Temporary file
-    TMPFILE=$(mktemp)
+show_inst_pkg_aur(){
+    clear
+    draw_logo
+    echo -e " ... ${red}under construction${nocolor} ... "
+    read -p "Press any key to resume ..."
+}
 
-    # Run pacgraph for explicits with console summary
-    pacgraph -c -e > "$TMPFILE" 2>/dev/null
+show_env_vars(){
+    clear
+    draw_logo
+    echo -e "${white}"
+    cat << EOF
+========================================================================
 
-    # Filter only lines starting with a number and overwrite TMPFILE
-    grep -E '^[0-9]' "$TMPFILE" > "${TMPFILE}.clean"
+  [ System ]
 
-    # Show all output in dialog textbox
-    dialog --title "Pacgraph Package Size Summary" --textbox "${TMPFILE}.clean" 35 95
+  System OS       = ${system_os}
+  Desktop         = ${de,,}
+  Shell           = $SHELL (if it's false, reboot)
+  User home       = ${app_home}
 
-    # Clean up
-    rm "$TMPFILE" "${TMPFILE}.clean"
+  [ Script ]
+
+  Script path     = ${app_pwd}
+
+========================================================================
+EOF
+    echo -e "${nocolor}"
+    read -p "Press any key to resume ..."
+}
+
+check_script_update(){
+    clear
+    draw_logo
+    git pull
+    read -p "Press any key to resume ..."
 }

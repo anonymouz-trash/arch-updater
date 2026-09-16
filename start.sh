@@ -24,14 +24,6 @@ for f in ./config/{app_functions,app_methods,cust_methods,opt_methods}.sh; do
   source "$f"
 done
 
-### Check if a config is available
-if ! [ -f ~/.config/arch_updater.conf ]; then
-    set_reflector
-fi
-
-### Menu section
-check_4_dialog
-
 while true; do
   ### Check if a config is available
   if ! [ -f ~/.config/arch_updater.conf ]; then
@@ -42,210 +34,123 @@ while true; do
     mkdir -p ~/.cache/arch-updater
   fi
   cd ${app_pwd}
-  CHOICE=$(dialog --clear --colors \
-    --backtitle "\Z5 Arch Linux Updater \Zn" \
-    --title "\Z6 Main Menu \Zn" \
-    --menu "Choose an option:" 21 70 14 \
-      1 "Update Arch Linux (yay/pacman + flatpaks)" \
-      2 "Update Mirrorlist (reflector)" \
-      3 "Clean Arch Linux" \
-      4 "All above at once" \
-      "" "" \
-      5 ">> Customization submenu" \
-      6 ">> Optimizations & Tweaks submenu" \
-      "" "" \
-      7 "Settings / Environment" \
-      8 "Credits" \
-      9 "Check for updates (script)" \
-      10 "Show explicit installed packages" \
-      "" "" \
-      q "Quit" \
-    2>&1 >/dev/tty)
-  status=$?
   clear
-  # Cancel-Button oder Esc gedrückt -> Programm sauber beenden
-  if [ $status -eq 1 ] || [ $status -eq 255 ]; then
-    echo "Goodbye."
-    exit 0
-  fi
-  case "$CHOICE" in
-    1) update_arch ;;
-    2) update_mirrorlist ;;
-    3) clean_arch ;;
-    4)
-       update_mirrorlist
-       update_arch
-       clean_arch
-       ;;
-    5)
-       if ! [[ "${system_os}" == "SteamOS" ]]; then
-           # Beispiel Untermenü: Customization
-           SUB=$(dialog --clear --colors \
-             --backtitle "\Z5 Arch Linux Updater \Zn" \
-             --title "\Z6 Customization \Zn" \
-             --menu "Choose an option:" 30 70 23 \
-               1 "[ CONFIG ] Fastfetch" \
-               2 "[ CONFIG ] Tmux" \
-               "" "" \
-               3 "[ CURSOR ] Bibata" \
-               "" "" \
-               4 "[ GRUB   ] Arch Silence" \
-               "" "" \
-               5 "[ GTK    ] Fluent" \
-               6 "[ GTK    ] Lavanda" \
-               7 "[ GTK    ] Layan" \
-               8 "[ GTK    ] WhiteSur" \
-               "" "" \
-               9 "[ ICON   ] Reversal" \
-              "" "" \
-              10 "[ KDE    ] Fluent" \
-              11 "[ KDE    ] Lavanda" \
-              12 "[ KDE    ] Layan" \
-              13 "[ KDE    ] WhiteSur" \
-              "" "" \
-              14 "[ SHELL  ] OhMyZsh!" \
-              "" "" \
-               b "Back" \
-               q "Quit" \
-             2>&1 >/dev/tty)
-           case "$SUB" in
-             1) cust_fastfetch ;;
-             2) cust_tmux ;;
-             3) cust_bibata ;;
-             4) cust_grub_arch_silence ;;
-             5) cust_gtk_fluent ;;
-             6) cust_gtk_lavanda ;;
-             7) cust_gtk_layan ;;
+  draw_logo
+  draw_main_menu
+  read -rp "Choice: " choice
+  case $choice in
+      1) update_arch ;;
+      2) update_mirrorlist ;;
+      3) clean_arch ;;
+      4)
+         clear
+         draw_logo
+         draw_cust_menu
+         read -rp "Choice: " choice
+         case $choice in
+             1) cust_grub_arch_silence ;;
+             2) cust_bibata ;;
+             3) cust_reversal ;;
+             4) cust_fastfetch ;;
+             5) cust_ohmyzsh ;;
+             6) cust_gtk_fluent ;;
+             7) cust_gtk_lavanda ;;
              8) cust_gtk_whitesur ;;
-             9) cust_reversal ;;
-            10) cust_kde_fluent ;;
-            11) cust_kde_lavanda ;;
-            12) cust_kde_layan ;;
-            13) cust_kde_whitesur;;
-            14) cust_ohmyzsh ;;
-            "") continue ;;
-             b) continue ;;
-             q) exit ;;
-             *) continue ;;
-           esac
-       else
-           dialog --clear --colors --msgbox "\Z1Important notice:\Zn\n\n \
-This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
-       fi
-       ;;
-    6)
-       if ! [[ "${system_os}" == "SteamOS" ]]; then
-           # Submenu: Optimizations & Tweaks — analog
-           SUB=$(dialog --clear --colors \
-             --backtitle "\Z5 Arch Linux Updater \Zn" \
-             --title "\Z6 Optimizations \Zn" \
-             --menu "Choose an option:" 22 70 16 \
-               1 "Install/Remove Chaotic (precompiled AUR packages)" \
-               2 "Install/Remove CachyOS (gaming optimized packages)" \
-               "" "" \
-               3 "Launch archgaming script by xi-Rick" \
-               4 "Launch Non-Steam-Launchers script by moraroy" \
-               "" "" \
-               5 "Install additional pacman / yay / cachyos packages" \
-               6 "Install additional Windows fonts" \
-               "" "" \
-               7 "Copy wireguard scripts to /usr/local/sbin" \
-               8 "Copy fan-profile script to /usr/local/bin" \
-               9 "Install iptables with preconfigured ruleset" \
-               "" "" \
-               b "Back" \
-               q "Quit" \
-             2>&1 >/dev/tty)
-           case "$SUB" in
-               1) opt_chaotic ;;
-               2) opt_cachyos ;;
-               3) opt_archgaming ;;
-               4) opt_nsl ;;
-               5) opt_packages ;;
-               6) opt_fonts ;;
-               7) opt_wireguard ;;
-               8) opt_fan-profile ;;
-               9) opt_iptables ;;
-               "") continue ;;
-               b) continue ;;
-               q) exit ;;
-               *) continue ;;
-           esac
-       else
-           dialog --clear --colors --msgbox "\Z1Important notice:\Zn\n\n \
-This section is \Z5disabled\Zn for Steamdeck!\n\n" 10 65
-       fi
-       ;;
-    7)
-       # Settings / Environment submenu
-       SUB=$(dialog --clear --colors \
-         --backtitle "\Z5 Arch Linux Updater \Zn" \
-         --title "\Z6 Settings \Zn" \
-         --menu "Choose an option:" 15 60 6 \
-           1 "Set reflector settings" \
-           2 "Show environment variables" \
-           "" "" \
-           b "Back" \
-           q "Quit" \
-         2>&1 >/dev/tty)
-       case "$SUB" in
-         1) set_reflector ;;
-         2) dialog --clear --colors --msgbox "Environment variables:\n\n \
-\Z6[System]\Zn\n \
-  \Z5System OS\Zn       = ${system_os}\n \
-  \Z5Desktop\Zn         = ${de,,}\n \
-  \Z5Shell\Zn           = $SHELL \Z1(if it's false, reboot)\Zn\n \
-  \Z5User home\Zn       = ${app_home}\n\n \
-\Z6[Script]\Zn\n \
-  \Z5Script path\Zn     = ${app_pwd}\n\n \
-\Z6[Pacman]\Zn\n \
-  \Z5Pacman cmd\Zn      = ${pacman_cmd} \n \
-  \Z5Pacman-key cmd\Zn  = ${packey_cmd}\n \
-  \Z5pacman.conf\Zn     = ${PACMAN_CONF}\n \
-  \Z5pacman.d\Zn        = ${PACMAN_DIR}" 22 65 ;;
-         "") continue ;;
-         b) continue ;;
-         q) exit ;;
-         *) continue ;;
-       esac
-       ;;
-    8)
-       # Credits — z. B. msgbox
-       dialog --clear --colors --msgbox "Credits & Thanks:\n\n \
-\Z5Arch Silence GRUB Theme\Zn\n \
-   https://www.pling.com/p/1111545\n\n \
-\Z5Reversal Icon Theme\Zn\n \
-   https://github.com/yeyushengfan258/Reversal-icon-theme\n\n \
-\Z5GTK/KDE/Icon Themes\Zn\n \
-   https://github.com/vinceliuice\n\n \
-\Z5Bibata Cursor Theme\Zn\n \
-   https://github.com/ful1e5/Bibata_Cursor\n\n \
-\Z5My own Fastfetch Preset Fork from examples\Zn\n \
-   https://github.com/fastfetch-cli/fastfetch\n\n \
-\Z5OhMyZsh!\Zn\n \
-   https://github.com/ohmyzsh/ohmyzsh\n\n \
-\Z5archgaming script\Zn\n \
-   https://github.com/xi-Rick/archgaming\n\n \
-\Z5NonSteamLaunchers on Steam Deck\Zn\n \
-   https://github.com/moraroy/NonSteamLaunchers-On-Steam-Deck\n\n \
-\Z5Steam Deck hacking: Setting up user space pacman\Zn\n
-   https://www.jeromeswannack.com/projects/2024/11/29/steamdeck-userspace-pacman.html\n" 35 95
-       ;;
-    9)
-       git pull 2>&1 | dialog --title "<[ Running script update... ]>" --colors --progressbox 20 70
-       read -p "Press any key to resume ..."
-       dialog --clear --colors --msgbox "If script got updated please restart the script." 6 60
-       ;;
-    10)
-       installed_packages
-       ;;
-    "")
-       continue
-       ;;
-    q) break ;;
-    *) break ;;
+             9) cust_kde_fluent ;;
+            10) cust_kde_lavanda ;;
+            11) cust_kde_layan ;;
+            12) cust_kde_whitesur ;;
+             b)
+                 continue
+                 ;;
+             q)
+                 echo "Bye"
+                 exit 0
+                 ;;
+             *)
+                 echo "Incorrect choice..."
+                 sleep 1
+                 ;;
+         esac
+         ;;
+      5)
+         clear
+         draw_logo
+         draw_opt_menu
+         read -rp "Choice: " choice
+         case $choice in
+             1) opt_chaotic ;;
+             2) opt_cachyos ;;
+             3) opt_archgaming ;;
+             4) opt_nsl ;;
+             5) opt_fonts ;;
+             6) opt_packages ;;
+             7) opt_iptables ;;
+             8) opt_wireguard ;;
+             9) opt_fan ;;
+             b)
+                 continue
+                 ;;
+             q)
+                 echo "Bye"
+                 exit 0
+                 ;;
+             *)
+                 echo "Incorrect choice..."
+                 sleep 1
+                 ;;
+         esac
+         ;;
+      6)
+         clear
+         draw_logo
+         draw_settings_menu
+         read -rp "Choice: " choice
+         case $choice in
+             1) set_reflector ;;
+             2) show_env_vars ;;
+             3) check_script_update ;;
+             4) show_inst_pkg_official ;;
+             5) show_inst_pkg_aur ;;
+             b)
+                 continue
+                 ;;
+             q)
+                 echo "Bye"
+                 exit 0
+                 ;;
+             *)
+                 echo "Incorrect choice..."
+                 sleep 1
+                 ;;
+         esac
+         ;;
+      7)
+         clear
+         draw_logo
+         draw_credits_menu
+         read -rp "Choice: " choice
+         case $choice in
+             b)
+                 continue
+                 ;;
+             q)
+                 echo "Bye"
+                 exit 0
+                 ;;
+             *)
+                 echo "Incorrect choice..."
+                 sleep 1
+                 ;;
+         esac
+         ;;
+      q)
+         echo "Bye"
+         exit 0
+         ;;
+      *)
+         echo "Incorrect choice..."
+         sleep 1
+         ;;
   esac
 done
-
-clear
-echo "Goodbye."
