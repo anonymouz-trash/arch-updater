@@ -106,9 +106,6 @@ update_arch(){
 	if [[ ${app_yay} == "1" ]]; then
         echo -e "${white}[+] ${blue}...AUR packages using yay ${nocolor}\n"
         yay -Syu
-    elif [[ ${app_paru} == "1" ]]; then
-        echo -e "${white}[+] ${blue}...AUR packages paru ${nocolor}\n"
-        paru -Syu
     fi
     if [[ ${app_flatpak} == "1" ]]; then
         echo -e "\n${white}[+] ${blue}...updating flatpaks ${nocolor}\n"

@@ -1,51 +1,64 @@
 # Arch Linux Updater Script
 
-This is a try to fully automate the Arch Linux maintainance and get a more knowledge of how Arch Linux works.
-My setup:  Arch Linux (ofc ^^), KDE Desktop (sometimes GNOME) and AMD (Desktop) / Nvidia (Laptop) graphics.
+This is an attempt to fully automate Arch Linux maintenance and to gain a better understanding of how Arch Linux works along the way.
+My setup: Arch Linux (of course ^^), KDE Plasma (sometimes GNOME), and AMD (desktop) / Nvidia (laptop) graphics.
 
-Feel free to use any of the code in this repo for your own.
-I highly encourage you to read through the script before you using it!
-As you know: No backup, no mercy. ;)
+Feel free to use any of the code in this repo for your own projects.
+I highly encourage you to read through the script before using it!
+As you know: no backup, no mercy. ;)
 
 # Disclaimer
+
 THIS IS WORK IN PROGRESS!!
 
-I'm not responsible for any damage and I highly recommend to see through the entire project/code before using it!
-The whole project is adjusted to my needs. As Arch-user I think you know what you're doing. :smile:
+I'm not responsible for any damage, and I highly recommend reviewing the entire project/code before using it!
+The whole project is tailored to my own needs. As an Arch user, I assume you know what you're doing. :smile:
+
+:warning: This script does **not** work on "immutable" SteamOS distros or derivatives like Bazzite. :warning:
+:information_source: Feel free to check out my other project, [SteamOS Customizer](https://github.com/anonymouz-trash/steamos-customizer). :grin:
 
 # Features
-* easy to use repeating tasks, like updating, cleaning and installing packages
-* annoying installation and configuration things when reinstalling the entire system
-* included the amazing Non-Steam-Launchers script for Desktop and Steamdeck
-* extra Steamdeck optimization section
-* error detection and prevention depending on what system you are (hopefully) :grin:
-* when things are more customizable, like packages to install, the script asks
+
+- Repeatable one-shot tasks for updating, cleaning, and installing packages (pacman, yay, flatpak)
+- Automates the tedious setup work that comes with reinstalling the entire system
+- Bundles the excellent Non-Steam-Launchers script for both desktop and Steam Deck
+- Guided reflector/mirrorlist setup, with your choices persisted in `~/.config/arch_updater.conf`
+- One-click theme installers for GTK & KDE (Fluent, Lavanda, Layan, WhiteSur), Bibata cursors, the Reversal icon theme, and an Arch Silence GRUB theme
+- Repository helpers to add/remove Chaotic-AUR and CachyOS
+- Gaming-focused extras: the archgaming script, gamescope, and a Battle.net-friendly `/etc/hosts` fix
+- Quick installers for a WireGuard toggle script, a fan-profile script, and a preconfigured iptables ruleset
+- Shows currently installed official & AUR packages and your environment variables at a glance
+- Built-in self-updater (`git pull` right from the menu)
+- Detects your distro/desktop and adapts its behavior accordingly (hopefully :grin:)
+- Prompts you interactively whenever something is customizable, like which packages to install
+- Zero external TUI dependency — the whole menu is pure Bash now, no more `dialog`
 
 # Prerequisites
-* dialog    (The menu itself)
-* yay       (AUR-Helper)
-* reflector (Updating Arch mirrorlist)
-* bash      (Default shell on most systems)
-* zsh       (Please have a look at option 9 in main menu, if you just installed it, you have to reboot!)
 
-All programs will be installed automatically if not available.
+- yay (AUR helper), optional
+- reflector (for updating the Arch mirrorlist)
+- bash (default shell on most systems)
+- zsh — only needed for the Oh My Zsh! installer in the Customization submenu; log back in (or reboot) afterwards for the shell change to take effect
+
+Most of the above are installed automatically if missing.
 
 # Usage
-Just clone the repo and run it like below at any preferred location you want.
-```
+
+Just clone the repo and run it like below from any location you like:
+
+```text
 ./start.sh
 ```
 
-> Hint: Configure a global hotkey in your system to use it.
+> Hint: Configure a global hotkey in your system to launch it.
 
 # Changelog
-> Changing this script to Rolling Release. I'll just document the latest changes. You'll find additional info in commits section.
+> Switched this script to a rolling-release model. From here on, only the latest changes are documented — check the commit history for anything older.
 
-* Add:    iptables: allow rdp connections from a private network (edit if needed)
-* Add:    A (Arch-) distro independent method to check for updates as a systemd (user) service (`check ./assets/opt_check-updates-notify.*`)
-* Remove: debtap (I think there's no more need for that)
-* Add:    Steamdeck optimization section :grin:
-* Add:    preconfigured iptables ruleset (`check ./assets/opt_iptables.rules` :warning:)
+- Add: Fluent [GTK](https://github.com/vinceliuice/Fluent-gtk-theme) & [KDE](https://github.com/vinceliuice/Fluent-kde) theme, Windows-like themes by [vinceliuice](https://github.com/vinceliuice)
+- Removed: the distro-independent update-check systemd (user) service — it didn't work as expected
+- Removed: Tmux installation + custom config
+- Redesign: back to a simple, dependency-free menu (no more `dialog`)
 
 # Screenshots
-![Arch Linux Updater - Main Menu](https://github.com/anonymouz-trash/arch-updater/blob/main/screenshots/arch-updater-dialog.png?raw=true)
+![Arch Linux Updater - Main Menu](https://github.com/anonymouz-trash/arch-updater/blob/main/screenshots/arch-updater-main-menu.png?raw=true)

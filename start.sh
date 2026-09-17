@@ -55,11 +55,12 @@ while true; do
              5) cust_ohmyzsh ;;
              6) cust_gtk_fluent ;;
              7) cust_gtk_lavanda ;;
-             8) cust_gtk_whitesur ;;
-             9) cust_kde_fluent ;;
-            10) cust_kde_lavanda ;;
-            11) cust_kde_layan ;;
-            12) cust_kde_whitesur ;;
+             8) cust_gtk_layan ;;
+             9) cust_gtk_whitesur ;;
+            10) cust_kde_fluent ;;
+            11) cust_kde_lavanda ;;
+            12) cust_kde_layan ;;
+            13) cust_kde_whitesur ;;
              b)
                  continue
                  ;;
@@ -87,7 +88,7 @@ while true; do
              6) opt_packages ;;
              7) opt_iptables ;;
              8) opt_wireguard ;;
-             9) opt_fan ;;
+             9) opt_fan-profile ;;
              b)
                  continue
                  ;;

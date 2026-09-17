@@ -89,17 +89,17 @@ draw_cust_menu() {
 
   [ GRUB ]                          [ GTK ]
 
-    1) Arch Silence                   5) Fluent
-                                      6) Lavanda
-  [ CURSOR ]                          7) Layan
-                                      8) WhiteSur
+    1) Arch Silence                   6) Fluent
+                                      7) Lavanda
+  [ CURSOR ]                          8) Layan
+                                      9) WhiteSur
     2) Bibata
                                     [ KDE ]
   [ ICON ]
-                                      9) Fluent
-    3) Reversal                      10) Lavanda
-                                     11) Layan
-  [ TERMINAL ]                       12) WhiteSur
+                                     10) Fluent
+    3) Reversal                      11) Lavanda
+                                     12) Layan
+  [ TERMINAL ]                       13) WhiteSur
 
     4) Fastfetch + Config
     5) OhMyZSH!
