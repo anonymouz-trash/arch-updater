@@ -36,6 +36,7 @@ while true; do
   cd ${app_pwd}
   clear
   draw_logo
+  draw_warning
   draw_main_menu
   read -rp "Choice: " choice
   case $choice in

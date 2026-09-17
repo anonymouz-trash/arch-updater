@@ -18,18 +18,22 @@ de=$XDG_CURRENT_DESKTOP
 # check current linux system
 if grep -q "steamos" /etc/os-release; then
     system_os="SteamOS"
-elif grep -q "Arch Linux" /etc/os-release; then
+elif grep -q "nobara" /etc/os-release; then
+    system_os="Nobara"
+elif grep -q "bazzite" /etc/os-release; then
+    system_os="Bazzite"
+elif grep -q "arch linux" /etc/os-release; then
     system_os="Arch Linux"
-elif grep -q "CachyOS" /etc/os-release; then
+elif grep -q "cachyos" /etc/os-release; then
     system_os="CachyOS"
-elif grep -q "EndeavourOS" /etc/os-release; then
+elif grep -q "endeavouros" /etc/os-release; then
     system_os="EndeavourOS"
-elif grep -q "Manjaro" /etc/os-release; then
+elif grep -q "manjaro" /etc/os-release; then
     system_os="Manjaro"
-elif grep -q "Garuda" /etc/os-release; then
+elif grep -q "garuda" /etc/os-release; then
     system_os="Garuda Linux"
 else
-    system_os="Something else (use at your own risk)"
+    system_os="an unknown OS"
 fi
 
 # check 4 yay
@@ -191,4 +195,11 @@ Credits & Thanks ar going to:
 ========================================================================
 EOF
     echo -e "${nocolor}"
+}
+
+draw_warning() {
+    if [[ "${system_os}" == "SteamOS" ]] || [[ "${system_os}" == "an unknown OS" ]] || [[ "${system_os}" == "Nobara" ]] || [[ "${system_os}" == "Bazzite" ]]; then
+        echo -e "${red}Warning: ${white}You're running ${red}${system_os} ${white}which is considered ${red}incompatible${white}!"
+        echo -e "         ${nocolor}Please use SteamOS Customizer instead."
+    fi
 }
