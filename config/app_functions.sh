@@ -134,8 +134,8 @@ draw_opt_menu() {
     7) Install iptables with preconfigured ruleset
 
   [ Global hotkey scripts ]
-    7) Copy wireguard scripts to /usr/local/sbin
-    8) Copy fan-profile script to /usr/local/bin (only ASUS laptops!)
+    8) Copy wireguard scripts to /usr/local/sbin
+    9) Copy fan-profile script to /usr/local/bin (only ASUS laptops!)
 
   b) Back
   q) Exit
