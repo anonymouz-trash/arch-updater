@@ -16,21 +16,21 @@ nocolor='\033[0m'
 de=$XDG_CURRENT_DESKTOP
 
 # check current linux system
-if grep -q "steamos" /etc/os-release; then
+if grep -qi "steamos" /etc/os-release; then
     system_os="SteamOS"
-elif grep -q "nobara" /etc/os-release; then
+elif grep -qi "nobara" /etc/os-release; then
     system_os="Nobara"
-elif grep -q "bazzite" /etc/os-release; then
+elif grep -qi "bazzite" /etc/os-release; then
     system_os="Bazzite"
-elif grep -q "arch linux" /etc/os-release; then
+elif grep -qi "arch linux" /etc/os-release; then
     system_os="Arch Linux"
-elif grep -q "cachyos" /etc/os-release; then
+elif grep -qi "cachyos" /etc/os-release; then
     system_os="CachyOS"
-elif grep -q "endeavouros" /etc/os-release; then
+elif grep -qi "endeavouros" /etc/os-release; then
     system_os="EndeavourOS"
-elif grep -q "manjaro" /etc/os-release; then
+elif grep -qi "manjaro" /etc/os-release; then
     system_os="Manjaro"
-elif grep -q "garuda" /etc/os-release; then
+elif grep -qi "garuda" /etc/os-release; then
     system_os="Garuda Linux"
 else
     system_os="an unknown OS"

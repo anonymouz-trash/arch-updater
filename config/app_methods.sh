@@ -203,15 +203,73 @@ clean_arch(){
 show_inst_pkg_official() {
     clear
     draw_logo
-    pacgraph -c
-    echo "Looking forward to a better solution..."
+
+    local pkglist
+    pkglist=$(comm -23 <(pacman -Qeq | sort -u) <(xargs -n 1 pactree -u <<< "${@}" | sort -u))
+
+    if [ -z "$pkglist" ]; then
+        echo "No suitable Packets found."
+        return
+    fi
+
+    printf "%-15s %-35s %s\n" "Size (MB)" "Packet" "Description"
+    printf '%s\n' "--------------------------------------------------------------------------------"
+
+    LC_ALL=C pacman -Qi $pkglist | awk -v RS="" -F"\n" '
+    {
+        name=""; desc=""; size="";
+        for (i=1; i<=NF; i++) {
+            if ($i ~ /^Name/)            { split($i, a, ": "); name=a[2] }
+            if ($i ~ /^Description/)     { split($i, a, ": "); desc=a[2] }
+            if ($i ~ /^Installed Size/)  { split($i, a, ": "); size=a[2] }
+        }
+        split(size, s, " ")
+        num=s[1]; unit=s[2]
+        if (unit == "KiB")      mb = num/1024
+        else if (unit == "MiB") mb = num
+        else if (unit == "GiB") mb = num*1024
+        else                    mb = 0
+        printf "%.2f\t%s\t%s\n", mb, name, desc
+    }' | sort -t$'\t' -k1 -n | while IFS=$'\t' read -r size name desc; do
+        printf "%-15s %-35s %s\n" "$size" "$name" "$desc"
+    done
+    echo
     read -p "Press any key to resume ..."
 }
 
 show_inst_pkg_aur(){
     clear
     draw_logo
-    echo -e " ... ${red}under construction${nocolor} ... "
+    local pkglist
+    pkglist=$(comm -23 <(pacman -Qmq | sort -u) <(xargs -n 1 pactree -u <<< "${@}" | sort -u))
+
+    if [ -z "$pkglist" ]; then
+        echo "No suitable AUR-Packets found."
+        return
+    fi
+
+    printf "%-15s %-35s %s\n" "Size (MB)" "Packet" "Description"
+    printf '%s\n' "--------------------------------------------------------------------------------"
+
+    LC_ALL=C pacman -Qi $pkglist | awk -v RS="" -F"\n" '
+    {
+        name=""; desc=""; size="";
+        for (i=1; i<=NF; i++) {
+            if ($i ~ /^Name/)            { split($i, a, ": "); name=a[2] }
+            if ($i ~ /^Description/)     { split($i, a, ": "); desc=a[2] }
+            if ($i ~ /^Installed Size/)  { split($i, a, ": "); size=a[2] }
+        }
+        split(size, s, " ")
+        num=s[1]; unit=s[2]
+        if (unit == "KiB")      mb = num/1024
+        else if (unit == "MiB") mb = num
+        else if (unit == "GiB") mb = num*1024
+        else                    mb = 0
+        printf "%.2f\t%s\t%s\n", mb, name, desc
+    }' | sort -t$'\t' -k1 -n | while IFS=$'\t' read -r size name desc; do
+        printf "%-15s %-35s %s\n" "$size" "$name" "$desc"
+    done
+    echo
     read -p "Press any key to resume ..."
 }
 
