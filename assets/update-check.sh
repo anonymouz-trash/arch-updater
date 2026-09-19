@@ -14,7 +14,7 @@ aur_updates=""
 if command -v checkupdates >/dev/null 2>&1; then
     pacman_updates="$(checkupdates 2>>"$LOG_FILE" || true)"
 else
-    echo "checkupdates no found (pacman-contrib installed?)" >>"$LOG_FILE"
+    echo "checkupdates not found (pacman-contrib installed?)" >>"$LOG_FILE"
 fi
 
 if command -v yay >/dev/null 2>&1; then

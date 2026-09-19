@@ -327,12 +327,12 @@ install_update_checker(){
         if (( active )); then
             echo -e "\n${white}[+] ${blue}update-check is already installed (timer active).${nocolor}"
         else
-            echo -e "\n${white}[+] ${blue}update-check is a already installed (timer not active).${nocolor}"
+            echo -e "\n${white}[+] ${blue}update-check is already installed (timer not active).${nocolor}"
         fi
         echo "  [r] Remove"
         echo "  [n] Reinstall (overwrites files)"
         echo "  [a] Abort"
-        read "choice?Choice [r/n/a]: "
+        read -p "Choice [r/n/a]: " choice
 
         case "$choice" in
             r|R)
@@ -363,7 +363,7 @@ install_update_checker(){
     chmod +x "$bin_dir/$script"
     cp "$src_dir/$service" "$unit_dir/$service"
     cp "$src_dir/$timer" "$unit_dir/$timer"
-    if command -v checkupdates >/dev/null 2>&1; then
+    if ! command -v checkupdates >/dev/null 2>&1; then
         sudo pacman -S pacman-contrib
     fi
     systemctl --user daemon-reload
