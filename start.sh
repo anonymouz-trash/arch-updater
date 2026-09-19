@@ -114,6 +114,7 @@ while true; do
              3) check_script_update ;;
              4) show_inst_pkg_official ;;
              5) show_inst_pkg_aur ;;
+             6) install_update_checker ;;
              b)
                  continue
                  ;;

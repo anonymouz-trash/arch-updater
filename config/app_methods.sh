@@ -304,3 +304,74 @@ check_script_update(){
     git pull
     read -p "Press any key to resume ..."
 }
+
+install_update_checker(){
+    clear
+    draw_logo
+    echo -e "\n${white}[+] ${blue}Installing / Removing systemd updates checker...${nocolor}\n"
+
+    local src_dir="./assets"
+    local unit_dir="$HOME/.config/systemd/user"
+    local bin_dir="$HOME/.local/bin"
+    local service="update-check.service"
+    local timer="update-check.timer"
+    local script="update-check.sh"
+
+    local installed=0
+    local active=0
+
+    [[ -f "$unit_dir/$service" || -f "$unit_dir/$timer" || -f "$bin_dir/$script" ]] && installed=1
+    systemctl --user is-active --quiet "$timer" 2>/dev/null && active=1
+
+    if (( installed || active )); then
+        if (( active )); then
+            echo -e "\n${white}[+] ${blue}update-check is already installed (timer active).${nocolor}"
+        else
+            echo -e "\n${white}[+] ${blue}update-check is a already installed (timer not active).${nocolor}"
+        fi
+        echo "  [r] Remove"
+        echo "  [n] Reinstall (overwrites files)"
+        echo "  [a] Abort"
+        read "choice?Choice [r/n/a]: "
+
+        case "$choice" in
+            r|R)
+                systemctl --user disable --now "$timer" 2>/dev/null
+                systemctl --user stop "$service" 2>/dev/null
+                rm -f "$unit_dir/$service" "$unit_dir/$timer" "$bin_dir/$script"
+                systemctl --user daemon-reload
+                echo -e "\n${white}[+] ${blue}update-check removed.${nocolor}"
+                return 0
+                ;;
+            n|N)
+                echo -e "\n${white}[+] ${blue}Installing again...${nocolor}"
+                ;;
+            *)
+                echo "Abort."
+                return 1
+                ;;
+        esac
+    fi
+
+    if [[ ! -f "$src_dir/$script" || ! -f "$src_dir/$service" || ! -f "$src_dir/$timer" ]]; then
+        echo "Error: $script / $service / $timer not found in $src_dir ." >&2
+        return 1
+    fi
+
+    mkdir -p "$unit_dir" "$bin_dir"
+    cp "$src_dir/$script" "$bin_dir/$script"
+    chmod +x "$bin_dir/$script"
+    cp "$src_dir/$service" "$unit_dir/$service"
+    cp "$src_dir/$timer" "$unit_dir/$timer"
+    if command -v checkupdates >/dev/null 2>&1; then
+        sudo pacman -S pacman-contrib
+    fi
+    systemctl --user daemon-reload
+    systemctl --user enable --now "$timer"
+    echo
+    echo -e "\n${white}[+] ${blue}update-check installed and timer started.${nocolor}"
+    echo
+    systemctl --user status "$timer" --no-pager
+
+    read -p "Press any key to resume ..."
+}

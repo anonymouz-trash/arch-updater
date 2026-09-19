@@ -158,12 +158,13 @@ draw_settings_menu() {
 
     1) Show / Set reflector settings
     2) Show environment variables
+    3) Check for script updates
 
   [ System ]
 
-    3) Check for script updates
     4) Show installed packages from official repos
     5) Show installed packages from AUR (Arch User Repository)
+    6) Install / Remove (user) systemd updates checker
 
   b) Back
   q) Exit

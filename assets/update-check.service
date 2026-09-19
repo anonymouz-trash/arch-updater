@@ -1,0 +1,8 @@
+[Unit]
+Description=Check for pacman/AUR updates (no root, uses checkupdates fakeroot db)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/update-check.sh
