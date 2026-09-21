@@ -6,3 +6,7 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 ExecStart=%h/.local/bin/update-check.sh
+# Exit 1 = "Updates gefunden" (siehe Script-Kommentar), kein Fehler -
+# sonst markiert systemd die Unit trotz korrektem Lauf als failed.
+SuccessExitStatus=1
+# Kein root nötig - läuft bewusst als User-Service
