@@ -55,10 +55,10 @@ Just clone the repo and run it like below from any location you like:
 # Changelog
 > Switched this script to a rolling-release model. From here on, only the latest changes are documented — check the commit history for anything older.
 
+- Add: a working method for a systemd user update-check service (Pacman, Yay, Flatpak)
 - Add: Fluent [GTK](https://github.com/vinceliuice/Fluent-gtk-theme) & [KDE](https://github.com/vinceliuice/Fluent-kde) theme, Windows-like themes by [vinceliuice](https://github.com/vinceliuice)
 - Removed: the distro-independent update-check systemd (user) service — it didn't work as expected
 - Removed: Tmux installation + custom config
-- Redesign: back to a simple, dependency-free menu (no more `dialog`)
 
 # Screenshots
 ![Arch Linux Updater - Main Menu](https://github.com/anonymouz-trash/arch-updater/blob/main/screenshots/arch-updater-main-menu.png?raw=true)
